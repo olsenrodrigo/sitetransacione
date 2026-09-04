@@ -1,0 +1,46 @@
+{
+  "name": "transacione-site",
+  "version": "1.0.0",
+  "type": "module",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "NODE_ENV=development tsx server/index.ts",
+    "build": "tsx script/build.ts",
+    "start": "NODE_ENV=production node dist/index.cjs",
+    "preview": "npm run build && npm start",
+    "check": "tsc --noEmit",
+    "marca": "python3 tools/build-marca.py $NEWSREADER_TTF",
+    "db:push": "drizzle-kit push"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.39.3",
+    "drizzle-zod": "^0.7.0",
+    "express": "^5.0.1",
+    "nodemailer": "^8.0.1",
+    "pg": "^8.16.3",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "wouter": "^3.3.5",
+    "zod": "^3.25.76",
+    "zod-validation-error": "^3.4.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.14",
+    "@types/express": "^5.0.0",
+    "@types/node": "^20.19.0",
+    "@types/nodemailer": "^7.0.11",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.0.4",
+    "drizzle-kit": "^0.31.4",
+    "esbuild": "^0.25.0",
+    "lightningcss": "^1.30.1",
+    "tailwindcss": "^4.1.14",
+    "tsx": "^4.20.5",
+    "typescript": "5.6.3",
+    "vite": "^7.1.9"
+  },
+  "description": "Site institucional da Transacione — transação tributária federal (PGFN) e estadual (PGE-SP).",
+  "private": true
+}

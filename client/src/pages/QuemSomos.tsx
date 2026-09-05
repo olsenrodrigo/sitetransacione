@@ -5,7 +5,7 @@ import CTA from "@/components/site/CTA";
 import { SOCIOS, INDICADORES } from "@/data/site";
 import {
   Botao,
-  CabecalhoSecao,
+  Abertura,
   Marcador,
   Revelar,
   Seta,
@@ -88,7 +88,7 @@ export default function QuemSomos() {
         resumo={rota.resumo}
         migalhas={migalhas}
         acoes={
-          <Botao href="/diagnostico" tamanho="lg">
+          <Botao href="/diagnostico" variante="esmeralda" tamanho="lg">
             Falar com a equipe técnica
             <Seta />
           </Botao>
@@ -96,8 +96,8 @@ export default function QuemSomos() {
       />
 
       {/* Indicadores */}
-      <section className="secao-sm">
-        <div className="container-t">
+      <section className="faixa-sm faixa-clara">
+        <div className="coluna-larga">
           <div className="grid gap-px overflow-hidden rounded-lg border border-borda bg-borda sm:grid-cols-2 lg:grid-cols-4">
             {INDICADORES.map((i, n) => (
               <Revelar key={i.rotulo} atraso={n * 60} className="bg-white p-7">
@@ -113,8 +113,8 @@ export default function QuemSomos() {
       </section>
 
       {/* Sócios */}
-      <section className="secao-sm">
-        <div className="container-t">
+      <section className="faixa-sm faixa-clara">
+        <div className="coluna-larga">
           <div className="grid gap-6 lg:gap-8">
             {SOCIOS.map((s, i) => (
               <Socio key={s.nome} socio={s} indice={i} />
@@ -132,15 +132,16 @@ export default function QuemSomos() {
       </section>
 
       {/* A origem da tecnologia */}
-      <section className="fundo-escuro">
-        <div className="container-t secao">
+      <section className="faixa-escura">
+        <div className="coluna-larga faixa">
           <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-16">
             <Revelar>
-              <CabecalhoSecao
+              <Abertura
+              alinhamento="esquerda"
                 claro
                 sobrescrita="Histórico de mercado"
                 titulo="A tecnologia foi desenvolvida por quem já conduzia esses casos"
-                descricao="Advogados tributaristas e contadores. É a experiência jurídica e contábil de campo, destilada em parâmetros, cálculo e prova."
+                resposta="Advogados tributaristas e contadores. É a experiência jurídica e contábil de campo, destilada em parâmetros, cálculo e prova."
               />
             </Revelar>
 

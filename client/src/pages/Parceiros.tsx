@@ -2,10 +2,11 @@ import { rotaPorPath } from "@shared/seo";
 import { usarSeo, seoDaRota } from "@/lib/seo";
 import HeroPagina from "@/components/site/HeroPagina";
 import Faq from "@/components/site/Faq";
-import Formulario from "@/components/site/Formulario";
+import CTA from "@/components/site/CTA";
+import { usarLead } from "@/components/site/LeadModal";
 import {
   Botao,
-  CabecalhoSecao,
+  Abertura,
   Marcador,
   Revelar,
   Seta,
@@ -90,6 +91,7 @@ const OBJECOES = [
 
 export default function Parceiros() {
   usarSeo(seoDaRota(rota, migalhas));
+  const { abrir } = usarLead();
 
   return (
     <>
@@ -105,11 +107,11 @@ export default function Parceiros() {
         migalhas={migalhas}
         acoes={
           <>
-            <Botao href="#candidatura" tamanho="lg">
+            <Botao variante="esmeralda" tamanho="lg" onClick={() => abrir("parceiro")}>
               Quero ser parceiro
               <Seta />
             </Botao>
-            <Botao href="/como-funciona" variante="secundario" tamanho="lg">
+            <Botao href="/como-funciona" variante="contorno-claro" tamanho="lg">
               Ver o método
             </Botao>
           </>
@@ -117,13 +119,14 @@ export default function Parceiros() {
       />
 
       {/* Radar */}
-      <section className="secao">
-        <div className="container-t">
+      <section className="faixa faixa-clara">
+        <div className="coluna-larga">
           <Revelar>
-            <CabecalhoSecao
+            <Abertura
+              alinhamento="esquerda"
               sobrescrita="Insights para o parceiro"
               titulo="Radar de oportunidades: o que procurar em cada cliente"
-              descricao="Seis sinais que indicam passivo com espaço de revisão. Nenhum deles exige análise técnica para ser identificado."
+              resposta="Seis sinais que indicam passivo com espaço de revisão. Nenhum deles exige análise técnica para ser identificado."
             />
           </Revelar>
 
@@ -146,14 +149,15 @@ export default function Parceiros() {
       </section>
 
       {/* Papel do parceiro */}
-      <section className="fundo-escuro">
-        <div className="container-t secao">
+      <section className="faixa-escura">
+        <div className="coluna-larga faixa">
           <Revelar>
-            <CabecalhoSecao
+            <Abertura
+              alinhamento="esquerda"
               claro
               sobrescrita="O seu papel"
               titulo="Como o parceiro entra"
-              descricao="O parceiro amplia os serviços à sua base sem montar estrutura técnica nem assumir o risco de execução."
+              resposta="O parceiro amplia os serviços à sua base sem montar estrutura técnica nem assumir o risco de execução."
             />
           </Revelar>
 
@@ -196,10 +200,11 @@ export default function Parceiros() {
       </section>
 
       {/* Objeções */}
-      <section className="secao-sm">
-        <div className="container-t">
+      <section className="faixa-sm faixa-clara">
+        <div className="coluna-larga">
           <Revelar>
-            <CabecalhoSecao
+            <Abertura
+              alinhamento="esquerda"
               sobrescrita="Para o parceiro responder"
               titulo="Três objeções — e as respostas"
             />
@@ -221,14 +226,15 @@ export default function Parceiros() {
       </section>
 
       {/* Candidatura */}
-      <section id="candidatura" className="secao" style={{ background: "#EFF1EC" }}>
-        <div className="container-t">
+      <section id="candidatura" className="faixa faixa-clara" style={{ background: "#EFF1EC" }}>
+        <div className="coluna-larga">
           <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
             <Revelar>
-              <CabecalhoSecao
+              <Abertura
+              alinhamento="esquerda"
                 sobrescrita="Canal do parceiro"
                 titulo="Traga um caso"
-                descricao="Em 48 horas dizemos se há oportunidade. Este canal é exclusivo para contadores, escritórios de advocacia e consultorias — clientes finais devem usar o diagnóstico."
+                resposta="Em 48 horas dizemos se há oportunidade. Este canal é exclusivo para contadores, escritórios de advocacia e consultorias — clientes finais devem usar o diagnóstico."
               />
               <ul className="mt-8 space-y-3">
                 {[
@@ -253,19 +259,40 @@ export default function Parceiros() {
             </Revelar>
 
             <Revelar atraso={90}>
-              <Formulario
-                origem="parceiro"
-                rotuloEnvio="Enviar candidatura"
-                rotuloEmpresa="Escritório ou empresa"
-                placeholderMensagem="Conte brevemente sobre a carteira: perfil dos clientes, esferas em que há passivo e volume aproximado."
-                sucesso="Candidatura recebida. Nossa equipe de parcerias responde em até um dia útil."
-              />
+              <div className="cartao p-8 md:p-10">
+                <p className="sobrescrita" style={{ color: "#0E9E6E" }}>
+                  Traga um caso
+                </p>
+                <p className="subafirmacao mt-4 text-verde">
+                  Em 48 horas dizemos se há oportunidade
+                </p>
+                <p className="corpo-sm mt-4">
+                  Quatro perguntas sobre o passivo do cliente e os seus dados de contato.
+                  Leva menos de um minuto e não exige nenhum documento.
+                </p>
+                <div className="mt-7">
+                  <Botao tamanho="lg" onClick={() => abrir("parceiro")}>
+                    Enviar um caso
+                    <Seta />
+                  </Botao>
+                </div>
+                <p className="nota mt-5">
+                  Resposta da equipe de parcerias em até um dia útil.
+                </p>
+              </div>
             </Revelar>
           </div>
         </div>
       </section>
 
       <Faq itens={rota.faq!} titulo="Parceria: perguntas frequentes" />
+      <CTA
+        sobrescrita="Canal do parceiro"
+        titulo="Passe a sua carteira pelo radar"
+        descricao="O parceiro identifica, apresenta e encaminha. A Transacione faz o diagnóstico, a revisão e a execução — sem que o parceiro monte estrutura técnica ou assuma risco."
+        rotulo="Enviar um caso"
+        origem="parceiro"
+      />
     </>
   );
 }

@@ -12,11 +12,11 @@ export default function NaoEncontrado() {
   });
 
   return (
-    <section className="secao pt-32 md:pt-40">
-      <div className="container-t">
+    <section className="faixa faixa-clara pt-32 md:pt-40">
+      <div className="coluna-larga">
         <div className="max-w-2xl">
           <Sobrescrita>Erro 404</Sobrescrita>
-          <h1 className="titulo-hero mt-5">Esta página não existe</h1>
+          <h1 className="manchete mt-5">Esta página não existe</h1>
           <p className="corpo mt-5">
             O endereço pode ter mudado ou o link pode estar incompleto. Abaixo estão os
             caminhos principais do site.
@@ -27,7 +27,7 @@ export default function NaoEncontrado() {
               Voltar ao início
               <Seta />
             </Botao>
-            <Botao href="/diagnostico" variante="secundario" tamanho="lg">
+            <Botao href="/diagnostico" variante="contorno" tamanho="lg">
               Fazer o diagnóstico
             </Botao>
           </div>

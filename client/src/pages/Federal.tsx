@@ -5,7 +5,7 @@ import Faq from "@/components/site/Faq";
 import CTA from "@/components/site/CTA";
 import {
   Botao,
-  CabecalhoSecao,
+  Abertura,
   Marcador,
   Revelar,
   Seta,
@@ -94,11 +94,11 @@ export default function Federal() {
         migalhas={migalhas}
         acoes={
           <>
-            <Botao href="/diagnostico" tamanho="lg">
+            <Botao href="/diagnostico" variante="esmeralda" tamanho="lg">
               Avaliar a minha CAPAG
               <Seta />
             </Botao>
-            <Botao href="/transacao-estadual" variante="secundario" tamanho="lg">
+            <Botao href="/transacao-estadual" variante="contorno-claro" tamanho="lg">
               Ver a esfera estadual
             </Botao>
           </>
@@ -107,13 +107,14 @@ export default function Federal() {
       />
 
       {/* Motor federal */}
-      <section className="secao">
-        <div className="container-t">
+      <section className="faixa faixa-clara">
+        <div className="coluna-larga">
           <Revelar>
-            <CabecalhoSecao
+            <Abertura
+              alinhamento="esquerda"
               sobrescrita="Motor federal · CAPAG"
               titulo="Avaliar a revisão de CAPAG-P para CAPAG-E"
-              descricao="Três grandezas conversam. A presumida sai do sistema; a efetiva sai das demonstrações; o grau resulta da relação entre a capacidade apurada e a dívida."
+              resposta="Três grandezas conversam. A presumida sai do sistema; a efetiva sai das demonstrações; o grau resulta da relação entre a capacidade apurada e a dívida."
             />
           </Revelar>
 
@@ -164,13 +165,14 @@ export default function Federal() {
       </section>
 
       {/* Sistema multiportas */}
-      <section className="secao-sm" style={{ background: "#EFF1EC" }}>
-        <div className="container-t">
+      <section className="faixa-sm faixa-clara" style={{ background: "#EFF1EC" }}>
+        <div className="coluna-larga">
           <Revelar>
-            <CabecalhoSecao
+            <Abertura
+              alinhamento="esquerda"
               sobrescrita="Sistema multiportas · PGFN"
               titulo="Várias transações disponíveis — a porta certa muda o resultado"
-              descricao="Avaliamos todas as modalidades a que a empresa tem acesso e indicamos a de melhor resultado, não a primeira que aparece."
+              resposta="Avaliamos todas as modalidades a que a empresa tem acesso e indicamos a de melhor resultado, não a primeira que aparece."
             />
           </Revelar>
 
@@ -200,10 +202,11 @@ export default function Federal() {
       </section>
 
       {/* Quanto pode chegar */}
-      <section className="fundo-escuro">
-        <div className="container-t secao">
+      <section className="faixa-escura">
+        <div className="coluna-larga faixa">
           <Revelar>
-            <CabecalhoSecao
+            <Abertura
+              alinhamento="esquerda"
               claro
               sobrescrita="Quanto pode chegar"
               titulo="Descontos e prazos na esfera federal"
@@ -246,17 +249,18 @@ export default function Federal() {
       </section>
 
       {/* Precatórios */}
-      <section className="secao">
-        <div className="container-t">
+      <section className="faixa faixa-clara">
+        <div className="coluna-larga">
           <div className="grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
             <Revelar>
-              <CabecalhoSecao
+              <Abertura
+              alinhamento="esquerda"
                 sobrescrita="Uma alavanca a mais"
                 titulo="Precatório: amortizar até 75% do débito já reduzido"
-                descricao="Precatório próprio ou adquirido de terceiro, aplicado ao saldo já reduzido da transação. A ordem importa: primeiro incidem os descontos, depois o precatório amortiza o remanescente."
+                resposta="Precatório próprio ou adquirido de terceiro, aplicado ao saldo já reduzido da transação. A ordem importa: primeiro incidem os descontos, depois o precatório amortiza o remanescente."
               />
               <div className="mt-8">
-                <Botao href="/conteudo/precatorio-para-amortizar-transacao" variante="secundario">
+                <Botao href="/conteudo/precatorio-para-amortizar-transacao" variante="contorno">
                   Ler a análise completa
                   <Seta />
                 </Botao>
@@ -296,14 +300,15 @@ export default function Federal() {
       </section>
 
       {/* Frentes */}
-      <section className="secao-sm" style={{ background: "#EFF1EC" }}>
-        <div className="container-t">
+      <section className="faixa-sm faixa-clara" style={{ background: "#EFF1EC" }}>
+        <div className="coluna-larga">
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
             <Revelar>
-              <CabecalhoSecao
+              <Abertura
+              alinhamento="esquerda"
                 sobrescrita="O que dá para fazer"
                 titulo="As frentes de trabalho — federal"
-                descricao="O resultado raramente vem de uma alavanca só. O diagnóstico indica quais se aplicam ao caso concreto."
+                resposta="O resultado raramente vem de uma alavanca só. O diagnóstico indica quais se aplicam ao caso concreto."
               />
             </Revelar>
             <Revelar atraso={80}>

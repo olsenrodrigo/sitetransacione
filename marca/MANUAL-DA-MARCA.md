@@ -1,6 +1,6 @@
 # Manual de aplicação da marca — Transacione
 
-**Versão 1.0 · Setembro de 2026**
+**Versão 1.1 · Setembro de 2026**
 CORREA Consultoria Empresarial Estratégica
 Desenvolvido por Sintetiza AI
 
@@ -8,21 +8,21 @@ Desenvolvido por Sintetiza AI
 
 ## 1. O conceito
 
-A Transacione trabalha sobre uma única premissa: **o mesmo passivo, reclassificado, custa
-menos**. A marca precisa dizer isso antes de qualquer texto.
+A Transacione trabalha sobre uma premissa: **transação é troca, e a troca acontece nos
+dois sentidos**. A marca precisa dizer isso antes de qualquer texto.
 
-O símbolo é a letra **T** construída sobre grade ortogonal exata, com três elementos que
-carregam o argumento:
+O símbolo é a letra **T** construída sobre grade ortogonal exata, em que o braço da letra
+é uma **seta dupla** — herança direta do ícone de troca que a Transacione já usava, agora
+resolvido como monograma:
 
 | Elemento | Geometria | O que significa |
 |---|---|---|
-| Barra superior | 24 × 4 unidades | O passivo como está — a classificação presumida |
-| Barra inferior | 12 × 4 unidades (50% da superior) | O mesmo passivo, reclassificado |
-| Haste | 4 × 22 unidades | A metodologia que sustenta as duas |
+| Seta superior | aponta à direita | O que a empresa leva ao Fisco: documento, apuração, proposta |
+| Seta inferior | aponta à esquerda | O que retorna à empresa: desconto, prazo, capacidade recomposta |
+| Haste | desce do centro | A metodologia que sustenta as duas pontas |
 
-A leitura é imediata como letra e sustenta a leitura conceitual quando explicada. Não há
-seta, não há gráfico ascendente, não há metáfora de crescimento — o negócio é redução, e a
-marca não promete resultado.
+A leitura é imediata como letra e como movimento. Não há gráfico ascendente nem metáfora
+de crescimento — o negócio é reduzir um passivo, e a marca não promete resultado.
 
 **Assinatura verbal:** *Transação tributária federal e estadual.*
 
@@ -34,20 +34,27 @@ Grade de **32 × 32 unidades**. Todas as coordenadas são inteiras — a marca p
 em qualquer densidade de tela e em favicon de 16 px.
 
 ```
-Barra superior   x: 4 → 28    y:  5 →  9     (largura 24, altura 4)
-Intervalo        y: 9 → 11    (2 unidades)
-Barra inferior   x: 10 → 22   y: 11 → 15     (largura 12, altura 4)
-Haste            x: 14 → 18   y:  5 → 27     (largura 4, altura 22)
+Seta superior   corpo x:  3 → 23   y:  4 →  8    (peso 4)
+                cabeça base x: 23, y: 2 → 10, ponta em (27, 6)
 
-Caixa do símbolo  24 × 22 unidades, centrada em (16, 16)
+Seta inferior   corpo x:  9 → 29   y: 12 → 16    (peso 4)
+                cabeça base x:  9, y: 10 → 18, ponta em (5, 14)
+
+Haste           x: 14 → 18   y: 16 → 30          (peso 4)
+
+Caixa do símbolo  26 × 28 unidades, de (3, 2) a (29, 30)
 ```
 
-Peso único de **4 unidades** em todos os traços. Cantos vivos a 90°, sem raio, sem chanfro.
+As duas setas são espelhos exatas uma da outra em torno do eixo vertical x = 16.
+
+Peso único de **4 unidades** em todos os traços. Cabeças a 45°, com 8 unidades de altura
+e 4 de ponta — proporção 2:1 sobre o corpo, que mantém a seta legível a 16 px sem
+dominar a composição. Cantos vivos a 90°, sem raio, sem chanfro.
 
 ### Área de proteção
 
-Reserve, em todos os lados, o equivalente à **altura de uma barra** (4 unidades = 1/6 da
-largura do símbolo). Nada entra nessa margem: nem texto, nem borda, nem imagem.
+Reserve, em todos os lados, o equivalente ao **peso do traço** (4 unidades). Nada entra
+nessa margem: nem texto, nem borda, nem imagem.
 
 ### Tamanho mínimo
 
@@ -75,8 +82,8 @@ alta, nunca em versalete, nunca abreviada.
 
 Símbolo à esquerda, logotipo à direita.
 
-- Altura do símbolo = **1,08 × altura de caixa alta** do logotipo
-- Espaço entre eles = **0,52 × altura de caixa alta**
+- Altura do símbolo = **1,22 × altura de caixa alta** do logotipo
+- Espaço entre eles = **0,46 × altura de caixa alta**
 - Alinhamento pelo eixo óptico vertical
 
 ### Lockup vertical (secundário)
@@ -184,7 +191,7 @@ usam Newsreader 500 com tracking −3%.
 | `logo-horizontal.svg` | Padrão, sobre fundo claro |
 | `logo-horizontal-branco.svg` | Sobre Grafite, Verde Profundo ou fotografia escura |
 | `logo-horizontal-grafite.svg` | Documentos monocromáticos e impressão sem cor |
-| `logo-horizontal-duotone.svg` | Materiais que explicam o conceito da marca; a barra inferior em Esmeralda |
+| `logo-horizontal-duotone.svg` | Materiais que explicam o conceito; a seta de retorno em Esmeralda |
 | `logo-vertical.svg` | Espaços quadrados, selos, avatares |
 | `simbolo.svg` / `simbolo-branco.svg` / `simbolo-duotone.svg` | Símbolo isolado, quando a marca já foi apresentada |
 | `favicon.svg` / `app-icon.svg` | Aba do navegador, ícone de aplicativo — símbolo reverso em quadrado de raio 7/32 |
@@ -202,17 +209,18 @@ usam Newsreader 500 com tracking −3%.
 ## 7. Usos proibidos
 
 1. Alterar as proporções entre barras, haste e intervalo.
-2. Igualar as barras — a diferença de largura **é** o conceito.
-3. Aplicar gradiente, sombra, contorno, relevo ou brilho ao símbolo.
-4. Rotacionar, inclinar, espelhar ou distorcer.
-5. Recolorir fora da paleta institucional.
-6. Substituir a tipografia do logotipo por outra família.
-7. Encaixar o lockup horizontal dentro de um contêiner colorido (use o lockup vertical ou
+2. Inverter o sentido das setas, ou fazer as duas apontarem para o mesmo lado — a oposição **é** o conceito.
+3. Engrossar ou afinar as cabeças em relação ao corpo das setas.
+4. Aplicar gradiente, sombra, contorno, relevo ou brilho ao símbolo.
+5. Rotacionar, inclinar, espelhar ou distorcer.
+6. Recolorir fora da paleta institucional.
+7. Substituir a tipografia do logotipo por outra família.
+8. Encaixar o lockup horizontal dentro de um contêiner colorido (use o lockup vertical ou
    o app icon).
-8. Aplicar sobre fundo de contraste insuficiente.
-9. Usar o símbolo como bullet, ícone de interface ou elemento decorativo repetido em
+9. Aplicar sobre fundo de contraste insuficiente.
+10. Usar o símbolo como bullet, ícone de interface ou elemento decorativo repetido em
    tamanho de texto.
-10. Inserir o logotipo em frase corrida como se fosse palavra.
+11. Inserir o logotipo em frase corrida como se fosse palavra.
 
 ---
 

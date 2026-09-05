@@ -132,7 +132,7 @@ export default function Artigo() {
             className="pointer-events-none absolute inset-0"
             style={{ background: "linear-gradient(170deg, #FFFFFF 0%, #F7F6F2 65%)" }}
           />
-          <div className="container-prosa relative">
+          <div className="coluna-prosa relative">
             <Migalhas
               itens={[
                 { nome: "Início", path: "/" },
@@ -178,7 +178,7 @@ export default function Artigo() {
           </div>
         </header>
 
-        <div className="container-prosa pb-16">
+        <div className="coluna-prosa pb-16">
           <div className="prosa">
             {artigo.corpo.map((b, i) => (
               <RenderBloco key={i} b={b} />
@@ -199,9 +199,9 @@ export default function Artigo() {
       ) : null}
 
       {/* Relacionados */}
-      <section className="secao-sm">
-        <div className="container-t">
-          <h2 className="titulo-secao">Continue lendo</h2>
+      <section className="faixa-sm faixa-clara">
+        <div className="coluna-larga">
+          <h2 className="afirmacao">Continue lendo</h2>
           <div className="mt-9 grid gap-6 md:grid-cols-2">
             {relacionados.map((a, i) => (
               <Revelar key={a.slug} atraso={i * 70}>

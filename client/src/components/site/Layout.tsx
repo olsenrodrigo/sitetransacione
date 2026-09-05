@@ -2,6 +2,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { useLocation, Link } from "wouter";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { LeadProvider } from "./LeadModal";
 import { whatsappDaPagina } from "@/data/site";
 
 /* ------------------------------------------------------- Botão WhatsApp */
@@ -11,7 +12,7 @@ function BotaoWhatsapp() {
   const [visivel, setVisivel] = useState(false);
 
   useEffect(() => {
-    const h = () => setVisivel(window.scrollY > 560);
+    const h = () => setVisivel(window.scrollY > 640);
     h();
     window.addEventListener("scroll", h, { passive: true });
     return () => window.removeEventListener("scroll", h);
@@ -49,7 +50,7 @@ function AvisoCookies() {
   useEffect(() => {
     try {
       if (!localStorage.getItem(CHAVE_COOKIES)) {
-        const t = setTimeout(() => setVisivel(true), 1400);
+        const t = setTimeout(() => setVisivel(true), 1800);
         return () => clearTimeout(t);
       }
     } catch {
@@ -72,13 +73,13 @@ function AvisoCookies() {
     <div
       role="dialog"
       aria-label="Aviso de cookies"
-      className="fixed bottom-0 left-0 right-0 z-40 border-t border-borda bg-white/97 backdrop-blur-md md:bottom-5 md:left-5 md:right-auto md:max-w-md md:rounded-lg md:border md:shadow-xl"
+      className="fixed bottom-0 left-0 right-0 z-40 border-t border-borda bg-white/97 backdrop-blur-md md:bottom-5 md:left-5 md:right-auto md:max-w-sm md:rounded-xl md:border md:shadow-xl"
+      style={{ animation: "subir .4s cubic-bezier(.22,1,.36,1)" }}
     >
       <div className="p-5">
-        <p className="corpo-sm">
-          Usamos cookies essenciais para o funcionamento do site e cookies de medição
-          para entender como ele é usado. Você pode aceitar todos ou manter apenas os
-          essenciais.{" "}
+        <p className="corpo-sm text-[0.88rem]">
+          Usamos cookies essenciais para o funcionamento do site e cookies de medição para
+          entender como ele é usado.{" "}
           <Link href="/cookies" className="text-verde underline underline-offset-2">
             Saiba mais
           </Link>
@@ -88,14 +89,14 @@ function AvisoCookies() {
           <button
             type="button"
             onClick={() => decidir("aceito")}
-            className="rounded-md bg-verde px-4 py-2 text-[0.82rem] font-medium text-white transition-colors hover:bg-verde-800"
+            className="rounded-lg bg-verde px-4 py-2.5 text-[0.82rem] font-medium text-white transition-colors hover:bg-verde-800"
           >
             Aceitar todos
           </button>
           <button
             type="button"
             onClick={() => decidir("essenciais")}
-            className="rounded-md border border-verde/25 px-4 py-2 text-[0.82rem] font-medium text-verde transition-colors hover:border-verde/60"
+            className="rounded-lg border border-verde/25 px-4 py-2.5 text-[0.82rem] font-medium text-verde transition-colors hover:border-verde/60"
           >
             Apenas essenciais
           </button>
@@ -111,20 +112,20 @@ export default function Layout({ children }: { children: ReactNode }) {
   const [local] = useLocation();
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const reduzido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.scrollTo({ top: 0, behavior: reduzido ? "auto" : "auto" });
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, [local]);
 
   return (
-    <div className="flex min-h-dvh flex-col">
-      <Navbar />
-      <main id="conteudo" className="flex-1">
-        {children}
-      </main>
-      <Footer />
-      <BotaoWhatsapp />
-      <AvisoCookies />
-    </div>
+    <LeadProvider>
+      <div className="flex min-h-dvh flex-col">
+        <Navbar />
+        <main id="conteudo" className="flex-1">
+          {children}
+        </main>
+        <Footer />
+        <BotaoWhatsapp />
+        <AvisoCookies />
+      </div>
+    </LeadProvider>
   );
 }

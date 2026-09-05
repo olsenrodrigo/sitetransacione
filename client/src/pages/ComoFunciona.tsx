@@ -5,7 +5,7 @@ import Faq from "@/components/site/Faq";
 import CTA from "@/components/site/CTA";
 import {
   Botao,
-  CabecalhoSecao,
+  Abertura,
   Marcador,
   Revelar,
   Seta,
@@ -115,11 +115,11 @@ export default function ComoFunciona() {
         migalhas={migalhas}
         acoes={
           <>
-            <Botao href="/diagnostico" tamanho="lg">
+            <Botao href="/diagnostico" variante="esmeralda" tamanho="lg">
               Começar o diagnóstico
               <Seta />
             </Botao>
-            <Botao href="/tecnologia" variante="secundario" tamanho="lg">
+            <Botao href="/tecnologia" variante="contorno-claro" tamanho="lg">
               Como o cálculo é feito
             </Botao>
           </>
@@ -127,13 +127,14 @@ export default function ComoFunciona() {
       />
 
       {/* Esteira do diagnóstico */}
-      <section className="secao">
-        <div className="container-t">
+      <section className="faixa faixa-clara">
+        <div className="coluna-larga">
           <Revelar>
-            <CabecalhoSecao
+            <Abertura
+              alinhamento="esquerda"
               sobrescrita="Diagnóstico em 48 horas"
               titulo="As cinco etapas da apuração"
-              descricao="Cada etapa produz um artefato conferível. Se não houver espaço para revisão, o diagnóstico registra essa conclusão e apresenta os respectivos fundamentos."
+              resposta="Cada etapa produz um artefato conferível. Se não houver espaço para revisão, o diagnóstico registra essa conclusão e apresenta os respectivos fundamentos."
             />
           </Revelar>
 
@@ -157,13 +158,14 @@ export default function ComoFunciona() {
       </section>
 
       {/* Documentos */}
-      <section className="secao-sm" style={{ background: "#EFF1EC" }}>
-        <div className="container-t">
+      <section className="faixa-sm faixa-clara" style={{ background: "#EFF1EC" }}>
+        <div className="coluna-larga">
           <Revelar>
-            <CabecalhoSecao
+            <Abertura
+              alinhamento="esquerda"
               sobrescrita="O que reunir"
               titulo="Os documentos do diagnóstico"
-              descricao="O envio é feito por link gerado pela plataforma, com o arquivo cifrado na origem — sem trafegar pelo servidor da aplicação."
+              resposta="O envio é feito por link gerado pela plataforma, com o arquivo cifrado na origem — sem trafegar pelo servidor da aplicação."
             />
           </Revelar>
 
@@ -197,14 +199,15 @@ export default function ComoFunciona() {
       </section>
 
       {/* Depuração */}
-      <section className="fundo-escuro">
-        <div className="container-t secao">
+      <section className="faixa-escura">
+        <div className="coluna-larga faixa">
           <Revelar>
-            <CabecalhoSecao
+            <Abertura
+              alinhamento="esquerda"
               claro
               sobrescrita="Depuração da dívida ativa"
               titulo="Antes de calcular desconto: verificar o que de fato deve ser cobrado"
-              descricao="Um passo que costuma ser pulado e que muda o denominador de todo o resto."
+              resposta="Um passo que costuma ser pulado e que muda o denominador de todo o resto."
             />
           </Revelar>
 
@@ -231,11 +234,11 @@ export default function ComoFunciona() {
       </section>
 
       {/* Decisão a cada etapa */}
-      <section className="secao">
-        <div className="container-t">
+      <section className="faixa faixa-clara">
+        <div className="coluna-larga">
           <Revelar>
             <div className="mx-auto max-w-3xl text-center">
-              <h2 className="titulo-secao">
+              <h2 className="afirmacao">
                 A cada etapa, você decide se avança — sempre com números na mesa
               </h2>
               <p className="corpo mt-5">
@@ -244,10 +247,10 @@ export default function ComoFunciona() {
                 acompanhamento até a homologação final.
               </p>
               <div className="mt-9 flex flex-wrap justify-center gap-3">
-                <Botao href="/transacao-federal" variante="secundario">
+                <Botao href="/transacao-federal" variante="contorno">
                   Ver a esfera federal
                 </Botao>
-                <Botao href="/transacao-estadual" variante="secundario">
+                <Botao href="/transacao-estadual" variante="contorno">
                   Ver a esfera estadual
                 </Botao>
               </div>

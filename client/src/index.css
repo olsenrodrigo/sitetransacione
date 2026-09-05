@@ -3,6 +3,10 @@
 /* ==========================================================================
    TRANSACIONE — Sistema de design
    Marca: Verde Profundo + Esmeralda | Tipografia: Newsreader + Inter
+
+   Estrutura em faixas de largura total que alternam claro e escuro, com
+   coluna central estreita. O ritmo vem do contraste entre faixas, não de
+   grades largas — cada seção é uma afirmação.
    ========================================================================== */
 
 @font-face {
@@ -54,8 +58,6 @@
   --color-accent-foreground: #14201c;
   --color-card: #ffffff;
   --color-card-foreground: #14201c;
-  --color-popover: #ffffff;
-  --color-popover-foreground: #14201c;
   --color-border: #e3e6e1;
   --color-input: #e3e6e1;
   --color-ring: #0e9e6e;
@@ -68,10 +70,10 @@
 
   /* ---- Raio ------------------------------------------------------------ */
   --radius-sm: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.625rem;
-  --radius-xl: 0.875rem;
-  --radius-2xl: 1.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
 }
 
 @layer base {
@@ -116,9 +118,9 @@
   h4 {
     font-family: var(--font-display);
     font-weight: 500;
-    letter-spacing: -0.014em;
+    letter-spacing: -0.018em;
     color: var(--color-verde);
-    text-wrap: balance;
+    text-wrap: pretty;
   }
 
   ::selection {
@@ -129,10 +131,9 @@
   :focus-visible {
     outline: 2px solid var(--color-esmeralda);
     outline-offset: 3px;
-    border-radius: 2px;
+    border-radius: 3px;
   }
 
-  /* Evita salto de layout em imagens */
   img,
   svg,
   video {
@@ -142,45 +143,103 @@
 }
 
 @layer utilities {
-  /* ---- Estrutura ------------------------------------------------------- */
-  .container-t {
+  /* ====================================================== Estrutura ==== */
+
+  /* Coluna central estreita — a leitura acontece numa medida só. */
+  .coluna {
     width: 100%;
-    max-width: 78rem;
+    max-width: 46rem;
     margin-inline: auto;
-    padding-inline: 1.25rem;
-  }
-  @media (min-width: 768px) {
-    .container-t {
-      padding-inline: 2rem;
-    }
+    padding-inline: 1.5rem;
   }
 
-  .container-prosa {
+  /* Coluna larga, para grades de cartões e tabelas. */
+  .coluna-larga {
     width: 100%;
-    max-width: 44rem;
+    max-width: 72rem;
     margin-inline: auto;
-    padding-inline: 1.25rem;
+    padding-inline: 1.5rem;
   }
 
-  .secao {
-    padding-block: 4.5rem;
+  .coluna-prosa {
+    width: 100%;
+    max-width: 42rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  /* Faixa de largura total. O ritmo do site vem daqui. */
+  .faixa {
+    padding-block: 5.5rem;
   }
   @media (min-width: 768px) {
-    .secao {
-      padding-block: 6.5rem;
+    .faixa {
+      padding-block: 8rem;
     }
   }
 
-  .secao-sm {
-    padding-block: 3.25rem;
+  .faixa-sm {
+    padding-block: 4rem;
   }
   @media (min-width: 768px) {
-    .secao-sm {
-      padding-block: 4.5rem;
+    .faixa-sm {
+      padding-block: 5.5rem;
     }
   }
 
-  /* ---- Tipografia ------------------------------------------------------ */
+  .faixa-clara {
+    background: var(--color-osso);
+  }
+  .faixa-branca {
+    background: #fff;
+  }
+  .faixa-osso2 {
+    background: var(--color-osso-2);
+  }
+
+  .faixa-escura {
+    background: var(--color-grafite);
+    color: #dfe9e5;
+  }
+  .faixa-escura h1,
+  .faixa-escura h2,
+  .faixa-escura h3,
+  .faixa-escura h4 {
+    color: #fff;
+  }
+  .faixa-escura .corpo,
+  .faixa-escura .corpo-sm {
+    color: #a9bbb4;
+  }
+  .faixa-escura .nota {
+    color: #8aa098;
+  }
+  .faixa-escura .cartao {
+    background: rgba(255, 255, 255, 0.022);
+    border-color: var(--color-borda-escura);
+  }
+
+  /* Verde institucional, para a faixa que precisa de mais peso. */
+  .faixa-verde {
+    background: var(--color-verde);
+    color: #e2efe9;
+  }
+  .faixa-verde h1,
+  .faixa-verde h2,
+  .faixa-verde h3,
+  .faixa-verde h4 {
+    color: #fff;
+  }
+  .faixa-verde .corpo,
+  .faixa-verde .corpo-sm {
+    color: #bcd8cc;
+  }
+  .faixa-verde .nota {
+    color: #9cc2ae;
+  }
+
+  /* ====================================================== Tipografia === */
+
   .fonte-display {
     font-family: var(--font-display);
   }
@@ -193,29 +252,40 @@
     font-feature-settings: "tnum" 1;
   }
 
-  .titulo-hero {
+  /* Manchete da primeira dobra — grande, centrada, sem concorrência. */
+  .manchete {
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: clamp(2.15rem, 1.35rem + 3.2vw, 3.7rem);
-    line-height: 1.07;
-    letter-spacing: -0.024em;
-    /* A manchete preenche a linha; "balance" a quebraria em linhas curtas. */
-    text-wrap: pretty;
+    font-size: clamp(2.4rem, 1.5rem + 4vw, 4.6rem);
+    line-height: 1.03;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
   }
 
-  .titulo-secao {
+  /* Afirmação de seção — abre cada faixa. */
+  .afirmacao {
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: clamp(1.75rem, 1.2rem + 2.1vw, 2.85rem);
-    line-height: 1.14;
-    letter-spacing: -0.018em;
+    font-size: clamp(1.9rem, 1.25rem + 2.6vw, 3.1rem);
+    line-height: 1.1;
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+  }
+
+  /* Subafirmação — a linha que responde à afirmação. */
+  .subafirmacao {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.3rem, 1rem + 1.1vw, 1.75rem);
+    line-height: 1.32;
+    letter-spacing: -0.014em;
   }
 
   .titulo-card {
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: 1.2rem;
-    line-height: 1.3;
+    font-size: 1.22rem;
+    line-height: 1.28;
     letter-spacing: -0.01em;
   }
 
@@ -223,7 +293,7 @@
     font-family: var(--font-display);
     font-weight: 500;
     font-variant-numeric: tabular-nums;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.035em;
     line-height: 1;
   }
 
@@ -231,96 +301,83 @@
     font-family: var(--font-sans);
     font-size: 0.6875rem;
     font-weight: 600;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
   }
 
   .corpo {
-    font-size: 1rem;
-    line-height: 1.68;
+    font-size: 1.0625rem;
+    line-height: 1.7;
     color: var(--color-cinza);
   }
   @media (min-width: 768px) {
     .corpo {
-      font-size: 1.0625rem;
+      font-size: 1.125rem;
     }
   }
 
   .corpo-sm {
-    font-size: 0.9125rem;
-    line-height: 1.62;
+    font-size: 0.9375rem;
+    line-height: 1.65;
     color: var(--color-cinza);
   }
 
   .nota {
-    font-size: 0.78rem;
-    line-height: 1.55;
+    font-size: 0.79rem;
+    line-height: 1.6;
     color: var(--color-cinza-claro);
   }
 
-  /* ---- Superfícies ----------------------------------------------------- */
+  /* ====================================================== Superfícies == */
+
   .cartao {
     background: #fff;
     border: 1px solid var(--color-borda);
     border-radius: var(--radius-lg);
   }
 
-  .cartao-escuro {
-    background: var(--color-grafite-2);
-    border: 1px solid var(--color-borda-escura);
-    border-radius: var(--radius-lg);
-  }
-
-  .fundo-escuro {
-    background: var(--color-grafite);
-    color: #e9efec;
-  }
-  .fundo-escuro h1,
-  .fundo-escuro h2,
-  .fundo-escuro h3,
-  .fundo-escuro h4 {
-    color: #fff;
-  }
-  .fundo-escuro .corpo,
-  .fundo-escuro .corpo-sm {
-    color: #a9bbb4;
-  }
-  .fundo-escuro .nota {
-    color: #8aa098;
-  }
-
-  /* Regra fina de marca, usada como separador editorial */
   .fio {
     height: 1px;
     background: linear-gradient(
       90deg,
-      var(--color-esmeralda) 0%,
-      color-mix(in srgb, var(--color-esmeralda) 22%, transparent) 42%,
+      transparent 0%,
+      var(--color-esmeralda) 50%,
       transparent 100%
     );
+    opacity: 0.5;
   }
 
   .grade-fina {
     background-image: linear-gradient(
         to right,
-        color-mix(in srgb, var(--color-verde) 5%, transparent) 1px,
+        color-mix(in srgb, currentColor 7%, transparent) 1px,
         transparent 1px
       ),
       linear-gradient(
         to bottom,
-        color-mix(in srgb, var(--color-verde) 5%, transparent) 1px,
+        color-mix(in srgb, currentColor 7%, transparent) 1px,
         transparent 1px
       );
-    background-size: 68px 68px;
+    background-size: 72px 72px;
   }
 
-  /* ---- Animação de entrada (transform/opacity apenas) ------------------ */
+  /* Halo esmeralda difuso, usado nas faixas escuras. */
+  .halo {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(120px);
+    pointer-events: none;
+    background: color-mix(in srgb, var(--color-esmeralda) 22%, transparent);
+  }
+
+  /* ====================================================== Movimento ==== */
+
   .revelar {
     opacity: 0;
-    transform: translate3d(0, 14px, 0);
+    transform: translate3d(0, 18px, 0);
     transition:
-      opacity 0.62s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.62s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: opacity, transform;
   }
   .revelar[data-visivel="true"] {
@@ -335,23 +392,62 @@
     }
   }
 
-  /* ---- Prosa (artigos do blog e páginas legais) ------------------------ */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes subir {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 26px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes flutuar {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(5px);
+    }
+  }
+  .flutuar {
+    animation: flutuar 2.4s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .flutuar {
+      animation: none;
+    }
+  }
+
+  /* ====================================================== Prosa ======== */
+
   .prosa {
-    font-size: 1.0425rem;
-    line-height: 1.75;
+    font-size: 1.0625rem;
+    line-height: 1.78;
     color: #33443d;
   }
   .prosa > * + * {
-    margin-top: 1.15em;
+    margin-top: 1.2em;
   }
   .prosa h2 {
-    font-size: 1.55rem;
-    margin-top: 2.4em;
+    font-size: 1.6rem;
+    margin-top: 2.5em;
     margin-bottom: 0.15em;
   }
   .prosa h3 {
-    font-size: 1.2rem;
-    margin-top: 1.9em;
+    font-size: 1.22rem;
+    margin-top: 2em;
     margin-bottom: 0.1em;
   }
   .prosa ul,
@@ -364,13 +460,13 @@
   .prosa ul li {
     position: relative;
     padding-left: 1.05rem;
-    margin-top: 0.5em;
+    margin-top: 0.55em;
   }
   .prosa ul li::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 0.72em;
+    top: 0.75em;
     width: 5px;
     height: 5px;
     border-radius: 1px;
@@ -380,7 +476,7 @@
     list-style: decimal;
   }
   .prosa ol li {
-    margin-top: 0.5em;
+    margin-top: 0.55em;
     padding-left: 0.25rem;
   }
   .prosa strong {
@@ -398,21 +494,21 @@
   }
   .prosa blockquote {
     border-left: 2px solid var(--color-esmeralda);
-    padding-left: 1.15rem;
+    padding-left: 1.25rem;
     font-family: var(--font-display);
-    font-size: 1.18rem;
+    font-size: 1.25rem;
     line-height: 1.5;
     color: var(--color-verde);
   }
   .prosa table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.9rem;
+    font-size: 0.92rem;
   }
   .prosa th,
   .prosa td {
     border-bottom: 1px solid var(--color-borda);
-    padding: 0.65rem 0.5rem;
+    padding: 0.7rem 0.5rem;
     text-align: left;
     vertical-align: top;
   }
@@ -425,9 +521,13 @@
     font-weight: 600;
   }
 
-  /* Barra de rolagem horizontal contida (tabelas largas) */
   .rolagem-x {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+  }
+
+  /* Trava a rolagem do fundo enquanto o modal está aberto. */
+  .travado {
+    overflow: hidden;
   }
 }

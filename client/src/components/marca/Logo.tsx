@@ -1,18 +1,18 @@
 /**
  * Marca Transacione — componentes oficiais.
  *
- * O símbolo é geometria exata sobre grade 32×32:
- *   barra superior  → o passivo como está
- *   barra inferior  → o mesmo passivo, reclassificado (50% da largura)
- *   haste           → a metodologia que sustenta as duas
+ * O braço do T é uma seta dupla, sobre grade exata de 32×32:
+ *   seta superior → o que a empresa leva ao Fisco
+ *   seta inferior → o que retorna à empresa
+ *   haste         → a metodologia que sustenta as duas
  *
- * Os mesmos caminhos estão em tools/build-marca.py, que gera os arquivos
+ * A mesma geometria está em tools/build-marca.py, que gera os arquivos
  * distribuíveis em marca/assets. Alterar aqui exige regerar lá.
  */
 
-const BARRA_SUP = "M4 5h24v4H4z";
-const BARRA_INF = "M10 11h12v4H10z";
-const HASTE = "M14 5h4v22h-4z";
+const SETA_SUP = "M3 4H23V2L27 6L23 10V8H3Z";
+const SETA_INF = "M29 16H9V18L5 14L9 10V12H29Z";
+const HASTE = "M14 16h4v14h-4z";
 
 type Variante = "verde" | "branco" | "grafite" | "duotone";
 
@@ -42,8 +42,8 @@ export function Simbolo({
       aria-hidden="true"
       focusable="false"
     >
-      <path fill={c.base} d={BARRA_SUP} />
-      <path fill={c.acento} d={BARRA_INF} />
+      <path fill={c.base} d={SETA_SUP} />
+      <path fill={c.acento} d={SETA_INF} />
       <path fill={c.base} d={HASTE} />
     </svg>
   );
@@ -51,8 +51,8 @@ export function Simbolo({
 
 /**
  * Lockup horizontal. O símbolo é vetorial; o logotipo usa a Newsreader
- * carregada pelo próprio site — o que mantém a marca nítida em qualquer
- * densidade de tela sem custo adicional de rede.
+ * carregada pelo próprio site — a marca fica nítida em qualquer densidade
+ * de tela sem custo adicional de rede.
  */
 export function Logo({
   variante = "verde",
@@ -67,18 +67,18 @@ export function Logo({
   return (
     <span
       className={`inline-flex items-center ${className ?? ""}`}
-      style={{ gap: altura * 0.42 }}
+      style={{ gap: altura * 0.36 }}
     >
-      <Simbolo variante={variante} tamanho={altura} />
+      <Simbolo variante={variante} tamanho={altura * 1.18} />
       <span
         className="fonte-display"
         style={{
           color: c.base,
-          fontSize: altura * 0.92,
+          fontSize: altura * 0.98,
           fontWeight: 500,
           letterSpacing: "-0.012em",
           lineHeight: 1,
-          paddingBottom: altura * 0.04,
+          paddingBottom: altura * 0.03,
         }}
       >
         Transacione

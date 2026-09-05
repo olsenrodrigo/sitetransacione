@@ -38,7 +38,7 @@ export default function Legal({ doc }: { doc: DocLegal }) {
           className="pointer-events-none absolute inset-0"
           style={{ background: "linear-gradient(170deg, #FFFFFF 0%, #F7F6F2 65%)" }}
         />
-        <div className="container-prosa relative">
+        <div className="coluna-prosa relative">
           <Revelar>
             <Migalhas itens={migalhas} />
             <Sobrescrita>Documento legal</Sobrescrita>
@@ -60,7 +60,7 @@ export default function Legal({ doc }: { doc: DocLegal }) {
         </div>
       </header>
 
-      <div className="container-prosa pb-20">
+      <div className="coluna-prosa pb-20">
         <div className="prosa">
           {conteudo.map((b, i) =>
             b.t === "h2" ? (

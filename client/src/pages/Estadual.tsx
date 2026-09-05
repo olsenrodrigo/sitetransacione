@@ -5,7 +5,7 @@ import Faq from "@/components/site/Faq";
 import CTA from "@/components/site/CTA";
 import {
   Botao,
-  CabecalhoSecao,
+  Abertura,
   Marcador,
   Revelar,
   Seta,
@@ -79,11 +79,11 @@ export default function Estadual() {
         migalhas={migalhas}
         acoes={
           <>
-            <Botao href="/diagnostico" tamanho="lg">
+            <Botao href="/diagnostico" variante="esmeralda" tamanho="lg">
               Aferir o meu grau
               <Seta />
             </Botao>
-            <Botao href="/transacao-federal" variante="secundario" tamanho="lg">
+            <Botao href="/transacao-federal" variante="contorno-claro" tamanho="lg">
               Ver a esfera federal
             </Botao>
           </>
@@ -92,13 +92,14 @@ export default function Estadual() {
       />
 
       {/* A fórmula */}
-      <section className="secao">
-        <div className="container-t">
+      <section className="faixa faixa-clara">
+        <div className="coluna-larga">
           <Revelar>
-            <CabecalhoSecao
+            <Abertura
+              alinhamento="esquerda"
               sobrescrita="O que define o desconto"
               titulo="A nota final do crédito"
-              descricao="Quatro critérios objetivos compõem a nota. Quanto maior a nota, maior o grau — e menor o desconto. Rever o grau é o que reabre o desconto."
+              resposta="Quatro critérios objetivos compõem a nota. Quanto maior a nota, maior o grau — e menor o desconto. Rever o grau é o que reabre o desconto."
             />
           </Revelar>
 
@@ -149,10 +150,11 @@ export default function Estadual() {
       </section>
 
       {/* Motor estadual */}
-      <section className="secao-sm" style={{ background: "#EFF1EC" }}>
-        <div className="container-t">
+      <section className="faixa-sm faixa-clara" style={{ background: "#EFF1EC" }}>
+        <div className="coluna-larga">
           <Revelar>
-            <CabecalhoSecao
+            <Abertura
+              alinhamento="esquerda"
               sobrescrita="Motor estadual · PGE-SP"
               titulo="A tecnologia afere, simula e instrui a revisão do grau"
             />
@@ -172,10 +174,11 @@ export default function Estadual() {
       </section>
 
       {/* Quanto pode chegar */}
-      <section className="fundo-escuro">
-        <div className="container-t secao">
+      <section className="faixa-escura">
+        <div className="coluna-larga faixa">
           <Revelar>
-            <CabecalhoSecao
+            <Abertura
+              alinhamento="esquerda"
               claro
               sobrescrita="Quanto pode chegar"
               titulo="Descontos e prazos na transação tributária estadual"
@@ -220,13 +223,14 @@ export default function Estadual() {
       </section>
 
       {/* Adesão x individual */}
-      <section className="secao">
-        <div className="container-t">
+      <section className="faixa faixa-clara">
+        <div className="coluna-larga">
           <Revelar>
-            <CabecalhoSecao
+            <Abertura
+              alinhamento="esquerda"
               sobrescrita="Duas portas"
               titulo="Acordo Paulista ou proposta individual"
-              descricao="A adesão traz condições pré-fixadas e caminho mais curto. A individual constrói as condições sobre a realidade do crédito — e, na esfera estadual, permite selecionar quais inscrições entram."
+              resposta="A adesão traz condições pré-fixadas e caminho mais curto. A individual constrói as condições sobre a realidade do crédito — e, na esfera estadual, permite selecionar quais inscrições entram."
             />
           </Revelar>
 
@@ -259,14 +263,15 @@ export default function Estadual() {
       </section>
 
       {/* Frentes */}
-      <section className="secao-sm" style={{ background: "#EFF1EC" }}>
-        <div className="container-t">
+      <section className="faixa-sm faixa-clara" style={{ background: "#EFF1EC" }}>
+        <div className="coluna-larga">
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
             <Revelar>
-              <CabecalhoSecao
+              <Abertura
+              alinhamento="esquerda"
                 sobrescrita="O que dá para fazer"
                 titulo="As frentes de trabalho — estadual"
-                descricao="O resultado raramente vem de uma alavanca só. O diagnóstico indica quais se aplicam ao caso concreto."
+                resposta="O resultado raramente vem de uma alavanca só. O diagnóstico indica quais se aplicam ao caso concreto."
               />
             </Revelar>
             <Revelar atraso={80}>

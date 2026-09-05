@@ -31,7 +31,7 @@ export default function Conteudo() {
           className="pointer-events-none absolute inset-0"
           style={{ background: "linear-gradient(170deg, #FFFFFF 0%, #F7F6F2 60%)" }}
         />
-        <div className="container-t relative">
+        <div className="coluna-larga relative">
           <Revelar>
             <Migalhas itens={migalhas} />
             <Sobrescrita>Central de conteúdo</Sobrescrita>
@@ -56,7 +56,7 @@ export default function Conteudo() {
 
       {/* Destaque */}
       <section className="pb-4">
-        <div className="container-t">
+        <div className="coluna-larga">
           <Revelar>
             <Link
               href={`/conteudo/${destaque.slug}`}
@@ -104,8 +104,8 @@ export default function Conteudo() {
       </section>
 
       {/* Demais artigos */}
-      <section className="secao">
-        <div className="container-t">
+      <section className="faixa faixa-clara">
+        <div className="coluna-larga">
           <div className="grid gap-6 md:grid-cols-2">
             {demais.map((a, i) => (
               <Revelar key={a.slug} atraso={i * 70} as="article">

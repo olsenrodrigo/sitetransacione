@@ -5,7 +5,7 @@ import Faq from "@/components/site/Faq";
 import CTA from "@/components/site/CTA";
 import {
   Botao,
-  CabecalhoSecao,
+  Abertura,
   Marcador,
   Revelar,
   Seta,
@@ -96,13 +96,13 @@ export default function Tecnologia() {
         migalhas={migalhas}
         acoes={
           <>
-            <Botao href="/diagnostico" tamanho="lg">
+            <Botao href="/diagnostico" variante="esmeralda" tamanho="lg">
               Fazer o diagnóstico
               <Seta />
             </Botao>
             <Botao
               href="/conteudo/onde-a-ia-entra-no-calculo-tributario"
-              variante="secundario"
+              variante="contorno-claro"
               tamanho="lg"
             >
               Ler a análise técnica
@@ -112,13 +112,14 @@ export default function Tecnologia() {
       />
 
       {/* Onde a IA entra e onde não entra */}
-      <section className="secao">
-        <div className="container-t">
+      <section className="faixa faixa-clara">
+        <div className="coluna-larga">
           <Revelar>
-            <CabecalhoSecao
+            <Abertura
+              alinhamento="esquerda"
               sobrescrita="A separação que importa"
               titulo="Onde a inteligência artificial entra — e onde não entra"
-              descricao="Ler um documento é uma tarefa. Aplicar uma regra normativa é outra. Tratá-las como a mesma coisa é o que produz número indefensável."
+              resposta="Ler um documento é uma tarefa. Aplicar uma regra normativa é outra. Tratá-las como a mesma coisa é o que produz número indefensável."
             />
           </Revelar>
 
@@ -171,14 +172,15 @@ export default function Tecnologia() {
       </section>
 
       {/* As quatro garantias */}
-      <section className="fundo-escuro">
-        <div className="container-t secao">
+      <section className="faixa-escura">
+        <div className="coluna-larga faixa">
           <Revelar>
-            <CabecalhoSecao
+            <Abertura
+              alinhamento="esquerda"
               claro
               sobrescrita="Rastreabilidade"
               titulo="Todo número do laudo pode ser reconstituído até a origem"
-              descricao="Pegue um número do resultado final e peça a reconstituição. Se algum elo faltar, o número é uma afirmação — não uma prova."
+              resposta="Pegue um número do resultado final e peça a reconstituição. Se algum elo faltar, o número é uma afirmação — não uma prova."
             />
           </Revelar>
 
@@ -223,13 +225,14 @@ export default function Tecnologia() {
       </section>
 
       {/* Segurança da informação */}
-      <section className="secao">
-        <div className="container-t">
+      <section className="faixa faixa-clara">
+        <div className="coluna-larga">
           <Revelar>
-            <CabecalhoSecao
+            <Abertura
+              alinhamento="esquerda"
               sobrescrita="Segurança da informação"
               titulo="Os documentos tratados são os mais sensíveis da empresa"
-              descricao="A arquitetura parte dessa premissa, do primeiro upload ao encerramento do caso."
+              resposta="A arquitetura parte dessa premissa, do primeiro upload ao encerramento do caso."
             />
           </Revelar>
 

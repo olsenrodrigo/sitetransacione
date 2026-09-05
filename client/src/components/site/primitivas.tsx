@@ -8,9 +8,8 @@ import { cn } from "@/lib/utils";
  * Entrada suave no scroll. Só opacity/transform — não força layout.
  *
  * O que já está na primeira dobra é marcado como visível antes da primeira
- * pintura (useLayoutEffect), sem animação e sem atraso: conteúdo com
- * opacity 0 não conta para o LCP, e animar a dobra inicial atrasaria a
- * métrica sem ganho perceptível.
+ * pintura (useLayoutEffect), sem animação: conteúdo com opacity 0 não conta
+ * para o LCP, e animar a dobra inicial atrasaria a métrica sem ganho.
  */
 export function Revelar({
   children,
@@ -47,7 +46,7 @@ export function Revelar({
           obs.disconnect();
         }
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.06 },
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -70,25 +69,33 @@ export function Revelar({
 export function Sobrescrita({
   children,
   claro = false,
+  centro = false,
   className,
 }: {
   children: ReactNode;
   claro?: boolean;
+  centro?: boolean;
   className?: string;
 }) {
   return (
-    <span className={cn("flex items-center gap-3", className)}>
+    <span
+      className={cn("flex items-center gap-3", centro && "justify-center", className)}
+    >
       <span
         aria-hidden="true"
         className="h-px w-7 shrink-0"
         style={{ background: claro ? "#3FD9A0" : "#0E9E6E" }}
       />
-      <span
-        className="sobrescrita"
-        style={{ color: claro ? "#3FD9A0" : "#0E9E6E" }}
-      >
+      <span className="sobrescrita" style={{ color: claro ? "#3FD9A0" : "#0E9E6E" }}>
         {children}
       </span>
+      {centro && (
+        <span
+          aria-hidden="true"
+          className="h-px w-7 shrink-0"
+          style={{ background: claro ? "#3FD9A0" : "#0E9E6E" }}
+        />
+      )}
     </span>
   );
 }
@@ -100,7 +107,7 @@ type BotaoProps = {
   href?: string;
   externo?: boolean;
   onClick?: () => void;
-  variante?: "primario" | "secundario" | "fantasma" | "claro";
+  variante?: "primario" | "esmeralda" | "contorno" | "contorno-claro" | "fantasma";
   tamanho?: "md" | "lg";
   className?: string;
   type?: "button" | "submit";
@@ -108,13 +115,14 @@ type BotaoProps = {
 };
 
 const ESTILOS: Record<NonNullable<BotaoProps["variante"]>, string> = {
-  primario:
-    "bg-verde text-white hover:bg-verde-800 border border-transparent shadow-[0_1px_2px_rgba(10,92,66,0.18)]",
-  secundario:
+  primario: "bg-verde text-white hover:bg-verde-800 border border-transparent",
+  esmeralda:
+    "bg-esmeralda text-grafite hover:bg-esmeralda-clara border border-transparent font-semibold",
+  contorno:
     "bg-transparent text-verde border border-verde/25 hover:border-verde/60 hover:bg-verde/[0.04]",
+  "contorno-claro":
+    "bg-transparent text-white border border-white/25 hover:border-white/55 hover:bg-white/[0.06]",
   fantasma: "bg-transparent text-verde border border-transparent hover:bg-verde/[0.06]",
-  claro:
-    "bg-esmeralda text-grafite border border-transparent hover:bg-esmeralda-clara font-semibold",
 };
 
 export function Botao({
@@ -129,9 +137,9 @@ export function Botao({
   disabled,
 }: BotaoProps) {
   const base = cn(
-    "inline-flex items-center justify-center gap-2 rounded-md font-medium transition-colors duration-200",
-    "disabled:opacity-55 disabled:pointer-events-none",
-    tamanho === "lg" ? "px-7 py-3.5 text-[0.95rem]" : "px-5 py-2.5 text-[0.875rem]",
+    "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors duration-200",
+    "disabled:pointer-events-none disabled:opacity-55",
+    tamanho === "lg" ? "px-7 py-4 text-[0.98rem]" : "px-5 py-2.5 text-[0.875rem]",
     ESTILOS[variante],
     className,
   );
@@ -155,13 +163,13 @@ export function Botao({
   );
 }
 
-/* --------------------------------------------------------------- Seta */
+/* --------------------------------------------------------------- Ícones */
 
 export function Seta({ className }: { className?: string }) {
   return (
     <svg
-      width="14"
-      height="14"
+      width="15"
+      height="15"
       viewBox="0 0 16 16"
       fill="none"
       aria-hidden="true"
@@ -191,7 +199,7 @@ export function Marcador({ className }: { className?: string }) {
       <path
         d="M3 8.4l3.1 3.1L13 4.6"
         stroke="currentColor"
-        strokeWidth="1.7"
+        strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -199,38 +207,39 @@ export function Marcador({ className }: { className?: string }) {
   );
 }
 
-/* ------------------------------------------------------ Cabeçalho de seção */
+/* ---------------------------------------------- Abertura de faixa ---- */
 
-export function CabecalhoSecao({
+/**
+ * Abre uma faixa: sobrescrita, afirmação e a linha de resposta.
+ * Centrada por padrão — a coluna estreita concentra a leitura.
+ */
+export function Abertura({
   sobrescrita,
   titulo,
-  descricao,
+  resposta,
   claro = false,
-  centro = false,
+  alinhamento = "centro",
   className,
 }: {
   sobrescrita?: string;
   titulo: ReactNode;
-  descricao?: ReactNode;
+  resposta?: ReactNode;
   claro?: boolean;
-  centro?: boolean;
+  alinhamento?: "centro" | "esquerda";
   className?: string;
 }) {
+  const centro = alinhamento === "centro";
   return (
-    <div
-      className={cn(
-        "max-w-3xl",
-        centro && "mx-auto text-center [&>span]:justify-center",
-        className,
-      )}
-    >
+    <div className={cn(centro && "text-center", className)}>
       {sobrescrita && (
-        <Sobrescrita claro={claro} className="mb-5">
+        <Sobrescrita claro={claro} centro={centro} className="mb-6">
           {sobrescrita}
         </Sobrescrita>
       )}
-      <h2 className="titulo-secao">{titulo}</h2>
-      {descricao && <p className="corpo mt-4 max-w-2xl">{descricao}</p>}
+      <h2 className="afirmacao">{titulo}</h2>
+      {resposta && (
+        <p className={cn("corpo mt-6", centro && "mx-auto max-w-2xl")}>{resposta}</p>
+      )}
     </div>
   );
 }
@@ -257,13 +266,13 @@ export function Migalhas({
                 <Link
                   href={it.path}
                   className="transition-colors hover:underline"
-                  style={{ color: claro ? "#a9bbb4" : "#5a6b64" }}
+                  style={{ color: claro ? "#A9BBB4" : "#5A6B64" }}
                 >
                   {it.nome}
                 </Link>
               )}
               {!ultimo && (
-                <span aria-hidden="true" style={{ color: claro ? "#4d5f58" : "#B4BDB8" }}>
+                <span aria-hidden="true" style={{ color: claro ? "#4D5F58" : "#B4BDB8" }}>
                   /
                 </span>
               )}
@@ -278,9 +287,8 @@ export function Migalhas({
 /* ------------------------------------------------------ Bloco de resposta */
 
 /**
- * Resposta direta no topo da página. Existe por dois motivos: dá ao leitor
- * a conclusão antes do argumento, e entrega aos modelos de IA um trecho
- * objetivo, autocontido e citável.
+ * Resposta direta. Existe por dois motivos: dá ao leitor a conclusão antes
+ * do argumento, e entrega aos modelos de IA um trecho objetivo e citável.
  */
 export function BlocoResposta({
   children,
@@ -291,18 +299,15 @@ export function BlocoResposta({
 }) {
   return (
     <div
-      className="rounded-lg border-l-2 py-1"
-      style={{
-        borderColor: claro ? "#3FD9A0" : "#0E9E6E",
-        paddingLeft: "1.15rem",
-      }}
+      className="border-l-2 py-1 pl-5"
+      style={{ borderColor: claro ? "#3FD9A0" : "#0E9E6E" }}
     >
       <p
         className="fonte-display"
         style={{
-          fontSize: "1.075rem",
-          lineHeight: 1.6,
-          color: claro ? "#dfe9e5" : "#33443d",
+          fontSize: "1.1rem",
+          lineHeight: 1.62,
+          color: claro ? "#DFE9E5" : "#33443D",
         }}
       >
         {children}
@@ -311,8 +316,51 @@ export function BlocoResposta({
   );
 }
 
-/* ---------------------------------------------------------------- Nota */
+export function NotaLegal({
+  children,
+  centro = false,
+}: {
+  children: ReactNode;
+  centro?: boolean;
+}) {
+  return (
+    <p className={cn("nota mt-8", centro && "mx-auto max-w-2xl text-center")}>
+      {children}
+    </p>
+  );
+}
 
-export function NotaLegal({ children }: { children: ReactNode }) {
-  return <p className="nota mt-6 max-w-3xl">{children}</p>;
+/* ------------------------------------------------------------- Indicador */
+
+export function Indicador({
+  valor,
+  unidade,
+  rotulo,
+  claro = false,
+}: {
+  valor: string;
+  unidade?: string;
+  rotulo: string;
+  claro?: boolean;
+}) {
+  return (
+    <div>
+      <p
+        className="numeral text-[2.6rem] md:text-[3rem]"
+        style={{ color: claro ? "#fff" : "#0A5C42" }}
+      >
+        {valor}
+        {unidade && (
+          <span
+            className="text-[1rem] md:text-[1.1rem]"
+            style={{ color: claro ? "#3FD9A0" : "#0E9E6E" }}
+          >
+            {" "}
+            {unidade}
+          </span>
+        )}
+      </p>
+      <p className="corpo-sm mt-3 text-[0.86rem]">{rotulo}</p>
+    </div>
+  );
 }

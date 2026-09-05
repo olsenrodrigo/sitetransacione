@@ -23,17 +23,19 @@ BRANCO  = "#FFFFFF"
 OSSO    = "#F7F6F2"
 
 # ------------------------------------------------- simbolo (grade 32x32)
-# Barra superior : o passivo como esta.
-# Barra inferior : o mesmo passivo, reclassificado — 50% da largura.
-# Haste          : a metodologia que sustenta as duas.
-BARRA_SUP = "M4 5h24v4H4z"
-BARRA_INF = "M10 11h12v4H10z"
-HASTE     = "M14 5h4v22h-4z"
-SIMBOLO   = f"{BARRA_SUP} {BARRA_INF} {HASTE}"
-SIM_X, SIM_Y, SIM_W, SIM_H = 4, 5, 24, 22   # bounding box do simbolo
+# O braço do T é uma seta dupla: a transação acontece nos dois sentidos.
+#   seta superior : o que a empresa leva ao Fisco
+#   seta inferior : o que retorna à empresa
+#   haste         : a metodologia que sustenta as duas
+# Peso único de 4 unidades; cabeças a 45°, com 8 de altura e 4 de ponta.
+SETA_SUP = "M3 4H23V2L27 6L23 10V8H3Z"      # aponta à direita
+SETA_INF = "M29 16H9V18L5 14L9 10V12H29Z"   # aponta à esquerda
+HASTE    = "M14 16h4v14h-4z"
+PARTES   = (SETA_SUP, SETA_INF, HASTE)
+SIM_X, SIM_Y, SIM_W, SIM_H = 3, 2, 26, 28   # bounding box do simbolo
 
 CAP = 100.0            # altura de caixa alta do logotipo
-SIM_ALTURA = 108.0     # altura do simbolo no lockup
+SIM_ALTURA = 122.0     # altura do simbolo no lockup
 TRACKING = -0.012
 
 
@@ -60,18 +62,17 @@ def svg(vb_w, vb_h, corpo, fundo=None):
             f'{bg}{corpo}</svg>')
 
 
-def simbolo_g(cor_barra, cor_haste=None, transform=""):
-    haste = cor_haste or cor_barra
+def simbolo_g(cor, transform=""):
     t = f' transform="{transform}"' if transform else ""
-    return (f'<g{t}><path fill="{cor_barra}" d="{BARRA_SUP}"/>'
-            f'<path fill="{cor_barra}" d="{BARRA_INF}"/>'
-            f'<path fill="{haste}" d="{HASTE}"/></g>')
+    corpo = "".join(f'<path fill="{cor}" d="{d}"/>' for d in PARTES)
+    return f'<g{t}>{corpo}</g>'
 
 
 def simbolo_duotone(cor_base, cor_acento, transform=""):
+    """A seta de retorno recebe o acento: é o que volta para a empresa."""
     t = f' transform="{transform}"' if transform else ""
-    return (f'<g{t}><path fill="{cor_base}" d="{BARRA_SUP}"/>'
-            f'<path fill="{cor_acento}" d="{BARRA_INF}"/>'
+    return (f'<g{t}><path fill="{cor_base}" d="{SETA_SUP}"/>'
+            f'<path fill="{cor_acento}" d="{SETA_INF}"/>'
             f'<path fill="{cor_base}" d="{HASTE}"/></g>')
 
 
@@ -79,7 +80,7 @@ def build(ttf, out_dirs):
     d, wlogo = logotipo(ttf)
     esc = SIM_ALTURA / SIM_H
     simw = SIM_W * esc
-    gap = 52
+    gap = 46
     H = 130
     total = simw + gap + wlogo
     ty = (H - SIM_ALTURA) / 2
@@ -92,11 +93,11 @@ def build(ttf, out_dirs):
     for nome, cb, ca in [("logo-horizontal", VERDE, VERDE),
                          ("logo-horizontal-branco", BRANCO, BRANCO),
                          ("logo-horizontal-grafite", GRAFITE, GRAFITE)]:
-        corpo = (simbolo_g(cb, transform=sim_tf) +
+        corpo = (simbolo_g(cb, sim_tf) +
                  f'<g transform="translate({simw+gap:.2f},{tl})"><path fill="{ca}" d="{d}"/></g>')
         ativos[f"{nome}.svg"] = svg(f"{total:.1f}", H, corpo)
 
-    corpo = (simbolo_duotone(VERDE, ESMER, transform=sim_tf) +
+    corpo = (simbolo_duotone(VERDE, ESMER, sim_tf) +
              f'<g transform="translate({simw+gap:.2f},{tl})"><path fill="{VERDE}" d="{d}"/></g>')
     ativos["logo-horizontal-duotone.svg"] = svg(f"{total:.1f}", H, corpo)
 
@@ -107,19 +108,18 @@ def build(ttf, out_dirs):
     vgap = 40
     VW = max(vsimw, wlogo)
     VH = vsim + vgap + CAP
-    corpo = (simbolo_g(VERDE, transform=f"translate({(VW-vsimw)/2:.2f},0) scale({vesc:.4f}) translate({-SIM_X},{-SIM_Y})") +
+    corpo = (simbolo_g(VERDE, f"translate({(VW-vsimw)/2:.2f},0) scale({vesc:.4f}) translate({-SIM_X},{-SIM_Y})") +
              f'<g transform="translate({(VW-wlogo)/2:.2f},{vsim+vgap})"><path fill="{VERDE}" d="{d}"/></g>')
     ativos["logo-vertical.svg"] = svg(f"{VW:.1f}", f"{VH:.1f}", corpo)
 
     # ---- simbolo isolado
-    ativos["simbolo.svg"] = svg(32, 32, f'<path fill="{VERDE}" d="{SIMBOLO}"/>')
-    ativos["simbolo-branco.svg"] = svg(32, 32, f'<path fill="{BRANCO}" d="{SIMBOLO}"/>')
+    ativos["simbolo.svg"] = svg(32, 32, simbolo_g(VERDE))
+    ativos["simbolo-branco.svg"] = svg(32, 32, simbolo_g(BRANCO))
     ativos["simbolo-duotone.svg"] = svg(32, 32, simbolo_duotone(VERDE, ESMER))
 
     # ---- app icon / favicon (fundo verde, simbolo reverso)
     icon = (f'<rect width="32" height="32" rx="7" fill="{VERDE}"/>'
-            f'<g transform="translate(16,16) scale(0.72) translate(-16,-16)">'
-            f'<path fill="{BRANCO}" d="{SIMBOLO}"/></g>')
+            + simbolo_g(BRANCO, "translate(16,16) scale(0.66) translate(-16,-16)"))
     ativos["favicon.svg"] = svg(32, 32, icon)
     ativos["app-icon.svg"] = svg(32, 32, icon)
 

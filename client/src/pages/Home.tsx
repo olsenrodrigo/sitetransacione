@@ -37,16 +37,6 @@ function Hero() {
       </div>
       <div
         aria-hidden="true"
-        className="grade-fina pointer-events-none absolute inset-0 opacity-40"
-        style={{
-          color: "#fff",
-          maskImage: "radial-gradient(ellipse 70% 55% at 50% 45%, #000 0%, transparent 75%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 70% 55% at 50% 45%, #000 0%, transparent 75%)",
-        }}
-      />
-      <div
-        aria-hidden="true"
         className="halo"
         style={{ width: 520, height: 520, left: "16%", top: "20%" }}
       />
@@ -432,11 +422,6 @@ const PASSOS = [
 function ComoFunciona() {
   return (
     <section className="faixa-verde faixa relative overflow-hidden">
-      <div
-        aria-hidden="true"
-        className="grade-fina pointer-events-none absolute inset-0 opacity-30"
-        style={{ color: "#fff" }}
-      />
       <div className="coluna relative">
         <Revelar>
           <Abertura

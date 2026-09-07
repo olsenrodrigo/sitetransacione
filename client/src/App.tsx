@@ -19,7 +19,7 @@ const NaoEncontrado = lazy(() => import("@/pages/NaoEncontrado"));
 
 function Carregando() {
   return (
-    <div className="secao container-t" aria-live="polite" aria-busy="true">
+    <div className="faixa coluna-larga" aria-live="polite" aria-busy="true">
       <div className="h-4 w-32 rounded bg-osso-2" />
       <div className="mt-6 h-10 w-2/3 max-w-lg rounded bg-osso-2" />
       <div className="mt-4 h-4 w-full max-w-xl rounded bg-osso-2" />

@@ -53,7 +53,7 @@ export default function Navbar() {
         <div className="coluna-larga">
           <div className="flex h-[4.75rem] items-center justify-between gap-6">
             <Link href="/" aria-label="Transacione — página inicial" className="shrink-0">
-              <Logo variante={sobreEscuro ? "branco" : "verde"} altura={24} />
+              <Logo variante={sobreEscuro ? "branco" : "verde"} altura={28} />
             </Link>
 
             <nav

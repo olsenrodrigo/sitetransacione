@@ -1,7 +1,6 @@
 import { useLocation } from "wouter";
 import { Botao, Revelar, Seta, Sobrescrita } from "./primitivas";
 import { whatsappDaPagina } from "@/data/site";
-import { Simbolo } from "@/components/marca/Logo";
 import { usarLead } from "./LeadModal";
 
 export default function CTA({
@@ -27,12 +26,6 @@ export default function CTA({
         className="halo"
         style={{ width: 620, height: 620, right: "-12%", top: "-22%" }}
       />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-24 left-1/2 -translate-x-1/2 opacity-[0.04]"
-      >
-        <Simbolo variante="branco" tamanho={460} />
-      </div>
 
       <div className="coluna relative text-center">
         <Revelar>

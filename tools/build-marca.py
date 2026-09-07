@@ -36,7 +36,11 @@ BRACO = "M4 8 L8 4 L8 6 L24 6 L24 4 L28 8 L24 12 L24 10 L8 10 L8 12 Z"
 SIM_X, SIM_Y, SIM_W, SIM_H = 4, 4, 24, 24   # bounding box do simbolo
 
 CAP = 100.0            # altura de caixa alta do logotipo
-SIM_ALTURA = 112.0     # altura do simbolo no lockup
+# O simbolo E a letra T da palavra: mesma altura de caixa alta (com 3% de
+# folga optica, porque a forma geometrica pesa menos que a serifada) e um
+# espaco curto ate o "r", como se fosse mais uma letra.
+SIM_ALTURA = CAP * 1.03
+GAP_LETRA = CAP * 0.07
 TRACKING = -0.012
 
 
@@ -76,44 +80,51 @@ def simbolo_duotone(cor_base, cor_acento, transform=""):
 
 
 def build(ttf, out_dirs):
-    d, wlogo = logotipo(ttf)
+    # "ransacione" — o T vem do simbolo.
+    d, wlogo = logotipo(ttf, "ransacione")
     esc = SIM_ALTURA / SIM_H
     simw = SIM_W * esc
-    gap = 46
     H = 130
-    total = simw + gap + wlogo
-    ty = (H - SIM_ALTURA) / 2
-    tl = (H - CAP) / 2
-    sim_tf = f"translate(0,{ty:.2f}) scale({esc:.4f}) translate({-SIM_X},{-SIM_Y})"
+    total = simw + GAP_LETRA + wlogo
+    topo = (H - CAP) / 2
+    # base do simbolo na linha de base do texto
+    sim_tf = (f"translate(0,{topo + CAP - SIM_ALTURA:.2f}) scale({esc:.4f}) "
+              f"translate({-SIM_X},{-SIM_Y})")
+    txt_tf = f"translate({simw + GAP_LETRA:.2f},{topo:.2f})"
 
     ativos = {}
 
-    # ---- lockup horizontal (3 versoes de cor + duotone)
-    for nome, cb, ca in [("logo-horizontal", VERDE, VERDE),
-                         ("logo-horizontal-branco", BRANCO, BRANCO),
-                         ("logo-horizontal-grafite", GRAFITE, GRAFITE)]:
-        corpo = (simbolo_g(cb, sim_tf) +
-                 f'<g transform="translate({simw+gap:.2f},{tl})"><path fill="{ca}" d="{d}"/></g>')
+    # ---- lockup horizontal
+    for nome, cor in [("logo-horizontal", VERDE),
+                      ("logo-horizontal-branco", BRANCO),
+                      ("logo-horizontal-grafite", GRAFITE),
+                      ("logo-horizontal-esmeralda", ESMER)]:
+        corpo = (simbolo_g(cor, sim_tf) +
+                 f'<g transform="{txt_tf}"><path fill="{cor}" d="{d}"/></g>')
         ativos[f"{nome}.svg"] = svg(f"{total:.1f}", H, corpo)
 
     corpo = (simbolo_duotone(VERDE, ESMER, sim_tf) +
-             f'<g transform="translate({simw+gap:.2f},{tl})"><path fill="{VERDE}" d="{d}"/></g>')
+             f'<g transform="{txt_tf}"><path fill="{VERDE}" d="{d}"/></g>')
     ativos["logo-horizontal-duotone.svg"] = svg(f"{total:.1f}", H, corpo)
 
-    # ---- lockup vertical
+    # ---- lockup vertical: simbolo acima, palavra inteira abaixo
+    d_full, w_full = logotipo(ttf, "Transacione")
     vsim = 132.0
     vesc = vsim / SIM_H
     vsimw = SIM_W * vesc
     vgap = 40
-    VW = max(vsimw, wlogo)
+    VW = max(vsimw, w_full)
     VH = vsim + vgap + CAP
-    corpo = (simbolo_g(VERDE, f"translate({(VW-vsimw)/2:.2f},0) scale({vesc:.4f}) translate({-SIM_X},{-SIM_Y})") +
-             f'<g transform="translate({(VW-wlogo)/2:.2f},{vsim+vgap})"><path fill="{VERDE}" d="{d}"/></g>')
+    corpo = (simbolo_g(VERDE, f"translate({(VW-vsimw)/2:.2f},0) scale({vesc:.4f}) "
+                              f"translate({-SIM_X},{-SIM_Y})") +
+             f'<g transform="translate({(VW-w_full)/2:.2f},{vsim+vgap})">'
+             f'<path fill="{VERDE}" d="{d_full}"/></g>')
     ativos["logo-vertical.svg"] = svg(f"{VW:.1f}", f"{VH:.1f}", corpo)
 
     # ---- simbolo isolado
     ativos["simbolo.svg"] = svg(32, 32, simbolo_g(VERDE))
     ativos["simbolo-branco.svg"] = svg(32, 32, simbolo_g(BRANCO))
+    ativos["simbolo-esmeralda.svg"] = svg(32, 32, simbolo_g(ESMER))
     ativos["simbolo-duotone.svg"] = svg(32, 32, simbolo_duotone(VERDE, ESMER))
 
     # ---- app icon / favicon (fundo verde, simbolo reverso)

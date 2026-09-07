@@ -347,19 +347,6 @@
     opacity: 0.5;
   }
 
-  .grade-fina {
-    background-image: linear-gradient(
-        to right,
-        color-mix(in srgb, currentColor 7%, transparent) 1px,
-        transparent 1px
-      ),
-      linear-gradient(
-        to bottom,
-        color-mix(in srgb, currentColor 7%, transparent) 1px,
-        transparent 1px
-      );
-    background-size: 72px 72px;
-  }
 
   /* Halo esmeralda difuso, usado nas faixas escuras. */
   .halo {

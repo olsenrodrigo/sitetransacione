@@ -1,6 +1,6 @@
 # Manual de aplicação da marca — Transacione
 
-**Versão 2.0 · Setembro de 2026**
+**Versão 2.1 · Setembro de 2026**
 CORREA Consultoria Empresarial Estratégica
 Desenvolvido por Sintetiza AI
 
@@ -80,22 +80,44 @@ A escolha é deliberada: uma serifada editorial contemporânea dá gravidade jur
 soar antiquada, e contrasta com o símbolo geométrico em vez de repeti-lo. A palavra
 "Transacione" é um verbo no imperativo — a serifa lhe dá autoridade em vez de urgência.
 
+### O símbolo é a letra T
+
+O logotipo **não é símbolo + palavra**: o símbolo ocupa o lugar da letra **T**, e a
+palavra continua em "ransacione". Marca e nome são a mesma coisa, não duas coisas lado a
+lado — é o que torna o conjunto minimalista.
+
+```
+[símbolo] ransacione
+```
+
+Isso funciona porque a caixa do símbolo (24 × 24 unidades) tem quase exatamente a largura
+do T da Newsreader na mesma altura de caixa alta — 100 contra 102,5 unidades. A troca não
+altera o ritmo da palavra.
+
+| Medida | Valor |
+|---|---|
+| Altura do símbolo | **1,03 × altura de caixa alta** — a forma geométrica pesa opticamente menos que a serifada, e a folga compensa |
+| Espaço até o "r" | **0,07 × altura de caixa alta** |
+| Alinhamento | base do símbolo sobre a linha de base do texto |
+
+Em código, o SVG usa `viewBox="4 4 24 24"` — recortado na caixa do símbolo, sem a margem
+de proteção. Assim a base do SVG coincide com a base da letra, e o alinhamento por
+baseline encaixa sozinho, sem ajuste manual.
+
 Grafia sempre **Transacione**, com T maiúsculo e o restante em caixa baixa. Nunca em caixa
 alta, nunca em versalete, nunca abreviada.
 
-### Lockup horizontal (principal)
+### Tamanho mínimo do logotipo
 
-Símbolo à esquerda, logotipo à direita.
-
-- Altura do símbolo = **1,12 × altura de caixa alta** do logotipo
-- Espaço entre eles = **0,44 × altura de caixa alta**
-- Alinhamento pelo eixo óptico vertical
+O símbolo precisa de **26 px de altura de caixa alta** para a seta continuar legível — o
+que corresponde a um logotipo de **26 px** de corpo. Abaixo disso, use o símbolo isolado
+em vez do logotipo.
 
 ### Lockup vertical (secundário)
 
 Para espaços quadrados: assinatura de apresentação, selo de rodapé, avatar de rede social.
-Símbolo centrado acima, logotipo centrado abaixo, com intervalo de **0,40 × altura de caixa
-alta**.
+Aqui o símbolo aparece **acima** da palavra completa — "Transacione" com T tipográfico,
+porque a leitura empilhada não sustenta a substituição.
 
 ---
 
@@ -194,11 +216,12 @@ usam Newsreader 500 com tracking −3%.
 | Arquivo | Quando usar |
 |---|---|
 | `logo-horizontal.svg` | Padrão, sobre fundo claro |
+| `logo-horizontal-esmeralda.svg` | Quando o Verde Profundo não tem contraste suficiente |
 | `logo-horizontal-branco.svg` | Sobre Grafite, Verde Profundo ou fotografia escura |
 | `logo-horizontal-grafite.svg` | Documentos monocromáticos e impressão sem cor |
 | `logo-horizontal-duotone.svg` | Materiais que explicam o conceito; o braço em Esmeralda sobre a haste em Verde Profundo |
 | `logo-vertical.svg` | Espaços quadrados, selos, avatares |
-| `simbolo.svg` / `simbolo-branco.svg` / `simbolo-duotone.svg` | Símbolo isolado, quando a marca já foi apresentada |
+| `simbolo.svg` / `simbolo-branco.svg` / `simbolo-esmeralda.svg` / `simbolo-duotone.svg` | Símbolo isolado, quando a marca já foi apresentada ou o espaço não comporta o logotipo |
 | `favicon.svg` / `app-icon.svg` | Aba do navegador, ícone de aplicativo — símbolo reverso em quadrado de raio 7/32 |
 
 ### Sobre fundos
@@ -226,6 +249,8 @@ usam Newsreader 500 com tracking −3%.
 10. Usar o símbolo como bullet, ícone de interface ou elemento decorativo repetido em
    tamanho de texto.
 11. Inserir o logotipo em frase corrida como se fosse palavra.
+12. Escrever "Transacione" com T tipográfico ao lado do símbolo — o símbolo **é** o T, não um acompanhante.
+13. Aplicar textura, padrão de grade ou trama sobre as superfícies da marca.
 
 ---
 

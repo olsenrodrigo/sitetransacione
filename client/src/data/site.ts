@@ -50,12 +50,14 @@ export interface Socio {
   bio: string;
   credenciais: string[];
   iniciais: string;
+  foto: string;
 }
 
 export const SOCIOS: Socio[] = [
   {
     nome: "Eduardo Corrêa da Silva",
     iniciais: "EC",
+    foto: "/equipe/eduardo-correa-da-silva.jpg",
     area: "Jurídico tributário",
     cargo: "Responsável técnico jurídico",
     lead: "Quem sustenta a tese do lado de dentro da mesa — e do lado de dentro do tribunal que a julga.",
@@ -74,6 +76,7 @@ export const SOCIOS: Socio[] = [
   {
     nome: "Fernando Lucas Corrêa",
     iniciais: "FC",
+    foto: "/equipe/fernando-lucas-correa.jpg",
     area: "Contábil, fiscal e tecnologia",
     cargo: "Responsável técnico pelo diagnóstico e pela plataforma",
     lead: "Quem já construiu — e vendeu — a operação contábil que hoje lê o balanço da sua empresa.",

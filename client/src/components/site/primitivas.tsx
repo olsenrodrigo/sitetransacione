@@ -265,7 +265,7 @@ export function Migalhas({
               ) : (
                 <Link
                   href={it.path}
-                  className="transition-colors hover:underline"
+                  className="-my-1 inline-block py-1 transition-colors hover:underline"
                   style={{ color: claro ? "#A9BBB4" : "#5A6B64" }}
                 >
                   {it.nome}

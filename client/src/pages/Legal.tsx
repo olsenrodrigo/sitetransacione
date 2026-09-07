@@ -80,7 +80,7 @@ export default function Legal({ doc }: { doc: DocLegal }) {
         <p className="nota mt-12 border-t border-borda pt-6">
           Dúvidas sobre este documento ou sobre o tratamento dos seus dados podem ser
           encaminhadas para{" "}
-          <a href={`mailto:${SITE.email}`} className="text-verde underline underline-offset-2">
+          <a href={`mailto:${SITE.email}`} className="-my-1 inline-block py-1.5 text-verde underline underline-offset-2">
             {SITE.email}
           </a>
           .

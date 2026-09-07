@@ -23,19 +23,20 @@ BRANCO  = "#FFFFFF"
 OSSO    = "#F7F6F2"
 
 # ------------------------------------------------- simbolo (grade 32x32)
-# O braço do T é uma seta dupla: a transação acontece nos dois sentidos.
-#   seta superior : o que a empresa leva ao Fisco
-#   seta inferior : o que retorna à empresa
-#   haste         : a metodologia que sustenta as duas
-# Peso único de 4 unidades; cabeças a 45°, com 8 de altura e 4 de ponta.
-SETA_SUP = "M3 4H23V2L27 6L23 10V8H3Z"      # aponta à direita
-SETA_INF = "M29 16H9V18L5 14L9 10V12H29Z"   # aponta à esquerda
-HASTE    = "M14 16h4v14h-4z"
-PARTES   = (SETA_SUP, SETA_INF, HASTE)
-SIM_X, SIM_Y, SIM_W, SIM_H = 3, 2, 26, 28   # bounding box do simbolo
+# O braço do T é UMA seta de duas pontas, fundida à haste numa peça só:
+# a transação acontece nos dois sentidos, e a metodologia sustenta as duas.
+# Contorno único, percorrido no sentido horário a partir da ponta esquerda.
+# Peso 4 · cabeças de 8 de altura e 4 de projeção (45°) · caixa 24x24.
+SIMBOLO = (
+    "M4 8 L8 4 L8 6 L24 6 L24 4 L28 8 L24 12 L24 10 "
+    "L18 10 L18 28 L14 28 L14 10 L8 10 L8 12 Z"
+)
+# Braço isolado — usado só na versão duotone, sobreposto ao símbolo.
+BRACO = "M4 8 L8 4 L8 6 L24 6 L24 4 L28 8 L24 12 L24 10 L8 10 L8 12 Z"
+SIM_X, SIM_Y, SIM_W, SIM_H = 4, 4, 24, 24   # bounding box do simbolo
 
 CAP = 100.0            # altura de caixa alta do logotipo
-SIM_ALTURA = 122.0     # altura do simbolo no lockup
+SIM_ALTURA = 112.0     # altura do simbolo no lockup
 TRACKING = -0.012
 
 
@@ -64,16 +65,14 @@ def svg(vb_w, vb_h, corpo, fundo=None):
 
 def simbolo_g(cor, transform=""):
     t = f' transform="{transform}"' if transform else ""
-    corpo = "".join(f'<path fill="{cor}" d="{d}"/>' for d in PARTES)
-    return f'<g{t}>{corpo}</g>'
+    return f'<g{t}><path fill="{cor}" d="{SIMBOLO}"/></g>'
 
 
 def simbolo_duotone(cor_base, cor_acento, transform=""):
-    """A seta de retorno recebe o acento: é o que volta para a empresa."""
+    """A seta recebe o acento; a haste, a cor institucional."""
     t = f' transform="{transform}"' if transform else ""
-    return (f'<g{t}><path fill="{cor_base}" d="{SETA_SUP}"/>'
-            f'<path fill="{cor_acento}" d="{SETA_INF}"/>'
-            f'<path fill="{cor_base}" d="{HASTE}"/></g>')
+    return (f'<g{t}><path fill="{cor_base}" d="{SIMBOLO}"/>'
+            f'<path fill="{cor_acento}" d="{BRACO}"/></g>')
 
 
 def build(ttf, out_dirs):
@@ -119,7 +118,7 @@ def build(ttf, out_dirs):
 
     # ---- app icon / favicon (fundo verde, simbolo reverso)
     icon = (f'<rect width="32" height="32" rx="7" fill="{VERDE}"/>'
-            + simbolo_g(BRANCO, "translate(16,16) scale(0.66) translate(-16,-16)"))
+            + simbolo_g(BRANCO, "translate(16,16) scale(0.72) translate(-16,-16)"))
     ativos["favicon.svg"] = svg(32, 32, icon)
     ativos["app-icon.svg"] = svg(32, 32, icon)
 

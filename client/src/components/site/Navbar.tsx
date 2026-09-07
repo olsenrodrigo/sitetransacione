@@ -53,17 +53,20 @@ export default function Navbar() {
         <div className="coluna-larga">
           <div className="flex h-[4.75rem] items-center justify-between gap-6">
             <Link href="/" aria-label="Transacione — página inicial" className="shrink-0">
-              <Logo variante={sobreEscuro ? "branco" : "verde"} altura={25} />
+              <Logo variante={sobreEscuro ? "branco" : "verde"} altura={24} />
             </Link>
 
-            <nav className="hidden items-center gap-7 xl:flex" aria-label="Principal">
+            <nav
+              className="hidden items-center gap-4 lg:flex xl:gap-7"
+              aria-label="Principal"
+            >
               {NAV.map((item) => {
                 const ativo = local === item.path || local.startsWith(item.path + "/");
                 return (
                   <Link
                     key={item.path}
                     href={item.path}
-                    className="relative text-[0.8125rem] font-medium transition-colors"
+                    className="relative whitespace-nowrap text-[0.78rem] font-medium transition-colors xl:text-[0.8125rem]"
                     style={{
                       color: sobreEscuro
                         ? ativo
@@ -89,18 +92,19 @@ export default function Navbar() {
               })}
             </nav>
 
-            <div className="hidden shrink-0 items-center xl:flex">
+            <div className="hidden shrink-0 items-center lg:flex">
               <button
                 type="button"
                 onClick={() => abrir("diagnostico")}
                 className={cn(
-                  "inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-[0.8125rem] font-semibold transition-colors",
+                  "inline-flex items-center gap-2 whitespace-nowrap rounded-lg px-3.5 py-2.5 text-[0.78rem] font-semibold transition-colors xl:px-4 xl:text-[0.8125rem]",
                   sobreEscuro
                     ? "bg-esmeralda text-grafite hover:bg-esmeralda-clara"
                     : "bg-verde text-white hover:bg-verde-800",
                 )}
               >
-                Fazer o diagnóstico
+                <span className="xl:hidden">Diagnóstico</span>
+                <span className="hidden xl:inline">Fazer o diagnóstico</span>
                 <Seta />
               </button>
             </div>
@@ -108,7 +112,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setAberto((v) => !v)}
-              className="-mr-2 p-2 xl:hidden"
+              className="-mr-2 p-2 lg:hidden"
               aria-label={aberto ? "Fechar menu" : "Abrir menu"}
               aria-expanded={aberto}
             >
@@ -135,7 +139,7 @@ export default function Navbar() {
 
         {aberto && (
           <nav
-            className="border-t border-verde/10 bg-osso xl:hidden"
+            className="border-t border-verde/10 bg-osso lg:hidden"
             aria-label="Principal (móvel)"
             style={{ height: "calc(100dvh - 4.75rem)", overflowY: "auto" }}
           >

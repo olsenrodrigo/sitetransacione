@@ -4,6 +4,7 @@ import { usarSeo, seoDaRota } from "@/lib/seo";
 import { INDICADORES, SOCIOS } from "@/data/site";
 import { Simbolo } from "@/components/marca/Logo";
 import { usarLead } from "@/components/site/LeadModal";
+import Retrato from "@/components/site/Retrato";
 import Faq from "@/components/site/Faq";
 import CTA from "@/components/site/CTA";
 import {
@@ -597,26 +598,12 @@ function QuemConduz() {
                 style={{ borderColor: "#24332D", background: "rgba(255,255,255,0.018)" }}
               >
                 <div className="flex items-center gap-4">
-                  <div
-                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg"
-                    style={{
-                      background:
-                        "linear-gradient(150deg, rgba(14,158,110,0.92) 0%, rgba(10,92,66,0.92) 100%)",
-                    }}
-                    aria-hidden="true"
-                  >
-                    <span
-                      className="fonte-display text-white"
-                      style={{ fontSize: "1.15rem", fontWeight: 500 }}
-                    >
-                      {s.iniciais}
-                    </span>
-                  </div>
-                  <div>
+                  <Retrato socio={s} tamanho={64} />
+                  <div className="min-w-0">
                     <p className="sobrescrita" style={{ color: "#3FD9A0" }}>
                       {s.area}
                     </p>
-                    <h3 className="fonte-display mt-1.5 text-[1.35rem] leading-tight text-white">
+                    <h3 className="fonte-display mt-1.5 text-[1.2rem] leading-tight text-white sm:text-[1.35rem]">
                       {s.nome}
                     </h3>
                   </div>

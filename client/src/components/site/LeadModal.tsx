@@ -285,11 +285,11 @@ function Modal({
 
       <div
         ref={painel}
-        className="relative flex max-h-[94dvh] w-full max-w-xl flex-col overflow-hidden rounded-t-2xl bg-white shadow-2xl sm:max-h-[90dvh] sm:rounded-2xl"
+        className="relative flex max-h-[96dvh] w-full max-w-xl flex-col overflow-hidden rounded-t-2xl bg-white shadow-2xl sm:max-h-[92dvh] sm:rounded-2xl"
         style={{ animation: "subir .32s cubic-bezier(.22,1,.36,1)" }}
       >
         {/* Cabeçalho */}
-        <div className="relative shrink-0 overflow-hidden bg-grafite px-6 py-5 sm:px-8">
+        <div className="relative shrink-0 overflow-hidden bg-grafite px-6 py-4 sm:px-8 sm:py-5">
           <div
             aria-hidden="true"
             className="halo"
@@ -300,7 +300,7 @@ function Modal({
               <span className="sobrescrita" style={{ color: "#3FD9A0" }}>
                 {origem === "parceiro" ? "Canal do parceiro" : "Diagnóstico em 48 horas"}
               </span>
-              <p className="fonte-display mt-2 text-[1.35rem] leading-tight text-white">
+              <p className="fonte-display mt-1.5 text-[1.15rem] leading-tight text-white sm:mt-2 sm:text-[1.35rem]">
                 {etapa === "pronto"
                   ? "Recebemos o seu contato"
                   : origem === "parceiro"
@@ -322,7 +322,7 @@ function Modal({
           </div>
 
           {etapa !== "pronto" && (
-            <div className="relative mt-5">
+            <div className="relative mt-4 sm:mt-5">
               <div className="flex items-center justify-between text-[0.7rem]" style={{ color: "#8AA098" }}>
                 <span>
                   {etapa === "qualificar"
@@ -347,7 +347,7 @@ function Modal({
         </div>
 
         {/* Corpo */}
-        <div className="min-h-0 flex-1 overflow-y-auto px-6 py-7 sm:px-8">
+        <div className="min-h-0 flex-1 overflow-y-auto px-6 py-6 sm:px-8 sm:py-7">
           {/* ---------- Etapa 1: qualificação ---------- */}
           {etapa === "qualificar" && (
             <div key={pergunta.chave}>
@@ -629,7 +629,7 @@ function Modal({
         </div>
 
         {/* Rodapé de marca */}
-        <div className="flex shrink-0 items-center gap-2.5 border-t border-borda bg-osso px-6 py-3 sm:px-8">
+        <div className="hidden shrink-0 items-center gap-2.5 border-t border-borda bg-osso px-6 py-3 min-[480px]:flex sm:px-8 [@media(max-height:560px)]:hidden">
           <Simbolo tamanho={16} />
           <p className="nota">
             Transação tributária federal e estadual · Lei 13.988/2020 · Lei 17.843/2023

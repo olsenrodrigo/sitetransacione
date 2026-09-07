@@ -25,7 +25,7 @@ function BotaoWhatsapp() {
       rel="noopener noreferrer"
       aria-label="Falar pelo WhatsApp"
       data-evento="whatsapp_flutuante"
-      className="fixed bottom-5 right-5 z-40 flex h-12 w-12 items-center justify-center rounded-full shadow-lg transition-[opacity,transform] duration-300 md:bottom-7 md:right-7"
+      className="fixed bottom-5 right-4 z-40 flex h-12 w-12 items-center justify-center rounded-full shadow-lg transition-[opacity,transform] duration-300 md:bottom-7 md:right-7"
       style={{
         background: "#0A5C42",
         opacity: visivel ? 1 : 0,
@@ -76,8 +76,8 @@ function AvisoCookies() {
       className="fixed bottom-0 left-0 right-0 z-40 border-t border-borda bg-white/97 backdrop-blur-md md:bottom-5 md:left-5 md:right-auto md:max-w-sm md:rounded-xl md:border md:shadow-xl"
       style={{ animation: "subir .4s cubic-bezier(.22,1,.36,1)" }}
     >
-      <div className="p-5">
-        <p className="corpo-sm text-[0.88rem]">
+      <div className="p-4 sm:p-5">
+        <p className="corpo-sm text-[0.84rem] sm:text-[0.88rem]">
           Usamos cookies essenciais para o funcionamento do site e cookies de medição para
           entender como ele é usado.{" "}
           <Link href="/cookies" className="text-verde underline underline-offset-2">
@@ -85,18 +85,18 @@ function AvisoCookies() {
           </Link>
           .
         </p>
-        <div className="mt-4 flex flex-wrap gap-2.5">
+        <div className="mt-3.5 flex flex-wrap gap-2.5 sm:mt-4">
           <button
             type="button"
             onClick={() => decidir("aceito")}
-            className="rounded-lg bg-verde px-4 py-2.5 text-[0.82rem] font-medium text-white transition-colors hover:bg-verde-800"
+            className="min-h-11 flex-1 rounded-lg bg-verde px-4 text-[0.82rem] font-medium text-white transition-colors hover:bg-verde-800 sm:min-h-0 sm:flex-none sm:py-2.5"
           >
             Aceitar todos
           </button>
           <button
             type="button"
             onClick={() => decidir("essenciais")}
-            className="rounded-lg border border-verde/25 px-4 py-2.5 text-[0.82rem] font-medium text-verde transition-colors hover:border-verde/60"
+            className="min-h-11 flex-1 rounded-lg border border-verde/25 px-4 text-[0.82rem] font-medium text-verde transition-colors hover:border-verde/60 sm:min-h-0 sm:flex-none sm:py-2.5"
           >
             Apenas essenciais
           </button>

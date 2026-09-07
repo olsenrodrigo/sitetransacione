@@ -1,6 +1,6 @@
 # Manual de aplicação da marca — Transacione
 
-**Versão 1.1 · Setembro de 2026**
+**Versão 2.0 · Setembro de 2026**
 CORREA Consultoria Empresarial Estratégica
 Desenvolvido por Sintetiza AI
 
@@ -11,15 +11,16 @@ Desenvolvido por Sintetiza AI
 A Transacione trabalha sobre uma premissa: **transação é troca, e a troca acontece nos
 dois sentidos**. A marca precisa dizer isso antes de qualquer texto.
 
-O símbolo é a letra **T** construída sobre grade ortogonal exata, em que o braço da letra
-é uma **seta dupla** — herança direta do ícone de troca que a Transacione já usava, agora
-resolvido como monograma:
+O símbolo é a letra **T** cujo braço é uma **seta de duas pontas** — herança direta do
+ícone de troca que a Transacione já usava, agora resolvido como monograma. Seta e haste
+são uma peça só, um contorno contínuo: a metodologia não é um acessório do processo, é o
+que o sustenta.
 
-| Elemento | Geometria | O que significa |
-|---|---|---|
-| Seta superior | aponta à direita | O que a empresa leva ao Fisco: documento, apuração, proposta |
-| Seta inferior | aponta à esquerda | O que retorna à empresa: desconto, prazo, capacidade recomposta |
-| Haste | desce do centro | A metodologia que sustenta as duas pontas |
+| Elemento | O que significa |
+|---|---|
+| Ponta esquerda | O que retorna à empresa: desconto, prazo, capacidade recomposta |
+| Ponta direita | O que a empresa leva ao Fisco: documento, apuração, proposta |
+| Haste, fundida ao braço | A metodologia que sustenta as duas pontas |
 
 A leitura é imediata como letra e como movimento. Não há gráfico ascendente nem metáfora
 de crescimento — o negócio é reduzir um passivo, e a marca não promete resultado.
@@ -30,31 +31,35 @@ de crescimento — o negócio é reduzir um passivo, e a marca não promete resu
 
 ## 2. Construção do símbolo
 
-Grade de **32 × 32 unidades**. Todas as coordenadas são inteiras — a marca permanece nítida
-em qualquer densidade de tela e em favicon de 16 px.
+Grade de **32 × 32 unidades**, com o símbolo ocupando uma caixa de **24 × 24** centrada
+em (16, 16). Todas as coordenadas são inteiras — a marca permanece nítida em qualquer
+densidade de tela e em favicon de 16 px.
+
+O símbolo é **um único contorno fechado**, percorrido no sentido horário a partir da
+ponta esquerda:
 
 ```
-Seta superior   corpo x:  3 → 23   y:  4 →  8    (peso 4)
-                cabeça base x: 23, y: 2 → 10, ponta em (27, 6)
-
-Seta inferior   corpo x:  9 → 29   y: 12 → 16    (peso 4)
-                cabeça base x:  9, y: 10 → 18, ponta em (5, 14)
-
-Haste           x: 14 → 18   y: 16 → 30          (peso 4)
-
-Caixa do símbolo  26 × 28 unidades, de (3, 2) a (29, 30)
+M4 8  L8 4  L8 6  L24 6  L24 4  L28 8  L24 12  L24 10
+      L18 10  L18 28  L14 28  L14 10  L8 10  L8 12  Z
 ```
 
-As duas setas são espelhos exatas uma da outra em torno do eixo vertical x = 16.
+```
+Braço      corpo y: 6 → 10        (peso 4), x: 8 → 24
+Cabeças    altura 8 (y: 4 → 12), projeção 4 → pontas em (4, 8) e (28, 8)
+Haste      x: 14 → 18, y: 10 → 28 (peso 4), fundida ao braço
+```
 
 Peso único de **4 unidades** em todos os traços. Cabeças a 45°, com 8 unidades de altura
-e 4 de ponta — proporção 2:1 sobre o corpo, que mantém a seta legível a 16 px sem
+e 4 de projeção — proporção 2:1 sobre o corpo, que mantém a seta legível a 16 px sem
 dominar a composição. Cantos vivos a 90°, sem raio, sem chanfro.
+
+Por ser um contorno único, a marca nunca se fragmenta: não há como aplicar cor a uma
+parte sem que ela permaneça ligada às outras.
 
 ### Área de proteção
 
-Reserve, em todos os lados, o equivalente ao **peso do traço** (4 unidades). Nada entra
-nessa margem: nem texto, nem borda, nem imagem.
+Reserve, em todos os lados, o equivalente ao **peso do traço** (4 unidades = 1/6 da
+caixa do símbolo). Nada entra nessa margem: nem texto, nem borda, nem imagem.
 
 ### Tamanho mínimo
 
@@ -82,8 +87,8 @@ alta, nunca em versalete, nunca abreviada.
 
 Símbolo à esquerda, logotipo à direita.
 
-- Altura do símbolo = **1,22 × altura de caixa alta** do logotipo
-- Espaço entre eles = **0,46 × altura de caixa alta**
+- Altura do símbolo = **1,12 × altura de caixa alta** do logotipo
+- Espaço entre eles = **0,44 × altura de caixa alta**
 - Alinhamento pelo eixo óptico vertical
 
 ### Lockup vertical (secundário)
@@ -191,7 +196,7 @@ usam Newsreader 500 com tracking −3%.
 | `logo-horizontal.svg` | Padrão, sobre fundo claro |
 | `logo-horizontal-branco.svg` | Sobre Grafite, Verde Profundo ou fotografia escura |
 | `logo-horizontal-grafite.svg` | Documentos monocromáticos e impressão sem cor |
-| `logo-horizontal-duotone.svg` | Materiais que explicam o conceito; a seta de retorno em Esmeralda |
+| `logo-horizontal-duotone.svg` | Materiais que explicam o conceito; o braço em Esmeralda sobre a haste em Verde Profundo |
 | `logo-vertical.svg` | Espaços quadrados, selos, avatares |
 | `simbolo.svg` / `simbolo-branco.svg` / `simbolo-duotone.svg` | Símbolo isolado, quando a marca já foi apresentada |
 | `favicon.svg` / `app-icon.svg` | Aba do navegador, ícone de aplicativo — símbolo reverso em quadrado de raio 7/32 |
@@ -209,7 +214,7 @@ usam Newsreader 500 com tracking −3%.
 ## 7. Usos proibidos
 
 1. Alterar as proporções entre barras, haste e intervalo.
-2. Inverter o sentido das setas, ou fazer as duas apontarem para o mesmo lado — a oposição **é** o conceito.
+2. Separar a seta da haste, ou fazer as pontas apontarem para o mesmo lado — a peça única e a oposição **são** o conceito.
 3. Engrossar ou afinar as cabeças em relação ao corpo das setas.
 4. Aplicar gradiente, sombra, contorno, relevo ou brilho ao símbolo.
 5. Rotacionar, inclinar, espelhar ou distorcer.
@@ -258,7 +263,15 @@ marca/
     ├── simbolo-duotone.svg
     ├── favicon.svg
     └── app-icon.svg
+
+client/public/equipe/
+├── eduardo-correa-da-silva.jpg    retrato quadrado, 400 px
+└── fernando-lucas-correa.jpg      retrato quadrado, 560 px
 ```
+
+Os retratos são quadrados e enquadrados no busto, com o rosto no terço superior — é o
+recorte que o componente `Retrato` espera (`object-position: center 22%`). Substituições
+devem manter esse enquadramento.
 
 Todos os arquivos são **SVG vetorial**, com o logotipo já convertido em contornos — não
 dependem da fonte instalada no computador de destino. Redimensionam sem perda para

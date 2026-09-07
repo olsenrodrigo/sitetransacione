@@ -2,6 +2,7 @@ import { rotaPorPath } from "@shared/seo";
 import { usarSeo, seoDaRota } from "@/lib/seo";
 import HeroPagina from "@/components/site/HeroPagina";
 import CTA from "@/components/site/CTA";
+import Retrato from "@/components/site/Retrato";
 import { SOCIOS, INDICADORES } from "@/data/site";
 import {
   Botao,
@@ -21,23 +22,8 @@ function Socio({ socio, indice }: { socio: (typeof SOCIOS)[number]; indice: numb
   return (
     <Revelar atraso={indice * 100}>
       <article className="grid h-full gap-8 rounded-lg border border-borda bg-white p-7 md:p-9 lg:grid-cols-[auto_1fr] lg:gap-10">
-        {/* Retrato tipográfico — monograma na tipografia da marca */}
         <div className="flex lg:block">
-          <div
-            className="flex h-24 w-24 shrink-0 items-center justify-center rounded-lg lg:h-28 lg:w-28"
-            style={{
-              background:
-                "linear-gradient(155deg, rgba(10,92,66,0.94) 0%, rgba(14,158,110,0.82) 100%)",
-            }}
-            aria-hidden="true"
-          >
-            <span
-              className="fonte-display text-white"
-              style={{ fontSize: "2.1rem", fontWeight: 500, letterSpacing: "-0.02em" }}
-            >
-              {socio.iniciais}
-            </span>
-          </div>
+          <Retrato socio={socio} tamanho={112} className="lg:!h-32 lg:!w-32" />
         </div>
 
         <div>

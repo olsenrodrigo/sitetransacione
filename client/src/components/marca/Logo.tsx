@@ -1,25 +1,27 @@
 /**
  * Marca Transacione — componentes oficiais.
  *
- * O braço do T é uma seta dupla, sobre grade exata de 32×32:
- *   seta superior → o que a empresa leva ao Fisco
- *   seta inferior → o que retorna à empresa
- *   haste         → a metodologia que sustenta as duas
+ * O braço do T é UMA seta de duas pontas, fundida à haste numa peça só:
+ * a transação acontece nos dois sentidos, e a metodologia sustenta as duas.
+ * Contorno único sobre grade 32×32, caixa de 24×24 centrada em (16, 16).
  *
  * A mesma geometria está em tools/build-marca.py, que gera os arquivos
  * distribuíveis em marca/assets. Alterar aqui exige regerar lá.
  */
 
-const SETA_SUP = "M3 4H23V2L27 6L23 10V8H3Z";
-const SETA_INF = "M29 16H9V18L5 14L9 10V12H29Z";
-const HASTE = "M14 16h4v14h-4z";
+const SIMBOLO =
+  "M4 8 L8 4 L8 6 L24 6 L24 4 L28 8 L24 12 L24 10 " +
+  "L18 10 L18 28 L14 28 L14 10 L8 10 L8 12 Z";
+
+/** Braço isolado — usado só na versão duotone, sobreposto ao símbolo. */
+const BRACO = "M4 8 L8 4 L8 6 L24 6 L24 4 L28 8 L24 12 L24 10 L8 10 L8 12 Z";
 
 type Variante = "verde" | "branco" | "grafite" | "duotone";
 
-const CORES: Record<Variante, { base: string; acento: string }> = {
-  verde: { base: "#0A5C42", acento: "#0A5C42" },
-  branco: { base: "#FFFFFF", acento: "#FFFFFF" },
-  grafite: { base: "#0C1512", acento: "#0C1512" },
+const CORES: Record<Variante, { base: string; acento?: string }> = {
+  verde: { base: "#0A5C42" },
+  branco: { base: "#FFFFFF" },
+  grafite: { base: "#0C1512" },
   duotone: { base: "#0A5C42", acento: "#0E9E6E" },
 };
 
@@ -42,9 +44,8 @@ export function Simbolo({
       aria-hidden="true"
       focusable="false"
     >
-      <path fill={c.base} d={SETA_SUP} />
-      <path fill={c.acento} d={SETA_INF} />
-      <path fill={c.base} d={HASTE} />
+      <path fill={c.base} d={SIMBOLO} />
+      {c.acento && <path fill={c.acento} d={BRACO} />}
     </svg>
   );
 }
@@ -66,15 +67,15 @@ export function Logo({
   const c = CORES[variante];
   return (
     <span
-      className={`inline-flex items-center ${className ?? ""}`}
-      style={{ gap: altura * 0.36 }}
+      className={`inline-flex items-center ${className ?? ""}`.trim()}
+      style={{ gap: altura * 0.3 }}
     >
-      <Simbolo variante={variante} tamanho={altura * 1.18} />
+      <Simbolo variante={variante} tamanho={altura * 1.05} />
       <span
         className="fonte-display"
         style={{
           color: c.base,
-          fontSize: altura * 0.98,
+          fontSize: altura,
           fontWeight: 500,
           letterSpacing: "-0.012em",
           lineHeight: 1,

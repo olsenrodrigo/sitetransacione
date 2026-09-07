@@ -35,7 +35,7 @@ export default function Footer() {
               <p className="pt-2">
                 <a
                   href={`mailto:${SITE.email}`}
-                  className="transition-colors hover:text-esmeralda-clara"
+                  className="-my-1 inline-block py-1.5 transition-colors hover:text-esmeralda-clara sm:my-0 sm:py-0"
                 >
                   {SITE.email}
                 </a>
@@ -55,7 +55,7 @@ export default function Footer() {
                 <li key={n.path}>
                   <Link
                     href={n.path}
-                    className="text-[0.86rem] transition-colors hover:text-esmeralda-clara"
+                    className="-my-1 inline-block py-1.5 text-[0.9rem] transition-colors hover:text-esmeralda-clara sm:my-0 sm:py-0 sm:text-[0.86rem]"
                     style={{ color: "#a9bbb4" }}
                   >
                     {n.rotulo}
@@ -65,7 +65,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/diagnostico"
-                  className="text-[0.86rem] transition-colors hover:text-esmeralda-clara"
+                  className="-my-1 inline-block py-1.5 text-[0.9rem] transition-colors hover:text-esmeralda-clara sm:my-0 sm:py-0 sm:text-[0.86rem]"
                   style={{ color: "#a9bbb4" }}
                 >
                   Diagnóstico
@@ -93,7 +93,7 @@ export default function Footer() {
                 <li key={l.path}>
                   <Link
                     href={l.path}
-                    className="text-[0.82rem] transition-colors hover:text-esmeralda-clara"
+                    className="-my-1 inline-block py-1.5 text-[0.86rem] transition-colors hover:text-esmeralda-clara sm:my-0 sm:py-0 sm:text-[0.82rem]"
                     style={{ color: "#a9bbb4" }}
                   >
                     {l.rotulo}
@@ -123,7 +123,7 @@ export default function Footer() {
                 href="https://www.sintetiza.ai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-colors hover:text-esmeralda-clara"
+                className="-my-1 inline-block py-1.5 transition-colors hover:text-esmeralda-clara"
               >
                 Sintetiza AI
               </a>

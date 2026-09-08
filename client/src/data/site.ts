@@ -1,4 +1,9 @@
 import { SITE } from "@shared/seo";
+/* Importadas como módulo: o Vite gera hash no nome, então trocar uma foto
+   invalida o cache do navegador sozinho — com nome fixo em /public, quem já
+   tinha visitado continuaria vendo a antiga pelos 7 dias de cache. */
+import fotoEduardo from "@/assets/equipe/eduardo-correa-da-silva.jpg";
+import fotoFernando from "@/assets/equipe/fernando-lucas-correa.jpg";
 import { linkWhatsapp } from "@/lib/utils";
 
 export { SITE };
@@ -57,7 +62,7 @@ export const SOCIOS: Socio[] = [
   {
     nome: "Eduardo Corrêa da Silva",
     iniciais: "EC",
-    foto: "/equipe/eduardo-correa-da-silva.jpg",
+    foto: fotoEduardo,
     area: "Jurídico tributário",
     cargo: "Responsável técnico jurídico",
     lead: "Quem sustenta a tese do lado de dentro da mesa — e do lado de dentro do tribunal que a julga.",
@@ -76,15 +81,15 @@ export const SOCIOS: Socio[] = [
   {
     nome: "Fernando Lucas Corrêa",
     iniciais: "FC",
-    foto: "/equipe/fernando-lucas-correa.jpg",
+    foto: fotoFernando,
     area: "Contábil, fiscal e tecnologia",
     cargo: "Responsável técnico pelo diagnóstico e pela plataforma",
     lead: "Quem já construiu — e vendeu — a operação contábil que hoje lê o balanço da sua empresa.",
-    bio: "Contador com mais de 20 anos em tributos e finanças corporativas, Fernando construiu e liderou a RSM Brasil BPS, uma das maiores operações de BPO contábil do país, vendida ao TMF Group. Fundou e vendeu ainda a HubCount, de automação contábil, adquirida pela Stone Co., e a AccountTech, adquirida pela Contabilizei — três exits concluídas. Essa trajetória explica o desenho da plataforma: quem passou duas décadas respondendo por número de cliente não aceita cálculo que não se reconstitui. Na Transacione, responde pelo diagnóstico, pela apuração da capacidade efetiva e pelo versionamento dos motores de cálculo.",
+    bio: "Contador com mais de 20 anos em tributos e finanças corporativas, Fernando foi sócio da RSM Brasil BPS, uma das maiores operações de BPO contábil do país, vendida para a TMF Group. Fundou e vendeu ainda a HubCount, de automação contábil, adquirida pela Stone Co., e a AccountTech, adquirida pela Contabilizei — três exits concluídos. Essa trajetória explica o desenho da plataforma: quem passou duas décadas respondendo por número de cliente não aceita cálculo que não se reconstitui. Na Transacione, responde pelo diagnóstico, pela apuração da capacidade efetiva e pelo versionamento dos motores de cálculo.",
     credenciais: [
       "Contador, mais de 20 anos em tributário, contábil e finanças corporativas",
       "Ex-sócio da RSM Brasil e do TMF Group",
-      "Fundador da RSM Brasil BPS — vendida ao TMF Group",
+      "Sócio da RSM Brasil BPS — vendida para a TMF Group",
       "Fundador da HubCount — adquirida pela Stone Co.",
       "Fundador da AccountTech — adquirida pela Contabilizei",
       "Passagem por Deloitte em consultoria",

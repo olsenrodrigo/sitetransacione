@@ -97,7 +97,7 @@ def p_capa():
   <p class="capa-sub">Transação tributária federal e estadual</p>
 </div>
 <div class="capa-pe">
-  <span>Versão 2.2 · Setembro de 2026</span>
+  <span>Versão 2.3 · Setembro de 2026</span>
   <span>CORREA Consultoria Empresarial Estratégica</span>
 </div>
 <div class="capa-sim">{sim("#FFFFFF", 520)}</div>
@@ -320,7 +320,7 @@ def p_variacoes():
         bloco("Vertical", "logo-vertical.svg", "#fff",
               f'<div class="vert">{sim(VERDE, 40)}'
               f'<span class="lkt" style="font-size:20px;color:{VERDE}">Transacione</span></div>',
-              "Espaços quadrados. Aqui o T é tipográfico."),
+              "Pouca largura disponível. Aqui o T é tipográfico."),
     ])
     return pagina("07", "05 · Variações de cor", f"""
 <p class="sup">05 · Variações de cor</p>
@@ -646,6 +646,7 @@ def p_arquivos():
     <pre class="cod arq">marca/
 ├── MANUAL-DA-MARCA.md
 ├── Manual-da-Marca-Transacione.pdf
+├── png/            exportações em alta
 └── assets/
     ├── logo-horizontal.svg
     ├── logo-horizontal-branco.svg
@@ -666,6 +667,7 @@ def p_arquivos():
       Redimensionam sem perda, de favicon a fachada.</p>
     <p class="txt">Para regerar após qualquer ajuste na geometria:</p>
     <pre class="cod">python3 tools/build-marca.py Newsreader.ttf
+python3 tools/build-marca-png.py
 python3 tools/build-manual-pdf.py</pre>
     <p class="txt sm">O script é a fonte da verdade da geometria. As mesmas coordenadas
       estão em <code>client/src/components/marca/Logo.tsx</code>, para o site renderizar a

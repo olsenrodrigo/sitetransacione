@@ -4,7 +4,7 @@
 > — 17 páginas em A4 paisagem, com as variações renderizadas e o conceito explicado
 > visualmente. Este Markdown é a fonte de consulta rápida; o PDF é o documento de entrega.
 
-**Versão 2.2 · Setembro de 2026**
+**Versão 2.3 · Setembro de 2026**
 CORREA Consultoria Empresarial Estratégica
 Desenvolvido por Sintetiza AI
 
@@ -119,9 +119,14 @@ em vez do logotipo.
 
 ### Lockup vertical (secundário)
 
-Para espaços quadrados: assinatura de apresentação, selo de rodapé, avatar de rede social.
-Aqui o símbolo aparece **acima** da palavra completa — "Transacione" com T tipográfico,
-porque a leitura empilhada não sustenta a substituição.
+Para quando há **pouca largura em relação à altura** disponível: assinatura de
+apresentação, coluna estreita, faixa lateral. O símbolo aparece acima da palavra
+completa — "Transacione" com T tipográfico, porque a leitura empilhada não sustenta a
+substituição.
+
+A proporção é de aproximadamente **2:1** (largura por altura), não quadrada: a palavra é
+longa e não deve ser quebrada em duas linhas. Para espaço genuinamente quadrado — avatar
+de rede social, ícone — use o **app icon** ou o **símbolo isolado**.
 
 ---
 
@@ -232,7 +237,7 @@ usam Newsreader 500 com tracking −3%.
 | `logo-horizontal-branco.svg` | Sobre Grafite, Verde Profundo ou fotografia escura |
 | `logo-horizontal-grafite.svg` | Documentos monocromáticos e impressão sem cor |
 | `logo-horizontal-duotone.svg` | Materiais que explicam o conceito; o braço em Esmeralda sobre a haste em Verde Profundo |
-| `logo-vertical.svg` | Espaços quadrados, selos, avatares |
+| `logo-vertical.svg` | Pouca largura disponível: assinatura de apresentação, coluna estreita |
 | `simbolo.svg` / `simbolo-branco.svg` / `simbolo-esmeralda.svg` / `simbolo-duotone.svg` | Símbolo isolado, quando a marca já foi apresentada ou o espaço não comporta o logotipo |
 | `favicon.svg` / `app-icon.svg` | Aba do navegador, ícone de aplicativo — símbolo reverso em quadrado de raio 7/32 |
 
@@ -256,8 +261,7 @@ usam Newsreader 500 com tracking −3%.
 5. Rotacionar, inclinar, inverter ou distorcer.
 6. Recolorir fora da paleta institucional.
 7. Substituir a tipografia do logotipo por outra família.
-8. Encaixar o lockup horizontal dentro de um contêiner colorido (use o lockup vertical ou
-   o app icon).
+8. Encaixar o lockup horizontal dentro de um contêiner colorido (use o app icon).
 9. Aplicar sobre fundo de contraste insuficiente.
 10. Usar o símbolo como bullet, ícone de interface ou elemento decorativo repetido em
    tamanho de texto.
@@ -305,14 +309,26 @@ marca/
     ├── favicon.svg
     └── app-icon.svg
 
-client/public/equipe/
+marca/png/                        exportações para quem não aceita vetor
+├── LEIA-ME.md
+├── logo-horizontal-*@1200/2400/4800.png
+├── logo-vertical@900/1800/3600.png
+├── simbolo-*@600/1200/2400.png
+├── app-icon@512/1024/2048.png
+└── fundo/                        já aplicados sobre Osso, Grafite e Verde
+
+client/src/assets/equipe/
 ├── eduardo-correa-da-silva.jpg    retrato quadrado, 400 px
-└── fernando-lucas-correa.jpg      retrato quadrado, 560 px
+└── fernando-lucas-correa.jpg      retrato quadrado, 800 px
 ```
 
-Os retratos são quadrados e enquadrados no busto, com o rosto no terço superior — é o
-recorte que o componente `Retrato` espera (`object-position: center 22%`). Substituições
-devem manter esse enquadramento.
+Os retratos são quadrados e enquadrados no busto, com os olhos a cerca de 38% da altura —
+proporção de retrato, que é o que o componente `Retrato` espera. Substituições devem
+manter esse enquadramento.
+
+Ficam em `client/src/assets/` e não em `public/`: assim o Vite gera um hash no nome do
+arquivo e trocar uma foto invalida o cache do navegador sozinho. Com nome fixo, quem já
+tivesse visitado o site continuaria vendo a foto antiga durante os sete dias de cache.
 
 Todos os arquivos são **SVG vetorial**, com o logotipo já convertido em contornos — não
 dependem da fonte instalada no computador de destino. Redimensionam sem perda para
@@ -321,7 +337,9 @@ qualquer aplicação, de favicon a fachada.
 Para regerar os arquivos após qualquer ajuste na geometria:
 
 ```bash
-python3 tools/build-marca.py /caminho/para/Newsreader.ttf
+python3 tools/build-marca.py /caminho/para/Newsreader.ttf   # SVGs
+python3 tools/build-marca-png.py                            # PNGs
+python3 tools/build-manual-pdf.py                           # este manual em PDF
 ```
 
 O script é a fonte da verdade da geometria. As mesmas coordenadas estão replicadas em

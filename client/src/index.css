@@ -330,6 +330,25 @@
 
   /* ====================================================== Superfícies == */
 
+  /* Grifo verde — marca-texto atrás da frase, como quem destaca no papel.
+     O box-decoration-clone mantém o fundo em cada linha quando a frase quebra. */
+  .grifo {
+    background: color-mix(in srgb, var(--color-esmeralda) 20%, transparent);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    padding: 0.06em 0.22em;
+    margin: 0 -0.06em;
+    border-radius: 0.14em;
+    color: var(--color-verde);
+  }
+
+  /* Sobre faixa escura o grifo precisa de mais presença. */
+  .faixa-escura .grifo,
+  .faixa-verde .grifo {
+    background: color-mix(in srgb, var(--color-esmeralda) 32%, transparent);
+    color: #fff;
+  }
+
   .cartao {
     background: #fff;
     border: 1px solid var(--color-borda);

@@ -109,10 +109,11 @@ def build(ttf, out_dirs):
 
     # ---- lockup vertical: simbolo acima, palavra inteira abaixo
     d_full, w_full = logotipo(ttf, "Transacione")
-    vsim = 132.0
+    # símbolo dominante: é ele que carrega a leitura quando a palavra vai abaixo
+    vsim = 200.0
     vesc = vsim / SIM_H
     vsimw = SIM_W * vesc
-    vgap = 40
+    vgap = 44
     VW = max(vsimw, w_full)
     VH = vsim + vgap + CAP
     corpo = (simbolo_g(VERDE, f"translate({(VW-vsimw)/2:.2f},0) scale({vesc:.4f}) "

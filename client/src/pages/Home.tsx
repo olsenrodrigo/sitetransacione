@@ -176,8 +176,10 @@ function ANota() {
 
         <Revelar atraso={120}>
           <p className="afirmacao mt-16 text-center">
-            Nosso trabalho é conferir essa nota, corrigi-la quando couber e negociar o que
-            a lei permite.
+            <span className="grifo">
+              Nosso trabalho é conferir essa nota, corrigi-la quando couber e negociar o
+              que a lei permite.
+            </span>
           </p>
         </Revelar>
       </div>

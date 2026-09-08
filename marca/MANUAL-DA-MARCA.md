@@ -1,5 +1,9 @@
 # Manual de aplicação da marca — Transacione
 
+> **Versão para apresentação:** [`Manual-da-Marca-Transacione.pdf`](Manual-da-Marca-Transacione.pdf)
+> — 17 páginas em A4 paisagem, com as variações renderizadas e o conceito explicado
+> visualmente. Este Markdown é a fonte de consulta rápida; o PDF é o documento de entrega.
+
 **Versão 2.2 · Setembro de 2026**
 CORREA Consultoria Empresarial Estratégica
 Desenvolvido por Sintetiza AI
@@ -249,7 +253,7 @@ usam Newsreader 500 com tracking −3%.
    única e a oposição **são** o conceito.
 3. Engrossar ou afinar as cabeças em relação ao corpo do braço.
 4. Aplicar gradiente, sombra, contorno, relevo ou brilho ao símbolo.
-5. Rotacionar, inclinar, espelhar ou distorcer.
+5. Rotacionar, inclinar, inverter ou distorcer.
 6. Recolorir fora da paleta institucional.
 7. Substituir a tipografia do logotipo por outra família.
 8. Encaixar o lockup horizontal dentro de um contêiner colorido (use o lockup vertical ou

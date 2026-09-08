@@ -1,6 +1,6 @@
 # Manual de aplicação da marca — Transacione
 
-**Versão 2.1 · Setembro de 2026**
+**Versão 2.2 · Setembro de 2026**
 CORREA Consultoria Empresarial Estratégica
 Desenvolvido por Sintetiza AI
 
@@ -193,15 +193,23 @@ subconjunto latino: **30 KB + 22 KB**, contra ~180 KB do carregamento padrão.
 
 ### Escala tipográfica
 
-| Estilo | Família | Tamanho | Entrelinha | Tracking |
-|---|---|---|---|---|
-| Manchete | Newsreader 500 | `clamp(2,15rem, 1,35rem + 3,2vw, 3,7rem)` | 1,07 | −2,4% |
-| Título de seção | Newsreader 500 | `clamp(1,75rem, 1,2rem + 2,1vw, 2,85rem)` | 1,14 | −1,8% |
-| Título de cartão | Newsreader 500 | 1,2 rem | 1,3 | −1,0% |
-| Sobrescrita | Inter 600 | 0,6875 rem, caixa alta | 1,4 | +16% |
-| Corpo | Inter 400 | 1–1,0625 rem | 1,68 | 0 |
-| Corpo pequeno | Inter 400 | 0,9125 rem | 1,62 | 0 |
-| Nota | Inter 400 | 0,78 rem | 1,55 | 0 |
+Cada estilo abaixo corresponde a um utilitário em `client/src/index.css` — os valores são
+os do código, não uma aproximação.
+
+| Estilo | Utilitário | Família | Tamanho | Entrelinha | Tracking |
+|---|---|---|---|---|---|
+| Manchete | `.manchete` | Newsreader 500 | `clamp(2,4rem · 1,5rem + 4vw · 4,6rem)` | 1,03 | −3,0% |
+| Afirmação de faixa | `.afirmacao` | Newsreader 500 | `clamp(1,9rem · 1,25rem + 2,6vw · 3,1rem)` | 1,10 | −2,2% |
+| Subafirmação | `.subafirmacao` | Newsreader 500 | `clamp(1,3rem · 1rem + 1,1vw · 1,75rem)` | 1,32 | −1,4% |
+| Título de cartão | `.titulo-card` | Newsreader 500 | 1,22 rem | 1,28 | −1,0% |
+| Numeral de destaque | `.numeral` | Newsreader 500 | herda do contexto | 1,0 | −3,5% |
+| Sobrescrita | `.sobrescrita` | Inter 600 | 0,6875 rem, caixa alta | — | +18% |
+| Corpo | `.corpo` | Inter 400 | 1,0625 rem · 1,125 rem a partir de 768 px | 1,70 | 0 |
+| Corpo pequeno | `.corpo-sm` | Inter 400 | 0,9375 rem | 1,65 | 0 |
+| Nota | `.nota` | Inter 400 | 0,79 rem | 1,60 | 0 |
+
+A hierarquia é de três degraus por faixa: **sobrescrita** anuncia o assunto, **afirmação**
+faz a declaração e **corpo** a sustenta. A manchete existe só na primeira dobra da home.
 
 ### Numerais
 
@@ -236,9 +244,10 @@ usam Newsreader 500 com tracking −3%.
 
 ## 7. Usos proibidos
 
-1. Alterar as proporções entre barras, haste e intervalo.
-2. Separar a seta da haste, ou fazer as pontas apontarem para o mesmo lado — a peça única e a oposição **são** o conceito.
-3. Engrossar ou afinar as cabeças em relação ao corpo das setas.
+1. Alterar as proporções entre o braço, as cabeças e a haste.
+2. Separar a seta da haste, ou fazer as pontas apontarem para o mesmo lado — a peça
+   única e a oposição **são** o conceito.
+3. Engrossar ou afinar as cabeças em relação ao corpo do braço.
 4. Aplicar gradiente, sombra, contorno, relevo ou brilho ao símbolo.
 5. Rotacionar, inclinar, espelhar ou distorcer.
 6. Recolorir fora da paleta institucional.
@@ -249,7 +258,8 @@ usam Newsreader 500 com tracking −3%.
 10. Usar o símbolo como bullet, ícone de interface ou elemento decorativo repetido em
    tamanho de texto.
 11. Inserir o logotipo em frase corrida como se fosse palavra.
-12. Escrever "Transacione" com T tipográfico ao lado do símbolo — o símbolo **é** o T, não um acompanhante.
+12. Escrever "Transacione" com T tipográfico ao lado do símbolo — no logotipo o símbolo
+   **é** o T, não um acompanhante.
 13. Aplicar textura, padrão de grade ou trama sobre as superfícies da marca.
 
 ---
@@ -281,10 +291,12 @@ marca/
     ├── logo-horizontal.svg
     ├── logo-horizontal-branco.svg
     ├── logo-horizontal-grafite.svg
+    ├── logo-horizontal-esmeralda.svg
     ├── logo-horizontal-duotone.svg
     ├── logo-vertical.svg
     ├── simbolo.svg
     ├── simbolo-branco.svg
+    ├── simbolo-esmeralda.svg
     ├── simbolo-duotone.svg
     ├── favicon.svg
     └── app-icon.svg
@@ -310,7 +322,12 @@ python3 tools/build-marca.py /caminho/para/Newsreader.ttf
 
 O script é a fonte da verdade da geometria. As mesmas coordenadas estão replicadas em
 `client/src/components/marca/Logo.tsx`, para o site renderizar a marca sem requisição de
-rede — alterar uma exige alterar a outra.
+rede — alterar uma exige alterar a outra. O componente expõe `<Simbolo>` (símbolo isolado,
+com margem de proteção) e `<Logo>` (o lockup, com o símbolo no lugar da letra T).
+
+A imagem de compartilhamento (`client/public/og.png`, 1200 × 630) e o ícone de toque
+(`apple-touch-icon.png`) são gerados a partir dos mesmos caminhos e precisam ser refeitos
+quando a geometria mudar.
 
 **Titularidade:** marca, identidade visual e arquivos abertos são de propriedade da
 Transacione / CORREA Consultoria Empresarial Estratégica.

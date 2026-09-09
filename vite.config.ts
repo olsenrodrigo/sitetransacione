@@ -1,10 +1,21 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
+import legacy from "@vitejs/plugin-legacy";
 import path from "path";
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    // Gera um bundle adicional (ES5 + polyfills, carregado via <script nomodule>)
+    // para navegadores/WebViews que não suportam módulos ES ou sintaxe ES2022 —
+    // sem isso, esses navegadores ficam com a página em branco (o <script type="module">
+    // é simplesmente ignorado, sem erro visível).
+    legacy({
+      targets: ["defaults", "not IE 11"],
+    }),
+  ],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),
@@ -16,7 +27,6 @@ export default defineConfig({
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
     cssMinify: "lightningcss",
-    target: "es2022",
     rollupOptions: {
       output: {
         // Núcleo do React num chunk estável: melhora o cache entre deploys.

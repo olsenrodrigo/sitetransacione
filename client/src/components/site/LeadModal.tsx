@@ -231,23 +231,30 @@ function Modal({
       [k]: k === "telefone" ? formatarTelefone(e.target.value) : e.target.value,
     }));
 
+  const envioRef = useRef<{ body: string; key: string } | null>(null);
+
   async function enviar(e: FormEvent) {
     e.preventDefault();
     setErro(null);
     setEnviando(true);
     try {
+      const body = JSON.stringify({
+        ...dados,
+        origem,
+        paginaOrigem: local,
+        consentimento,
+        qualificacao: veredito
+          ? { ...(respostas as Record<Chave, string>), veredito: veredito.chave }
+          : undefined,
+      });
+      const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(body));
+      const payloadHash = Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, "0")).join("");
+      // Repetir o mesmo formulário mantém a chave e evita gravar contato duplicado.
+      if (envioRef.current?.body !== body) envioRef.current = { body, key: Array.from(crypto.getRandomValues(new Uint8Array(16)), b => b.toString(16).padStart(2, "0")).join("") };
       const res = await fetch("/api/leads", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...dados,
-          origem,
-          paginaOrigem: local,
-          consentimento,
-          qualificacao: veredito
-            ? { ...(respostas as Record<Chave, string>), veredito: veredito.chave }
-            : undefined,
-        }),
+        headers: { "Content-Type": "application/json", "x-amz-content-sha256": payloadHash, "Idempotency-Key": envioRef.current!.key },
+        body,
       });
       const json = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(json?.mensagem ?? "Não foi possível enviar agora.");

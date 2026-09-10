@@ -12,9 +12,14 @@
     "marca": "python3 tools/build-marca.py $NEWSREADER_TTF",
     "db:push": "drizzle-kit push",
     "deploy": "tsx script/deploy.ts",
-    "verify:build": "tsx script/verify-build.ts"
+    "verify:build": "tsx script/verify-build.ts",
+    "build:aws": "tsx script/build-aws.ts",
+    "test:aws": "tsx --test server/lambda.test.ts"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.1129.0",
+    "@aws-sdk/client-sesv2": "^3.1129.0",
+    "@aws-sdk/lib-dynamodb": "^3.1129.0",
     "drizzle-orm": "^0.39.3",
     "drizzle-zod": "^0.7.0",
     "express": "^5.0.1",

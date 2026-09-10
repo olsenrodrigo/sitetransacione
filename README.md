@@ -207,3 +207,37 @@ O teste verifica conteúdo e menu móvel com JavaScript desativado, bloqueado e 
 com todos os subrecursos bloqueados, sem IntersectionObserver e sem localStorage;
 nos cenários interativos também abre o diagnóstico. `CHROMIUM_PATH` permite apontar
 para um Chromium já instalado. Não envia formulários nem e-mails.
+
+### Destino AWS sem servidor permanente
+
+`npm run build:aws` gera as páginas em `.build/aws/public`, o pacote da API
+em `.build/aws/lambda` e a função de roteamento `router.js`. Não altera `current`.
+`npm run test:aws` verifica validação, idempotência, limite de envios e falhas de
+persistência. A Lambda usa `LEADS_TABLE` e DynamoDB; contatos não expiram,
+mas contadores temporários usam `expiresAt`. O frontend envia o hash SHA256
+necessário ao CloudFront OAC e uma chave de idempotência por submissão.
+
+O bucket deve ser privado e o CloudFront deve ter acesso somente ao prefixo
+`public/`. A API usa Function URL com autenticação IAM e permissões limitadas
+à distribuição; `/api/*` usa cache desativado. O roteamento preserva os HTMLs
+pré-renderizados e retorna 404 para arquivos/rotas desconhecidos. Assets com hash
+anteriores são incluídos no build quando `current` está disponível.
+
+`deploy/aws/provision.py` prepara comandos e JSONs locais por fase (`base`,
+`edge`, `certificate`, `monitor`). Sem `--execute`, não cria recursos AWS.
+Com `--execute`, verifica a identidade esperada, usa `us-east-1` e salva cada
+resposta em `.dados/aws/state.json`. A fase edge deixa a distribuição desativada:
+confirmar assinatura FREE ativa, conteúdo enviado e permissões antes de habilitar.
+CloudFront e Route 53 são serviços globais. Nunca versionar `.dados` ou credenciais.
+O script destina-se à migração inicial; não é um reconciliador de infraestrutura.
+
+`deploy/aws/import-leads.py` importa os registros locais com identificadores
+estáveis e escrita condicional; pode ser repetido sem sobrescrever contatos.
+Notificações SES só são habilitadas com `LEAD_EMAIL_FROM` e `LEAD_EMAIL_TO`,
+identidade SES validada e permissão IAM correspondente. Falhas deixam o contato
+gravado com notificação pendente, recuperável por operação administrativa.
+
+Antes de trocar DNS, validar o destino HTTPS, todas as páginas e formulários;
+manter a origem e conciliar contatos recebidos durante a propagação. Os IDs,
+checkpoints, orçamento e pendências específicas ficam no relatório operacional
+local `MIGRACAO-AWS.md`.

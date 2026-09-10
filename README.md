@@ -224,7 +224,7 @@ pré-renderizados e retorna 404 para arquivos/rotas desconhecidos. Assets com ha
 anteriores são incluídos no build quando `current` está disponível.
 
 `deploy/aws/provision.py` prepara comandos e JSONs locais por fase (`base`,
-`edge`, `certificate`, `monitor`). Sem `--execute`, não cria recursos AWS.
+`edge`, `certificate`, `monitor`, `dns`). Sem `--execute`, não cria recursos AWS.
 Com `--execute`, verifica a identidade esperada, usa `us-east-1` e salva cada
 resposta em `.dados/aws/state.json`. A fase edge deixa a distribuição desativada:
 confirmar assinatura FREE ativa, conteúdo enviado e permissões antes de habilitar.

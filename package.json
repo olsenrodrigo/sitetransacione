@@ -6,11 +6,13 @@
   "scripts": {
     "dev": "NODE_ENV=development tsx server/index.ts",
     "build": "tsx script/build.ts",
-    "start": "NODE_ENV=production node dist/index.cjs",
+    "start": "NODE_ENV=production node script/start.cjs",
     "preview": "npm run build && npm start",
     "check": "tsc --noEmit",
     "marca": "python3 tools/build-marca.py $NEWSREADER_TTF",
-    "db:push": "drizzle-kit push"
+    "db:push": "drizzle-kit push",
+    "deploy": "tsx script/deploy.ts",
+    "verify:build": "tsx script/verify-build.ts"
   },
   "dependencies": {
     "drizzle-orm": "^0.39.3",

@@ -11,3 +11,10 @@ migrations/
 # Material de origem do cliente (apresentações e proposta comercial com valores).
 # Fora do repositório porque ele é público — mantenha localmente ou em repo privado.
 insumos/
+
+# Builds isolados e publicações atômicas.
+.build/
+.releases/
+current
+.current-*
+.deploy-lock/

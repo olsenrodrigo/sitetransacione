@@ -64,7 +64,7 @@ client/
   index.html                  Modelo base: head, CSS crítico, preload das fontes
   public/                     Fontes, marca, favicon, OG image, manifest
   src/
-    App.tsx                   Rotas (home no bundle inicial, demais sob demanda)
+    App.tsx                   Rotas síncronas, compartilhadas pelo HTML e pelo cliente
     index.css                 Tokens da marca, tipografia e utilitários
     components/marca/         Símbolo e lockup, em geometria vetorial
     components/site/          Navbar, footer, layout, FAQ, formulário, primitivas
@@ -96,10 +96,12 @@ O site é uma SPA, mas o build gera **um HTML estático por rota** em
 
 - `<title>`, `description`, `canonical`, Open Graph e Twitter próprios
 - JSON-LD: `ProfessionalService`, `WebPage`/`Service`/`Article`, `FAQPage`, `BreadcrumbList`
-- o conteúdo crítico da página em `<noscript>`
+- o conteúdo completo da página em HTML visível, com o CSS embutido
 
-Isso garante que buscadores e agentes de IA leiam cada URL com conteúdo real, sem depender
-da execução de JavaScript, mantendo a navegação client-side para quem usa o site.
+O visitante recebe a página com o visual pronto sem depender de downloads de JavaScript,
+CSS ou fontes. O React hidrata esse HTML para ativar o diagnóstico e a navegação client-side.
+Menu móvel e FAQ usam elementos nativos; links de contato continuam disponíveis se o
+JavaScript for bloqueado. Todas as rotas são síncronas: a navegação não depende de baixar chunks adicionais.
 
 `shared/seo.ts` e `shared/artigos.ts` são a fonte única: alimentam a pré-renderização, o
 `<head>` durante a navegação, o `sitemap.xml` e o `llms.txt`. Adicionar uma rota ou um
@@ -169,3 +171,39 @@ sitemap, rodapé e os links de WhatsApp de todas as páginas.
 ---
 
 Marca, identidade visual e site desenvolvidos por [Sintetiza AI](https://www.sintetiza.ai).
+
+
+### VPS: publicação sem interrupção
+
+O Nginx usa `current/public` e serve HTML, fontes e assets diretamente. Apenas `/api/`
+é encaminhado ao Node na porta 3027. A configuração está em `deploy/nginx.conf`.
+Ela mantém os dois nomes HTTPS e o redirecionamento de HTTP para HTTPS.
+
+```bash
+npm run deploy
+```
+
+O comando verifica os tipos, compila em `.build`, valida as 17 páginas e move o resultado
+para `.releases/<data>`. Somente então troca o link `current` atomicamente. Falha de build
+não altera a publicação. Assets com hash anteriores são preservados para abas abertas.
+Não apague `.releases` nem os assets antigos enquanto houver versões em uso.
+O deploy do frontend não exige reiniciar o Node; alterações da API exigem atualizar e
+reiniciar seu processo separadamente (`pm2 restart sitetransacione`, como o usuário
+`claude-user` nesta VPS). `npm start` usa `current/index.cjs` quando há uma release publicada. `npm run build` continua gerando `dist` para uso local.
+
+Para reverter, crie um link temporário para a release anterior e substitua `current` com
+`mv -Tf`; não remova o link ativo antes da troca. O deploy imprime os dois caminhos.
+
+Os tempos de atendimento ficam em `/var/log/nginx/transacione-access.log` (`rt`, `upstream`
+e TLS). O diagnóstico opcional `?suporte=acesso` registra somente eventos de carregamento
+em `/var/log/nginx/transacione-support.log`, sem cookies nem conteúdo de formulários.
+
+
+### Testes de acesso em navegador
+
+`script/check-browser.cjs` requer Playwright e os navegadores Chromium/WebKit instalados.
+Execute com `TEST_URL=https://www.transacione.com.br node script/check-browser.cjs`.
+O teste verifica conteúdo e menu móvel com JavaScript desativado, bloqueado e atrasado,
+com todos os subrecursos bloqueados, sem IntersectionObserver e sem localStorage;
+nos cenários interativos também abre o diagnóstico. `CHROMIUM_PATH` permite apontar
+para um Chromium já instalado. Não envia formulários nem e-mails.

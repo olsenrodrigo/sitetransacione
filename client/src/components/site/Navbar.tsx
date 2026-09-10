@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Logo } from "@/components/marca/Logo";
+import { SITE } from "@shared/seo";
 import { NAV } from "@/data/site";
 import { Seta } from "./primitivas";
 import { usarLead } from "./LeadModal";
@@ -13,11 +14,11 @@ import { cn } from "@/lib/utils";
  */
 export default function Navbar() {
   const [rolou, setRolou] = useState(false);
-  const [aberto, setAberto] = useState(false);
+  const menu = useRef<HTMLDetailsElement>(null);
   const [local] = useLocation();
   const { abrir } = usarLead();
 
-  const sobreEscuro = local === "/" && !rolou && !aberto;
+  const sobreEscuro = local === "/" && !rolou;
 
   useEffect(() => {
     const h = () => setRolou(window.scrollY > 40);
@@ -26,12 +27,9 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", h);
   }, []);
 
-  useEffect(() => setAberto(false), [local]);
-
   useEffect(() => {
-    document.body.classList.toggle("travado", aberto);
-    return () => document.body.classList.remove("travado");
-  }, [aberto]);
+    if (menu.current) menu.current.open = false;
+  }, [local]);
 
   return (
     <>
@@ -93,9 +91,9 @@ export default function Navbar() {
             </nav>
 
             <div className="hidden shrink-0 items-center lg:flex">
-              <button
-                type="button"
-                onClick={() => abrir("diagnostico")}
+              <a
+                href={`mailto:${SITE.email}`}
+                onClick={(event) => { event.preventDefault(); abrir("diagnostico"); }}
                 className={cn(
                   "inline-flex items-center gap-2 whitespace-nowrap rounded-lg px-3.5 py-2.5 text-[0.78rem] font-semibold transition-colors xl:px-4 xl:text-[0.8125rem]",
                   sobreEscuro
@@ -106,72 +104,39 @@ export default function Navbar() {
                 <span className="xl:hidden">Diagnóstico</span>
                 <span className="hidden xl:inline">Fazer o diagnóstico</span>
                 <Seta />
-              </button>
+              </a>
             </div>
 
-            <button
-              type="button"
-              onClick={() => setAberto((v) => !v)}
-              className="-mr-2 p-2 lg:hidden"
-              aria-label={aberto ? "Fechar menu" : "Abrir menu"}
-              aria-expanded={aberto}
-            >
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                {aberto ? (
-                  <path
-                    d="M5 5l14 14M19 5L5 19"
-                    stroke="#0A5C42"
-                    strokeWidth="1.7"
-                    strokeLinecap="round"
-                  />
-                ) : (
-                  <path
-                    d="M3.5 7h17M3.5 12h17M3.5 17h17"
-                    stroke={sobreEscuro ? "#fff" : "#0A5C42"}
-                    strokeWidth="1.7"
-                    strokeLinecap="round"
-                  />
-                )}
-              </svg>
-            </button>
+            <details ref={menu} className="lg:hidden">
+              <summary className="-mr-2 cursor-pointer list-none p-2" aria-label="Abrir menu">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M3.5 7h17M3.5 12h17M3.5 17h17" stroke={sobreEscuro ? "#fff" : "#0A5C42"} strokeWidth="1.7" strokeLinecap="round" />
+                </svg>
+              </summary>
+              <nav className="absolute inset-x-0 top-full border-t border-verde/10 bg-osso"
+                aria-label="Principal (móvel)" style={{ maxHeight: "calc(100vh - 4.75rem)", overflowY: "auto" }}>
+                <div className="coluna-larga py-5">
+                  {NAV.map((item) => (
+                    <Link key={item.path} href={item.path}
+                      className="block border-b border-verde/[0.07] py-4 text-[1rem] font-medium"
+                      style={{ color: local === item.path ? "#0E9E6E" : "#14201C" }}>
+                      {item.rotulo}
+                    </Link>
+                  ))}
+                  <a href={`mailto:${SITE.email}`}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      if (menu.current) menu.current.open = false;
+                      abrir("diagnostico");
+                    }}
+                    className="mt-5 flex items-center justify-center gap-2 rounded-lg bg-verde px-5 py-3.5 text-[0.95rem] font-semibold text-white">
+                    Fazer o diagnóstico <Seta />
+                  </a>
+                </div>
+              </nav>
+            </details>
           </div>
         </div>
-
-        {aberto && (
-          <nav
-            className="border-t border-verde/10 bg-osso lg:hidden"
-            aria-label="Principal (móvel)"
-            style={{ height: "calc(100dvh - 4.75rem)", overflowY: "auto" }}
-          >
-            <div className="coluna-larga py-5">
-              {NAV.map((item) => (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  className="block border-b border-verde/[0.07] py-4 text-[1rem] font-medium"
-                  style={{ color: local === item.path ? "#0E9E6E" : "#14201C" }}
-                >
-                  {item.rotulo}
-                </Link>
-              ))}
-              <button
-                type="button"
-                onClick={() => {
-                  setAberto(false);
-                  abrir("diagnostico");
-                }}
-                className="mt-7 flex w-full items-center justify-center gap-2 rounded-lg bg-verde px-5 py-4 text-[0.98rem] font-semibold text-white"
-              >
-                Fazer o diagnóstico
-                <Seta />
-              </button>
-              <p className="nota mt-5">
-                Diagnóstico técnico em 48 horas. Pode concluir que não há espaço de
-                revisão — e dizer por quê.
-              </p>
-            </div>
-          </nav>
-        )}
       </header>
     </>
   );

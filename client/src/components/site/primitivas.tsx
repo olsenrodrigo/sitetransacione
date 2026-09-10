@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "wouter";
+import { SITE } from "@shared/seo";
 import { cn } from "@/lib/utils";
 
 /* ------------------------------------------------------------ Revelar */
@@ -23,7 +24,7 @@ export function Revelar({
   as?: "div" | "section" | "li" | "article";
 }) {
   const ref = useRef<HTMLElement>(null);
-  const [visivel, setVisivel] = useState(false);
+  const [visivel, setVisivel] = useState(true);
   const [imediato, setImediato] = useState(false);
 
   useLayoutEffect(() => {
@@ -33,7 +34,7 @@ export function Revelar({
     const reduzido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const naDobra = el.getBoundingClientRect().top < window.innerHeight * 0.92;
 
-    if (reduzido || naDobra) {
+    if (reduzido || naDobra || !("IntersectionObserver" in window)) {
       setImediato(true);
       setVisivel(true);
       return;
@@ -48,6 +49,7 @@ export function Revelar({
       },
       { rootMargin: "0px 0px -8% 0px", threshold: 0.06 },
     );
+    setVisivel(false);
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
@@ -155,6 +157,16 @@ export function Botao({
       <Link href={href} className={base}>
         {children}
       </Link>
+    );
+  // O contato continua acessível enquanto o JavaScript baixa ou se for bloqueado.
+  if (onClick && type === "button" && !disabled)
+    return (
+      <a href={`mailto:${SITE.email}`} className={base} onClick={(event) => {
+        event.preventDefault();
+        onClick();
+      }}>
+        {children}
+      </a>
     );
   return (
     <button type={type} onClick={onClick} className={base} disabled={disabled}>

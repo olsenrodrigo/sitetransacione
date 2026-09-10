@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import legacy from "@vitejs/plugin-legacy";
 import path from "path";
 
-export default defineConfig({
+export default defineConfig(({ isSsrBuild }) => ({
   plugins: [
     react(),
     tailwindcss(),
@@ -12,7 +12,7 @@ export default defineConfig({
     // para navegadores/WebViews que não suportam módulos ES ou sintaxe ES2022 —
     // sem isso, esses navegadores ficam com a página em branco (o <script type="module">
     // é simplesmente ignorado, sem erro visível).
-    legacy({
+    !isSsrBuild && legacy({
       targets: ["defaults", "not IE 11"],
     }),
   ],
@@ -24,7 +24,7 @@ export default defineConfig({
   },
   root: path.resolve(import.meta.dirname, "client"),
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
+    outDir: path.resolve(import.meta.dirname, process.env.BUILD_DIR || "dist", "public"),
     emptyOutDir: true,
     cssMinify: "lightningcss",
     rollupOptions: {
@@ -42,4 +42,4 @@ export default defineConfig({
     allowedHosts: true,
     fs: { strict: true, deny: ["**/.*"] },
   },
-});
+}));

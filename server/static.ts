@@ -15,7 +15,7 @@ export function serveStatic(app: Express) {
 
   const enviarHtml = (res: express.Response, arquivo: string) => {
     res.set("Cache-Control", "public, max-age=0, must-revalidate");
-    res.sendFile(arquivo);
+    res.sendFile(path.relative(dist, arquivo), { root: dist });
   };
 
   // Ativos com hash no nome podem ser cacheados indefinidamente.
@@ -28,6 +28,9 @@ export function serveStatic(app: Express) {
       redirect: false,
     }),
   );
+
+  // Um chunk ausente deve retornar 404, nunca o HTML da aplicação.
+  app.use("/assets", (_req, res) => res.status(404).end());
 
   app.use(
     express.static(dist, {

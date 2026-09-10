@@ -4,7 +4,7 @@
  * Para cada rota conhecida gera dist/public/<rota>/index.html com:
  *  - <head> completo: title, description, canonical, Open Graph, robots
  *  - JSON-LD: Organization, WebPage/Service/Article, FAQPage, BreadcrumbList
- *  - conteúdo crítico em <noscript>
+ *  - página completa em HTML visível, sem depender de JavaScript
  *
  * O SPA continua sendo a experiência de navegação; isto garante que
  * buscadores e agentes de IA leiam cada URL com conteúdo real e correto,
@@ -15,10 +15,13 @@
 
 import { promises as fs } from "fs";
 import path from "path";
+import { pathToFileURL } from "node:url";
 import { ROTAS, SITE, ATUALIZADO, type RotaSeo } from "../shared/seo";
-import { ARTIGOS, textoDoArtigo, type Artigo } from "../shared/artigos";
+import { ARTIGOS, type Artigo } from "../shared/artigos";
 
-const DIST = path.resolve(process.cwd(), "dist/public");
+const BUILD = path.resolve(process.env.BUILD_DIR || "dist");
+const DIST = path.join(BUILD, "public");
+const { render } = await import(pathToFileURL(path.join(BUILD, "ssr/entry-server.js")).href);
 
 const esc = (s: string) =>
   s.replace(/[&<>"']/g, (c) =>
@@ -96,7 +99,7 @@ interface Meta {
   tipoOg: "website" | "article";
   noindex?: boolean;
   blocos: unknown[];
-  noscript: string;
+  html: string;
 }
 
 function montarHead(m: Meta) {
@@ -119,32 +122,6 @@ function montarHead(m: Meta) {
     `<meta name="twitter:image" content="${SITE.url}${SITE.og}" />`,
     ...m.blocos.map(ld),
   ].join("\n    ");
-}
-
-function noscriptDeRota(r: RotaSeo) {
-  const partes = [`<h1>${esc(r.h1)}</h1>`, `<p>${esc(r.resumo)}</p>`];
-  if (r.pontos?.length)
-    partes.push(`<ul>${r.pontos.map((p) => `<li>${esc(p)}</li>`).join("")}</ul>`);
-  if (r.faq?.length)
-    partes.push(
-      `<h2>Perguntas frequentes</h2>` +
-        r.faq
-          .map((f) => `<h3>${esc(f.pergunta)}</h3><p>${esc(f.resposta)}</p>`)
-          .join(""),
-    );
-  return partes.join("\n      ");
-}
-
-function noscriptDeArtigo(a: Artigo) {
-  const corpo = textoDoArtigo(a)
-    .split("\n\n")
-    .map((p) => `<p>${esc(p)}</p>`)
-    .join("");
-  const faq = a.faq?.length
-    ? `<h2>Perguntas frequentes</h2>` +
-      a.faq.map((f) => `<h3>${esc(f.pergunta)}</h3><p>${esc(f.resposta)}</p>`).join("")
-    : "";
-  return `<h1>${esc(a.titulo)}</h1>${corpo}${faq}`;
 }
 
 /* ------------------------------------------------------------- Geração */
@@ -172,10 +149,8 @@ async function escreverPagina(modelo: string, m: Meta) {
   }
 
   html = html.replace("</head>", `\n    ${montarHead(m)}\n  </head>`);
-  html = html.replace(
-    "</body>",
-    `<noscript><div id="conteudo-estatico">${m.noscript}</div></noscript></body>`,
-  );
+  if (!html.includes('<div id="root"></div>')) throw new Error("Falta o ponto de inserção do HTML");
+  html = html.replace('<div id="root"></div>', () => `<div id="root">${m.html}</div>`);
 
   const destino =
     m.path === "/" ? path.join(DIST, "index.html") : path.join(DIST, m.path, "index.html");
@@ -185,7 +160,14 @@ async function escreverPagina(modelo: string, m: Meta) {
 }
 
 async function main() {
-  const modelo = await fs.readFile(path.join(DIST, "index.html"), "utf-8");
+  let modelo = await fs.readFile(path.join(DIST, "index.html"), "utf-8");
+  // A primeira pintura não depende de outro download, nem mesmo da folha CSS.
+  for (const match of modelo.matchAll(/<link\b[^>]*rel="stylesheet"[^>]*>/g)) {
+    const href = match[0].match(/href="([^"]+)"/)?.[1];
+    if (!href?.startsWith("/assets/")) throw new Error("CSS inesperado no build");
+    const css = await fs.readFile(path.join(DIST, href), "utf-8");
+    modelo = modelo.replace(match[0], () => `<style>${css}</style>`);
+  }
 
   const gerados: string[] = [];
   const org = organizacao();
@@ -225,7 +207,7 @@ async function main() {
         tipoOg: "website",
         noindex: r.noindex,
         blocos,
-        noscript: noscriptDeRota(r),
+        html: await render(r.path),
       }),
     );
   }
@@ -261,7 +243,7 @@ async function main() {
         descricao: a.descricao,
         tipoOg: "article",
         blocos,
-        noscript: noscriptDeArtigo(a),
+        html: await render(p),
       }),
     );
   }

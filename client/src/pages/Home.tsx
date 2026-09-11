@@ -4,6 +4,7 @@ import { usarSeo, seoDaRota } from "@/lib/seo";
 import { INDICADORES, SOCIOS } from "@/data/site";
 import { Simbolo } from "@/components/marca/Logo";
 import { usarLead } from "@/components/site/LeadModal";
+import Jornada from "@/components/site/Jornada";
 import Retrato from "@/components/site/Retrato";
 import Faq from "@/components/site/Faq";
 import CTA from "@/components/site/CTA";
@@ -24,92 +25,27 @@ const rota = rotaPorPath("/")!;
 
 function Hero() {
   const { abrir } = usarLead();
-
   return (
-    <section className="faixa-escura relative flex min-h-[100svh] items-center justify-center overflow-hidden">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 flex items-center justify-end"
-      >
-        <div className="-mr-28 opacity-[0.035] md:-mr-16">
-          <Simbolo variante="branco" tamanho={620} />
+    <section className="faixa-escura relative overflow-hidden">
+      <div aria-hidden="true" className="pointer-events-none absolute right-[-180px] top-20 opacity-[0.035]">
+        <Simbolo variante="branco" tamanho={620} />
+      </div>
+      <div className="coluna-larga relative z-10 pb-12 pt-32 md:pb-16 md:pt-36">
+        <Sobrescrita claro>Transacione · Gestão do passivo tributário</Sobrescrita>
+        <h1 className="fonte-display mt-6 max-w-4xl text-[clamp(2.2rem,5vw,4.25rem)] leading-[1.08] tracking-[-0.035em] text-white">
+          Administração estratégica do <em className="text-esmeralda-clara">passivo tributário</em>
+        </h1>
+        <p className="mt-6 max-w-2xl text-[1.05rem] leading-relaxed text-[#DFE9E5] md:text-lg">
+          Da gestão da dívida à transação e ao encontro de contas com precatório.
+          O diagnóstico indica quando agir e qual caminho faz sentido para a sua empresa.
+        </p>
+        <h2 className="sobrescrita mb-5 mt-10 text-esmeralda-clara">Uma jornada em quatro ciclos</h2>
+        <Jornada claro />
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <Botao variante="esmeralda" tamanho="lg" onClick={() => abrir("diagnostico")}>Avaliar minha dívida <Seta /></Botao>
+          <Botao href="/como-funciona" variante="contorno-claro" tamanho="lg">Entender a jornada <Seta /></Botao>
         </div>
-      </div>
-      <div
-        aria-hidden="true"
-        className="halo"
-        style={{ width: 520, height: 520, left: "16%", top: "20%" }}
-      />
-
-      <div className="coluna relative z-10 py-28 text-center md:py-32">
-        <Revelar>
-          <Sobrescrita claro centro>
-            Transação tributária federal e estadual
-          </Sobrescrita>
-        </Revelar>
-
-        <Revelar atraso={70}>
-          <h1 className="manchete mt-8 text-white">
-            Sua dívida com o governo pode custar{" "}
-            <em style={{ fontStyle: "italic", color: "#3FD9A0" }}>bem menos</em>
-          </h1>
-        </Revelar>
-
-        <Revelar atraso={140}>
-          <p className="subafirmacao mx-auto mt-9 max-w-xl" style={{ color: "#DFE9E5" }}>
-            O desconto não depende do tamanho da sua dívida.
-          </p>
-        </Revelar>
-
-        <Revelar atraso={200}>
-          <p className="subafirmacao mx-auto mt-2 max-w-xl" style={{ color: "#3FD9A0" }}>
-            Depende de uma nota que o governo deu à sua empresa.
-          </p>
-        </Revelar>
-
-        <Revelar atraso={260}>
-          <p className="corpo mx-auto mt-8 max-w-lg">
-            Essa nota é presumida por sistema. E a própria lei permite corrigi-la.
-          </p>
-        </Revelar>
-
-        <Revelar atraso={320}>
-          <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
-            <Botao variante="esmeralda" tamanho="lg" onClick={() => abrir("diagnostico")}>
-              Descobrir se cabe para mim
-              <Seta />
-            </Botao>
-            <Botao href="/como-funciona" variante="contorno-claro" tamanho="lg">
-              Como funciona
-            </Botao>
-          </div>
-        </Revelar>
-
-        <Revelar atraso={380}>
-          <p className="nota mx-auto mt-7 max-w-md">
-            Diagnóstico técnico em 48 horas. Pode concluir que não há espaço de revisão —
-            e, nesse caso, apresenta os fundamentos.
-          </p>
-        </Revelar>
-      </div>
-
-      <div
-        aria-hidden="true"
-        className="absolute bottom-7 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1.5"
-        style={{ color: "rgba(255,255,255,0.28)" }}
-      >
-        <span className="sobrescrita" style={{ fontSize: "0.62rem" }}>
-          Continue
-        </span>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="flutuar">
-          <path
-            d="M4 6l4 4 4-4"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        <p className="nota mt-5 max-w-2xl">Diagnóstico técnico em 48 horas a partir da entrega dos documentos. Cada etapa avança com a sua aprovação e a análise das condições do caso.</p>
       </div>
     </section>
   );
@@ -122,7 +58,7 @@ const FATOS = [
     n: "01",
     titulo: "Existe desconto por lei",
     texto:
-      "Reduzir juros, multas e encargos, com entrada e prazo facilitados, está previsto em norma. Não é favor: é direito de quem se enquadra.",
+      "Reduzir juros, multas e encargos, com entrada e prazo facilitados, está previsto em norma. A concessão depende do enquadramento e da aprovação nas condições aplicáveis.",
   },
   {
     n: "02",
@@ -144,7 +80,7 @@ function ANota() {
       <div className="coluna">
         <Revelar>
           <Abertura
-            sobrescrita="O que está em jogo"
+            sobrescrita="Uma das frentes da transação"
             titulo={
               <>
                 A conta que o governo faz sobre a sua empresa{" "}
@@ -321,8 +257,8 @@ const ESFERAS = [
       "Pedido de revisão quando o grau está subestimado",
       "Acordo Paulista ou proposta individual",
     ],
-    teto: "até 60%",
-    tetoNota: "e até 75% para ME/EPP e recuperação judicial",
+    teto: "até 65%",
+    tetoNota: "e até 70% nas hipóteses especiais previstas",
     path: "/transacao-estadual",
     base: "Lei estadual 17.843/2023 · Resolução PGE 6/2024",
   },
@@ -400,79 +336,25 @@ function Esferas() {
 
 /* ==================================================== 5 · Como funciona === */
 
-const PASSOS = [
-  {
-    n: "1",
-    titulo: "Diagnóstico",
-    texto:
-      "Você envia os documentos pelo link gerado pela plataforma. Em 48 horas dizemos se há espaço de economia, de quanto — ou por que não há.",
-  },
-  {
-    n: "2",
-    titulo: "Revisão da nota",
-    texto:
-      "Demonstramos ao governo a situação real da empresa e pedimos a correção da classificação, com base jurídica, contábil e econômica.",
-  },
-  {
-    n: "3",
-    titulo: "Negociação",
-    texto:
-      "Estruturamos a melhor transação possível, protocolamos, negociamos e acompanhamos até a homologação final.",
-  },
-];
-
-function ComoFunciona() {
+function Precatorios() {
   return (
-    <section className="faixa-verde faixa relative overflow-hidden">
-      <div className="coluna relative">
-        <Revelar>
-          <Abertura
-            claro
-            sobrescrita="Simples assim"
-            titulo="Você não precisa entender de tributário"
-            resposta="Precisa apenas enviar os documentos. O resto é com a nossa equipe."
-          />
-        </Revelar>
-
-        <div className="mt-16 space-y-10">
-          {PASSOS.map((p, i) => (
-            <Revelar key={p.n} atraso={i * 80}>
-              <div className="flex gap-6 md:gap-8">
-                <span
-                  className="numeral shrink-0 text-[2.6rem] md:text-[3.2rem]"
-                  style={{ color: "rgba(255,255,255,0.3)" }}
-                >
-                  {p.n}
-                </span>
-                <div className="pt-1">
-                  <h3 className="subafirmacao text-white">{p.titulo}</h3>
-                  <p className="corpo mt-3">{p.texto}</p>
-                </div>
-              </div>
-            </Revelar>
-          ))}
-        </div>
-
-        <Revelar atraso={160}>
-          <div
-            className="mt-14 rounded-xl border p-7 md:p-8"
-            style={{
-              borderColor: "rgba(255,255,255,0.18)",
-              background: "rgba(255,255,255,0.06)",
-            }}
-          >
-            <p className="text-[1.05rem] leading-relaxed text-white">
-              A cada etapa você decide se avança, sempre com números na mesa.{" "}
-              <strong style={{ fontWeight: 600 }}>Nada acontece sem a sua aprovação.</strong>
-            </p>
-            <div className="mt-6">
-              <Botao href="/como-funciona" variante="contorno-claro">
-                Ver o método completo
-                <Seta />
-              </Botao>
-            </div>
+    <section className="faixa-verde faixa">
+      <div className="coluna-larga">
+        <Abertura claro alinhamento="esquerda" sobrescrita="Precatórios · Estadual e federal"
+          titulo="A dívida foi negociada. O próximo passo pode estar no precatório."
+          resposta="Além dos descontos da transação, avaliamos o uso de crédito próprio ou adquirido com deságio para amortizar o saldo. Da análise do título ao encontro de contas, cada esfera tem seu caminho." />
+        <div className="mt-9 grid gap-5 md:grid-cols-2">
+          <div className="rounded-xl border border-white/20 p-7">
+            <h3 className="subafirmacao text-white">São Paulo · PGE-SP</h3>
+            <p className="corpo-sm mt-3">Aquisição e regularização do precatório, seguidas de validação administrativa e amortização, nos limites da transação paulista.</p>
+            <Botao className="mt-6" href="/precatorios#estadual" variante="contorno-claro">Ver o fluxo estadual <Seta /></Botao>
           </div>
-        </Revelar>
+          <div className="rounded-xl border border-white/20 p-7">
+            <h3 className="subafirmacao text-white">União · PGFN</h3>
+            <p className="corpo-sm mt-3">Estruturação da operação, regularização no tribunal e pedido no Regularize para amortizar ou liquidar o saldo, inclusive parcelas vincendas elegíveis do acordo.</p>
+            <Botao className="mt-6" href="/precatorios#federal" variante="contorno-claro">Ver o fluxo federal <Seta /></Botao>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -715,11 +597,11 @@ export default function Home() {
       <ANota />
       <NaPratica />
       <Esferas />
-      <ComoFunciona />
       <Tecnologia />
       <QuemConduz />
       <Numeros />
       <Frentes />
+      <Precatorios />
       <Faq
         itens={rota.faq!}
         titulo="O que perguntam antes de começar"

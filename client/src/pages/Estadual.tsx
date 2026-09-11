@@ -44,8 +44,8 @@ const MOTOR = [
 ];
 
 const NUMEROS = [
-  { valor: "até 60%", rotulo: "de desconto sobre o valor total do crédito (regra geral)" },
-  { valor: "até 75%", rotulo: "para ME, EPP e empresas em recuperação judicial" },
+  { valor: "até 65%", rotulo: "limite legal de redução do valor total, conforme grau e modalidade" },
+  { valor: "até 70%", rotulo: "limite nas hipóteses especiais previstas, como ME/EPP e recuperação judicial" },
   { valor: "até 75%", rotulo: "quitação com precatórios e créditos acumulados de ICMS" },
   { valor: "120–145", rotulo: "parcelas (145 para ME/EPP e recuperação judicial)" },
 ];
@@ -219,6 +219,14 @@ export default function Estadual() {
             Percentuais e prazos conforme a classificação e os limites da lei. Não
             constitui promessa de resultado.
           </p>
+        </div>
+      </section>
+
+      <section className="faixa-sm faixa-clara">
+        <div className="coluna-larga">
+          <Abertura alinhamento="esquerda" sobrescrita="Precatório estadual" titulo="Da aquisição do título ao encontro de contas"
+            resposta="Estruturamos a operação em duas fases: aquisição e regularização do precatório; depois, validação administrativa e amortização perante a PGE-SP. O crédito elegível pode cobrir até 75% do saldo após os descontos, conforme o acordo." />
+          <Botao className="mt-8" href="/precatorios#estadual" variante="contorno">Conhecer o fluxo paulista <Seta /></Botao>
         </div>
       </section>
 

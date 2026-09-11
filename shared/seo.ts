@@ -1,3 +1,5 @@
+import { JORNADA, CONTINUIDADE } from "./jornada";
+
 /**
  * Fonte única de metadados por rota.
  *
@@ -13,7 +15,7 @@ export const SITE = {
   nomeLegal: "CORREA Consultoria Empresarial Estratégica",
   url: "https://www.transacione.com.br",
   descricaoCurta:
-    "Aferição, revisão e negociação de transação tributária federal (PGFN) e estadual (PGE-SP), com motores de cálculo determinísticos e análise jurídica e contábil.",
+    "Gestão estratégica do passivo tributário federal e paulista: diagnóstico, transação ou repactuação, amortização com deságio e encontro de contas com precatório.",
   telefone: "+55 11 4000-0000",
   whatsapp: "5511940000000",
   email: "contato@transacione.com.br",
@@ -54,18 +56,18 @@ export interface RotaSeo {
   noindex?: boolean;
 }
 
-export const ATUALIZADO = "2026-09-04";
+export const ATUALIZADO = "2026-09-10";
 
 export const ROTAS: RotaSeo[] = [
   {
     path: "/",
     titulo:
-      "Transacione | Transação tributária federal (PGFN) e estadual (PGE-SP)",
+      "Transacione | Gestão do passivo, transação tributária e precatórios",
     descricao:
-      "Sua dívida tributária pode custar menos. Aferimos a classificação usada pela PGFN e pela PGE-SP, pedimos revisão quando cabível e estruturamos a transação. Diagnóstico técnico em 48 horas.",
-    h1: "Sua dívida com o governo pode custar bem menos do que custa hoje",
+      "Da gestão da dívida à transação e ao encontro de contas com precatório. Conheça os quatro ciclos da Transacione para o passivo federal e paulista.",
+    h1: "Administração estratégica do passivo tributário",
     resumo:
-      "A União (PGFN) e o Estado de São Paulo (PGE-SP) negociam dívidas tributárias inscritas com desconto sobre juros, multa e encargos, entrada facilitada e prazo alongado. O tamanho do desconto depende de uma classificação atribuída ao contribuinte — CAPAG na esfera federal, grau de recuperabilidade na estadual — e essa classificação é presumida por sistema, podendo não refletir a realidade econômico-financeira da empresa. A própria legislação admite pedido de revisão.",
+      "A Transacione administra o passivo tributário em quatro ciclos: gestão da dívida; transação por adesão ou repactuação; amortização com deságio; e encontro de contas com precatório. O diagnóstico define quando transacionar e qual modalidade usar na União ou em São Paulo. O monitoramento dos acordos e de novas dívidas mantém a estratégia atualizada.",
     intencao: [
       "transação tributária com desconto",
       "negociar dívida tributária empresa",
@@ -73,8 +75,10 @@ export const ROTAS: RotaSeo[] = [
     ],
     tipo: "WebPage",
     pontos: [
+      ...JORNADA.map(e => `${e.numero} — ${e.titulo}: ${e.resumo}`),
+      CONTINUIDADE,
       "Descontos de até 65% (PGFN, regra geral) e até 75% em hipóteses específicas, incidentes sobre juros, multa e encargos legais — nunca sobre o principal.",
-      "Descontos de até 60% do valor total do débito na PGE-SP, e até 75% para ME/EPP e empresas em recuperação judicial.",
+      "Na PGE-SP, limite legal de redução de até 65% do valor total, e até 70% nas hipóteses especiais previstas na lei. Os descontos efetivos dependem do grau e da modalidade.",
       "Parcelamento em até 120 meses pela regra geral e até 145 meses nas hipóteses previstas — contra 60 meses do parcelamento ordinário.",
       "Diagnóstico técnico concluído em 48 horas, que pode concluir pela ausência de espaço de revisão e apresentar os fundamentos dessa conclusão.",
       "Base normativa: Lei 13.988/2020 e Portaria PGFN 6.757/2022 (federal); Lei estadual 17.843/2023 e Resolução PGE 6/2024 (estadual).",
@@ -88,7 +92,7 @@ export const ROTAS: RotaSeo[] = [
       {
         pergunta: "De quanto pode ser o desconto na transação tributária?",
         resposta:
-          "Na esfera federal, os descontos alcançam até 65% do valor total dos créditos pela regra geral e até 75% para pessoa física, ME, EPP, Santas Casas, instituições de ensino e empresas em recuperação judicial, incidindo sobre juros, multas e encargos legais — nunca sobre o principal. No Estado de São Paulo, o teto é de 60% do valor total do débito, e de 75% para ME, EPP e recuperação judicial. O percentual efetivo depende da classificação atribuída ao crédito ou ao contribuinte e dos limites da lei aplicável ao caso.",
+          "Na esfera federal, os descontos alcançam até 65% do valor total dos créditos pela regra geral e até 75% para pessoa física, ME, EPP, Santas Casas, instituições de ensino e empresas em recuperação judicial, incidindo sobre juros, multas e encargos legais — nunca sobre o principal. No Estado de São Paulo, o teto legal é de 65% do valor total, e de 70% nas hipóteses especiais previstas, como ME, EPP e recuperação judicial. O percentual efetivo depende da classificação atribuída ao crédito ou ao contribuinte e dos limites da lei aplicável ao caso.",
       },
       {
         pergunta:
@@ -104,18 +108,18 @@ export const ROTAS: RotaSeo[] = [
       {
         pergunta: "Minha empresa já fez transação. Ainda vale analisar?",
         resposta:
-          "Sim. Há três caminhos possíveis: repactuação das condições vigentes, revisão do que já foi feito — inclusive quanto à modalidade escolhida — e uso de precatório para amortizar até 75% do débito consolidado após os descontos.",
+          "Sim. O diagnóstico pode indicar repactuação, revisão da modalidade ou uso de precatório no saldo após os descontos. Em São Paulo, a utilização observa o teto de 75% e as condições do acordo. Na esfera federal, créditos elegíveis podem amortizar ou liquidar o saldo, inclusive parcelas vincendas do acordo, conforme a análise da PGFN.",
       },
     ],
   },
   {
     path: "/como-funciona",
-    titulo: "Como funciona a transação tributária | Transacione",
+    titulo: "Da gestão da dívida à liquidação do passivo | Transacione",
     descricao:
-      "O método em quatro etapas: anamnese do passivo, extração assistida com conferência humana, análise pelos motores estadual e federal, e negociação até a homologação.",
-    h1: "Como funciona, do documento ao acordo homologado",
+      "Conheça os quatro ciclos: gestão da dívida, transação ou repactuação, amortização com deságio e encontro de contas com precatório. Diagnóstico e acompanhamento contínuo.",
+    h1: "Da gestão da dívida à liquidação do passivo",
     resumo:
-      "O trabalho tem quatro etapas: (1) diagnóstico em 48 horas a partir dos documentos enviados; (2) pedido de revisão da classificação, com fundamentação jurídica, contábil e econômica; (3) estruturação e protocolo da transação; (4) acompanhamento até a homologação. A cada etapa o contribuinte decide se avança, com os números na mesa.",
+      "Quatro ciclos conectam a administração do passivo à liquidação: gestão da dívida, transação por adesão ou repactuação, amortização com deságio e encontro de contas com precatório. O diagnóstico orienta o momento de agir e a escolha da modalidade. O acompanhamento continua com os acordos, as novas dívidas e as oportunidades de renegociação.",
     intencao: [
       "como funciona a transação tributária",
       "passo a passo transação tributária PGFN",
@@ -123,7 +127,9 @@ export const ROTAS: RotaSeo[] = [
     ],
     tipo: "Service",
     pontos: [
-      "Etapa 1 — Anamnese: levantamento do passivo em aberto, transacionado, parcelado e do histórico de recolhimento.",
+      ...JORNADA.map(e => `${e.numero} — ${e.titulo}: ${e.detalhe}`),
+      CONTINUIDADE,
+      "Apuração do diagnóstico — Anamnese: levantamento do passivo em aberto, transacionado, parcelado e do histórico de recolhimento.",
       "Etapa 2 — Documentos: extratos de CAPAG, Regularize, e-CAC e PGE-SP, além de ECD, ECF e EFD.",
       "Etapa 3 — Extração: leitura assistida por IA com citação literal do trecho de origem e aprovação humana de cada dado antes de entrar no cálculo.",
       "Etapa 4 — Análise: motores estadual e federal, com cenários e análise de sensibilidade.",
@@ -164,7 +170,7 @@ export const ROTAS: RotaSeo[] = [
       "Sistema multiportas: adesão por edital, transação individual, transação de pequeno valor e relevante e disseminada controvérsia — comparamos desconto, entrada e prazo de cada porta.",
       "Descontos de até 65% pela regra geral e até 75% para PF, ME/EPP, Santas Casas, instituições de ensino e recuperação judicial, incidentes sobre juros, multas e encargos legais.",
       "Até 120 parcelas pela regra geral e até 145 nas hipóteses específicas; contribuições previdenciárias limitadas a 60 parcelas por vedação constitucional.",
-      "Amortização com prejuízo fiscal e base negativa de CSLL (até 70% do saldo) e uso de precatórios.",
+      "Amortização com prejuízo fiscal e base negativa de CSLL, quando admitida na modalidade (até 70% do saldo), e uso de precatórios elegíveis.",
       "Base normativa: Lei nº 13.988/2020 e Portaria PGFN nº 6.757/2022, arts. 43 e 44.",
     ],
     faq: [
@@ -210,7 +216,7 @@ export const ROTAS: RotaSeo[] = [
     pontos: [
       "NF = G + P + H + I — grau de garantia, parcelamentos, histórico de recolhimento e idade das inscrições, com cada critério aberto e justificado.",
       "Reclassificação quando NF ≥ 3; o corte de classificação muda a faixa de recuperabilidade e, com ela, o desconto disponível.",
-      "Descontos de até 60% do valor total do débito e até 75% para ME/EPP e recuperação judicial, incidentes sobre multas, juros e honorários — não sobre o principal.",
+      "Limite legal de desconto de até 65% do valor total, ou até 70% nas hipóteses especiais previstas. A redução incide sobre multas, juros e honorários, sem reduzir o principal, conforme grau e modalidade.",
       "Até 120 parcelas pela regra e 145 para ME/EPP e recuperação judicial; garantia exigida a partir de 60 meses de parcelamento.",
       "Quitação com precatórios e créditos acumulados de ICMS em até 75% do débito consolidado.",
       "Base normativa: Lei estadual nº 17.843/2023 e Resolução PGE nº 6/2024, art. 34 e seguintes.",
@@ -231,6 +237,29 @@ export const ROTAS: RotaSeo[] = [
         resposta:
           "É a modalidade de transação por adesão do Estado de São Paulo, com condições pré-fixadas em edital para os débitos elegíveis, instituída no âmbito da Lei nº 17.843/2023. É uma das portas disponíveis; a outra é a proposta individual, que na esfera estadual não exige a totalidade das inscrições — é possível selecionar quais entram na negociação.",
       },
+    ],
+  },
+  {
+    path: "/precatorios",
+    titulo: "Precatórios estaduais e federais para quitar dívidas | Transacione",
+    descricao: "Como utilizar precatórios em São Paulo e na União: análise do título, cessão, regularização, validação e encontro de contas para amortizar ou liquidar o passivo.",
+    h1: "Precatórios para amortizar e liquidar o passivo tributário",
+    resumo: "O precatório próprio ou adquirido de terceiro pode integrar a estratégia de pagamento da dívida. A Transacione analisa a viabilidade, estrutura a operação e acompanha a regularização e o encontro de contas. Conheça os fluxos específicos de São Paulo e da União.",
+    intencao: ["precatório estadual PGE SP", "precatório federal PGFN", "amortizar dívida com precatório", "cessão de precatório e CVLD"],
+    tipo: "Service",
+    atualizado: ATUALIZADO,
+    pontos: [
+      "São Paulo: aquisição e regularização do título, seguidas de validação administrativa e encontro de contas. Na transação paulista, até 75% do saldo após descontos, conforme a legislação e o acordo.",
+      "União: estruturação privada, regularização no tribunal com CVLD e requerimento no Regularize. Créditos elegíveis podem amortizar ou liquidar o saldo admitido pela PGFN.",
+      "O deságio é a diferença entre o valor do crédito e seu preço de aquisição. A economia líquida depende também de custos, atualização e valor efetivamente admitido.",
+      "Conta escrow é uma proteção contratual opcional entre as partes, não uma exigência geral da PGFN.",
+    ],
+    faq: [
+      { pergunta: "Preciso ser o titular original do precatório?", resposta: "Não necessariamente. A operação pode utilizar crédito próprio ou adquirido de terceiro, desde que elegível e com a cessão e a titularidade regularizadas. A análise do processo, da cadeia de cessões e do valor disponível vem antes da aquisição." },
+      { pergunta: "O limite de 75% vale para precatórios federais?", resposta: "O teto de 75% citado nesta página se refere à transação paulista. Na esfera federal, a PGFN admite créditos elegíveis para amortizar ou liquidar dívida ativa ou saldo negociado. A extensão depende do crédito, do débito e do procedimento aplicável." },
+      { pergunta: "Posso quitar parcelas que ainda vão vencer?", resposta: "Na esfera federal, a análise pode abranger o saldo da transação ou do parcelamento, incluindo suas parcelas vincendas. Isso não significa autorização automática para compensar tributos correntes. As obrigações do acordo precisam continuar sendo cumpridas durante o procedimento." },
+      { pergunta: "Quanto tempo leva a operação?", resposta: "Para o fluxo paulista, a referência de planejamento é de até três meses para aquisição e regularização e até dois meses para validação e encontro de contas. É uma estimativa operacional, não um prazo legal ou garantia. Na esfera federal, o prazo depende dos atos no tribunal, da documentação e da análise da PGFN." },
+      { pergunta: "O deságio garante uma economia fixa?", resposta: "Não. Preço de aquisição, custos da operação, atualização, saldo elegível e valor reconhecido precisam ser calculados juntos. A contratação ocorre a partir da viabilidade do caso, sem promessa de percentual fixo de economia." },
     ],
   },
   {

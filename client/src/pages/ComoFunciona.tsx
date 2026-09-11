@@ -1,5 +1,6 @@
 import { rotaPorPath } from "@shared/seo";
 import { usarSeo, seoDaRota } from "@/lib/seo";
+import Jornada from "@/components/site/Jornada";
 import HeroPagina from "@/components/site/HeroPagina";
 import Faq from "@/components/site/Faq";
 import CTA from "@/components/site/CTA";
@@ -104,11 +105,11 @@ export default function ComoFunciona() {
   return (
     <>
       <HeroPagina
-        sobrescrita="Do documento ao resultado"
+        sobrescrita="Gestão contínua do passivo"
         titulo={
           <>
-            Como funciona, do documento ao{" "}
-            <em style={{ fontStyle: "italic", color: "#0E9E6E" }}>acordo homologado</em>
+            Da gestão da dívida à{" "}
+            <em style={{ fontStyle: "italic", color: "#0E9E6E" }}>liquidação do passivo</em>
           </>
         }
         resumo={rota.resumo}
@@ -126,6 +127,15 @@ export default function ComoFunciona() {
         }
       />
 
+      <section className="faixa faixa-clara">
+        <div className="coluna-larga">
+          <Abertura alinhamento="esquerda" sobrescrita="A jornada Transacione" titulo="Quatro ciclos, uma estratégia para a empresa"
+            resposta="O diagnóstico define por onde começar. Quem já tem um acordo também pode avaliar repactuação, amortização e liquidação com precatório, quando cabíveis." />
+          <div className="mt-10"><Jornada detalhada /></div>
+          <Botao className="mt-8" href="/precatorios" variante="contorno">Conhecer a operação com precatórios <Seta /></Botao>
+        </div>
+      </section>
+
       {/* Esteira do diagnóstico */}
       <section className="faixa faixa-clara">
         <div className="coluna-larga">
@@ -133,7 +143,7 @@ export default function ComoFunciona() {
             <Abertura
               alinhamento="esquerda"
               sobrescrita="Diagnóstico em 48 horas"
-              titulo="As cinco etapas da apuração"
+              titulo="O primeiro ciclo começa pela apuração"
               resposta="Cada etapa produz um artefato conferível. Se não houver espaço para revisão, o diagnóstico registra essa conclusão e apresenta os respectivos fundamentos."
             />
           </Revelar>

@@ -152,6 +152,8 @@ export function Botao({
         {children}
       </a>
     );
+  // Âncoras usam a navegação nativa, inclusive entre páginas e sem JavaScript.
+  if (href?.includes("#")) return <a href={href} className={base}>{children}</a>;
   if (href)
     return (
       <Link href={href} className={base}>

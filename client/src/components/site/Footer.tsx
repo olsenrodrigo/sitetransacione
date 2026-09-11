@@ -50,8 +50,8 @@ export default function Footer() {
               <Logo altura={28} />
             </Link>
             <p className="corpo-sm mt-5 max-w-sm text-[0.9rem]">
-              Aferição, revisão e negociação de transação tributária federal e estadual.
-              Tecnologia própria, sustentada jurídica, contábil e economicamente.
+              Gestão estratégica do passivo tributário: diagnóstico, transação,
+              amortização com deságio e encontro de contas com precatório.
             </p>
             <address className="mt-6 space-y-1 text-[0.85rem] not-italic text-cinza">
               <p>

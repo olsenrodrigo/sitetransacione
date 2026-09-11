@@ -112,7 +112,9 @@ export default function Layout({ children }: { children: ReactNode }) {
   const [local] = useLocation();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "auto" });
+    const destino = document.getElementById(window.location.hash.slice(1));
+    if (destino) destino.scrollIntoView({ behavior: "auto" });
+    else window.scrollTo({ top: 0, behavior: "auto" });
   }, [local]);
 
   return (

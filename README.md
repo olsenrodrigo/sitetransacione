@@ -183,7 +183,7 @@ Ela mantém os dois nomes HTTPS e o redirecionamento de HTTP para HTTPS.
 npm run deploy
 ```
 
-O comando verifica os tipos, compila em `.build`, valida as 17 páginas e move o resultado
+O comando verifica os tipos, compila em `.build`, valida todas as páginas e move o resultado
 para `.releases/<data>`. Somente então troca o link `current` atomicamente. Falha de build
 não altera a publicação. Assets com hash anteriores são preservados para abas abertas.
 Não apague `.releases` nem os assets antigos enquanto houver versões em uso.
@@ -230,6 +230,28 @@ resposta em `.dados/aws/state.json`. A fase edge deixa a distribuição desativa
 confirmar assinatura FREE ativa, conteúdo enviado e permissões antes de habilitar.
 CloudFront e Route 53 são serviços globais. Nunca versionar `.dados` ou credenciais.
 O script destina-se à migração inicial; não é um reconciliador de infraestrutura.
+
+Para publicar o frontend numa distribuição já configurada, após `npm run build:aws`
+e os testes, execute `python3 deploy/aws/publish.py --account <conta> --bucket <bucket>
+--distribution <id> --function <nome>`. O comando confere conta, origem e associação
+da função, preserva assets antigos no roteamento, envia assets antes do HTML e
+invalida o cache. Não altera DNS nem a API de leads. Checkpoints da publicação
+ficam em `.dados/aws-publications/`, incluindo a função anterior e a invalidação.
+Espere a invalidação concluir e valide os dois endereços públicos após publicar.
+
+Na AWS, o HTML tem `max-age=0,s-maxage=300`: o navegador revalida a página,
+enquanto o CloudFront pode servi-la por cinco minutos sem voltar ao S3.
+`stale-while-revalidate=60` permite atualização em segundo plano e
+`stale-if-error=86400` permite usar a cópia disponível numa falha temporária da
+origem. Cada publicação invalida `/*`; arquivos com hash mantêm cache imutável.
+
+`script/check-jornada.cjs` usa o mesmo Playwright dos testes de acesso. Com
+`TEST_URL` configurado, verifica todas as rotas em Chromium e WebKit, testa as
+páginas da jornada em larguras de 320 a 1440 pixels, confere menu, links internos,
+canonical, ausência de erros e navegação por âncoras com e sem JavaScript.
+`REPORT_DIR` opcional grava medições e capturas localmente. O teste não envia
+formulários. A jornada está em `shared/jornada.ts`; a aba `/precatorios` contém
+os procedimentos próprios da União e de São Paulo.
 
 `deploy/aws/import-leads.py` importa os registros locais com identificadores
 estáveis e escrita condicional; pode ser repetido sem sobrescrever contatos.

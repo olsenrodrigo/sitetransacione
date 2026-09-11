@@ -15,6 +15,7 @@ export const NAV = [
   { rotulo: "A tecnologia", path: "/tecnologia" },
   { rotulo: "Parceiros", path: "/parceiros" },
   { rotulo: "Quem somos", path: "/quem-somos" },
+  { rotulo: "Precatórios", path: "/precatorios" },
   { rotulo: "Conteúdo", path: "/conteudo" },
 ];
 
@@ -27,6 +28,8 @@ const MENSAGENS: Record<string, string> = {
     "Olá. Tenho passivo inscrito em dívida ativa da União e gostaria de avaliar a revisão de CAPAG.",
   "/transacao-estadual":
     "Olá. Tenho passivo inscrito na dívida ativa do Estado de São Paulo e gostaria de avaliar a revisão do grau de recuperabilidade.",
+  "/precatorios":
+    "Olá. Gostaria de avaliar o uso de precatório estadual ou federal para amortizar o passivo tributário da minha empresa.",
   "/tecnologia":
     "Olá. Gostaria de entender melhor a metodologia e a rastreabilidade do laudo da Transacione.",
   "/parceiros":

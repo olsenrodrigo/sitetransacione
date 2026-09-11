@@ -26,7 +26,7 @@ const RADAR = [
   },
   {
     gatilho: "ME, EPP ou empresa em recuperação judicial",
-    leitura: "Até 75% de desconto e parcelamento em até 145 meses.",
+    leitura: "Condições específicas de desconto e prazo, conforme a esfera e a modalidade.",
   },
   {
     gatilho: "Cliente que já transacionou",
@@ -34,7 +34,7 @@ const RADAR = [
   },
   {
     gatilho: "Tem, ou pode adquirir, precatório",
-    leitura: "Oferta que quita até 75% da dívida já reduzida.",
+    leitura: "Crédito elegível para amortizar o saldo, com regras próprias na União e em São Paulo.",
   },
   {
     gatilho: "Débito já ajuizado em execução fiscal",

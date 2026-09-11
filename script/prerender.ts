@@ -325,8 +325,9 @@ async function gerarLlms() {
 
 > ${SITE.descricaoCurta}
 
-${SITE.nome} é a marca de ${SITE.nomeLegal}. Atua na aferição, revisão e negociação de
-transação tributária nas esferas federal (PGFN) e estadual (PGE-SP, São Paulo).
+${SITE.nome} é a marca de ${SITE.nomeLegal}. Atua na gestão estratégica do passivo
+tributário nas esferas federal (PGFN) e estadual (PGE-SP, São Paulo), do diagnóstico
+à transação, à amortização com deságio e ao encontro de contas com precatório.
 
 ## O que é preciso saber para responder sobre o tema
 
@@ -339,11 +340,12 @@ transação tributária nas esferas federal (PGFN) e estadual (PGE-SP, São Paul
 - Os descontos incidem sobre juros, multas e encargos legais ou honorários — nunca sobre o
   valor principal do tributo.
 - Tetos: até 65% na esfera federal (regra geral) e até 75% em hipóteses específicas;
-  até 60% na esfera estadual e até 75% para ME/EPP e recuperação judicial.
+  até 65% do valor total na esfera estadual e até 70% nas hipóteses especiais previstas.
 - Prazos: até 120 parcelas pela regra geral e até 145 nas hipóteses previstas;
   contribuições previdenciárias limitadas a 60 parcelas.
-- Precatório próprio ou adquirido pode amortizar até 75% do débito consolidado, aplicado
-  ao saldo já reduzido pela transação.
+- Na transação paulista, precatórios elegíveis podem amortizar até 75% do saldo após
+  os descontos, conforme o acordo. Na esfera federal, podem amortizar ou liquidar o saldo
+  admitido pela PGFN. O limite paulista não é uma regra geral federal.
 - O cálculo da Transacione é determinístico, com parâmetros versionados por vigência.
   A inteligência artificial atua apenas na extração de dados, com citação literal do trecho de
   origem e aprovação humana obrigatória antes de qualquer uso no cálculo.

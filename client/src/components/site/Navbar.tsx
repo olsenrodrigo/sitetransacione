@@ -55,7 +55,7 @@ export default function Navbar() {
             </Link>
 
             <nav
-              className="hidden items-center gap-4 lg:flex xl:gap-7"
+              className="hidden items-center gap-4 xl:flex xl:gap-5"
               aria-label="Principal"
             >
               {NAV.map((item) => {
@@ -90,7 +90,7 @@ export default function Navbar() {
               })}
             </nav>
 
-            <div className="hidden shrink-0 items-center lg:flex">
+            <div className="hidden shrink-0 items-center xl:flex">
               <a
                 href={`mailto:${SITE.email}`}
                 onClick={(event) => { event.preventDefault(); abrir("diagnostico"); }}
@@ -107,7 +107,7 @@ export default function Navbar() {
               </a>
             </div>
 
-            <details ref={menu} className="lg:hidden">
+            <details ref={menu} className="xl:hidden">
               <summary className="-mr-2 cursor-pointer list-none p-2" aria-label="Abrir menu">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M3.5 7h17M3.5 12h17M3.5 17h17" stroke={sobreEscuro ? "#fff" : "#0A5C42"} strokeWidth="1.7" strokeLinecap="round" />

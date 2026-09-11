@@ -256,12 +256,12 @@ export default function Federal() {
               <Abertura
               alinhamento="esquerda"
                 sobrescrita="Uma alavanca a mais"
-                titulo="Precatório: amortizar até 75% do débito já reduzido"
+                titulo="Precatório federal: amortizar ou liquidar o saldo negociado"
                 resposta="Precatório próprio ou adquirido de terceiro, aplicado ao saldo já reduzido da transação. A ordem importa: primeiro incidem os descontos, depois o precatório amortiza o remanescente."
               />
               <div className="mt-8">
-                <Botao href="/conteudo/precatorio-para-amortizar-transacao" variante="contorno">
-                  Ler a análise completa
+                <Botao href="/precatorios#federal" variante="contorno">
+                  Conhecer o fluxo federal
                   <Seta />
                 </Botao>
               </div>
@@ -290,8 +290,8 @@ export default function Federal() {
                   ))}
                 </ol>
                 <p className="nota mt-7 border-t border-borda pt-5">
-                  Compensa até 75% do débito consolidado na transação, nas hipóteses e
-                  formas admitidas pela legislação aplicável.
+                  A extensão depende do crédito elegível e do saldo admitido pela PGFN.
+                  O teto de 75% da transação paulista não é uma regra geral federal.
                 </p>
               </div>
             </Revelar>

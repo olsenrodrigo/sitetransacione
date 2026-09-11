@@ -6,7 +6,7 @@ import { usarLead } from "./LeadModal";
 export default function CTA({
   sobrescrita = "Comece pelo diagnóstico",
   titulo = "Em 48 horas você sabe se cabe para a sua empresa",
-  descricao = "O diagnóstico técnico verifica se há espaço de economia, de quanto — ou por que não há. Nada avança sem a sua aprovação, e cada etapa é apresentada com números na mesa.",
+  descricao = "A partir dos documentos, o diagnóstico indica se é o momento de transacionar, como administrar a dívida e quais oportunidades de economia cabem no caso. Cada etapa avança com a sua aprovação.",
   rotulo = "Fazer o diagnóstico",
   origem = "diagnostico",
 }: {

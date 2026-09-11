@@ -8,6 +8,7 @@ import { organizacaoLd } from "@/lib/seo";
 import ComoFunciona from "@/pages/ComoFunciona";
 import Federal from "@/pages/Federal";
 import Estadual from "@/pages/Estadual";
+import Precatorios from "@/pages/Precatorios";
 import Tecnologia from "@/pages/Tecnologia";
 import Parceiros from "@/pages/Parceiros";
 import QuemSomos from "@/pages/QuemSomos";
@@ -35,6 +36,7 @@ export default function App() {
           <Route path="/como-funciona" component={ComoFunciona} />
           <Route path="/transacao-federal" component={Federal} />
           <Route path="/transacao-estadual" component={Estadual} />
+          <Route path="/precatorios" component={Precatorios} />
           <Route path="/tecnologia" component={Tecnologia} />
           <Route path="/parceiros" component={Parceiros} />
           <Route path="/quem-somos" component={QuemSomos} />

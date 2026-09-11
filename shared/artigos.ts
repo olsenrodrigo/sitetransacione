@@ -173,8 +173,8 @@ export const ARTIGOS: Artigo[] = [
       {
         t: "ul",
         itens: [
-          "Até 60% de desconto sobre o valor total do débito, pela regra geral.",
-          "Até 75% para ME, EPP e empresas em recuperação judicial.",
+          "Limite legal de até 65% de redução do valor total, conforme grau e modalidade.",
+          "Limite de até 70% nas hipóteses especiais previstas, como ME, EPP e recuperação judicial.",
           "A redução alcança multas, juros e honorários — não o valor principal.",
           "Parcelamento em até 120 meses pela regra e até 145 meses para ME/EPP e recuperação judicial.",
           "Garantia exigida a partir de 60 meses de parcelamento.",
@@ -206,16 +206,16 @@ export const ARTIGOS: Artigo[] = [
   },
   {
     slug: "precatorio-para-amortizar-transacao",
-    titulo: "Precatório na transação tributária: amortizar até 75% do débito já reduzido",
+    titulo: "Precatório na transação tributária: como amortizar o saldo negociado",
     tituloSeo:
-      "Precatório na transação tributária: como amortizar até 75% | Transacione",
+      "Precatório na transação tributária: amortização do saldo | Transacione",
     descricao:
       "Como o precatório próprio ou adquirido de terceiro se aplica ao saldo já reduzido da transação, nas esferas federal e estadual, e qual é a esteira da operação.",
     resposta:
-      "O precatório — próprio ou adquirido de terceiro — pode ser aplicado ao saldo já reduzido da transação para amortizar até 75% do débito consolidado, nas hipóteses e formas admitidas pela legislação aplicável. Vale nas duas esferas, PGE-SP e PGFN. A ordem importa: primeiro incidem os descontos da transação, depois o precatório amortiza o saldo remanescente — e não o contrário.",
+      "O precatório próprio ou adquirido de terceiro pode amortizar o saldo após os descontos da transação. Em São Paulo, a utilização observa o teto de 75% e as condições do acordo. Na União, créditos federais elegíveis podem amortizar ou liquidar o saldo admitido pela PGFN. Cada esfera exige seu próprio procedimento de regularização e validação.",
     categoria: "Precatórios",
     publicado: "2026-08-26",
-    atualizado: "2026-09-04",
+    atualizado: "2026-09-10",
     leitura: 5,
     autor: "Equipe técnica Transacione",
     intencao: [
@@ -226,12 +226,12 @@ export const ARTIGOS: Artigo[] = [
     corpo: [
       {
         t: "p",
-        c: "Entre as alavancas disponíveis na transação tributária, o precatório é a que costuma ser subestimada — e a única que continua útil para quem já transacionou.",
+        c: "O precatório pode integrar a estratégia de quem ainda vai negociar ou já tem uma transação em andamento. O diagnóstico compara a viabilidade da operação com outras medidas, como a repactuação do acordo.",
       },
       { t: "h2", c: "A ordem das operações" },
       {
         t: "p",
-        c: "O ponto central é a sequência. O precatório não substitui o desconto: ele se aplica depois dele. Primeiro a transação reduz juros, multa e encargos nos limites da norma; sobre o saldo consolidado resultante é que incide a amortização com precatório, admitida em até 75%. O restante é pago à vista ou parcelado nas condições da transação.",
+        c: "Na transação, primeiro se apura o saldo com os descontos admitidos. Depois se avalia a amortização com o precatório. O teto de 75% é da transação paulista, não uma regra geral federal. Na PGFN, a utilização do crédito elegível pode alcançar a liquidação do saldo admitido; eventual remanescente deve ser pago conforme o acordo.",
       },
       { t: "h2", c: "A esteira da operação" },
       {
@@ -250,7 +250,7 @@ export const ARTIGOS: Artigo[] = [
         t: "ul",
         itens: [
           "A empresa é titular de precatório e não o considerou como ativo de liquidez para o passivo fiscal.",
-          "A empresa já transacionou e quer quitar as parcelas vincendas com precatório adquirido de terceiro.",
+          "A empresa tem saldo negociado na esfera federal e quer avaliar a liquidação de parcelas vincendas com crédito elegível adquirido de terceiro.",
           "O débito está ajuizado em execução fiscal — mesmo nessa situação há caminho para transacionar e ofertar precatório.",
         ],
       },
